@@ -31,7 +31,7 @@ abstract class PluginThemeFilesBase {
 	 */
 	public function getOriginalFileMd5FromVcs( $fullPath ) {
 		$file = $this->getOriginalFileFromVcs( $fullPath );
-		return empty( $file ) ? null : \md5_file( $file );
+		return empty( $file ) ? null : \hash_file( 'md5', $file );
 	}
 
 	/**

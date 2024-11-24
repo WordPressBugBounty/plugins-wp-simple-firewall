@@ -418,7 +418,7 @@ class Data {
 	}
 
 	public function getServerHash() :string {
-		return \md5( \serialize(
+		return \hash( 'md5', \serialize(
 			\array_values( \array_intersect_key(
 				$_SERVER,
 				\array_flip( [

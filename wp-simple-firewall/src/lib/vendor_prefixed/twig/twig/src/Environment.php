@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by Paul Goodchild on 12-September-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */
 
 namespace AptowebDeps\Twig;
@@ -45,11 +45,11 @@ use AptowebDeps\Twig\TokenParser\TokenParserInterface;
  */
 class Environment
 {
-    public const VERSION = '3.11.1';
-    public const VERSION_ID = 301101;
+    public const VERSION = '3.11.3';
+    public const VERSION_ID = 301103;
     public const MAJOR_VERSION = 4;
     public const MINOR_VERSION = 11;
-    public const RELEASE_VERSION = 1;
+    public const RELEASE_VERSION = 3;
     public const EXTRA_VERSION = '';
 
     private $charset;

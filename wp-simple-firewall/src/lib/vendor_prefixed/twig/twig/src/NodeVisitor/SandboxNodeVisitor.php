@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by Paul Goodchild on 12-September-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */
 
 namespace AptowebDeps\Twig\NodeVisitor;
@@ -17,12 +17,14 @@ use AptowebDeps\Twig\Environment;
 use AptowebDeps\Twig\Node\CheckSecurityCallNode;
 use AptowebDeps\Twig\Node\CheckSecurityNode;
 use AptowebDeps\Twig\Node\CheckToStringNode;
+use AptowebDeps\Twig\Node\Expression\ArrayExpression;
 use AptowebDeps\Twig\Node\Expression\Binary\ConcatBinary;
 use AptowebDeps\Twig\Node\Expression\Binary\RangeBinary;
 use AptowebDeps\Twig\Node\Expression\FilterExpression;
 use AptowebDeps\Twig\Node\Expression\FunctionExpression;
 use AptowebDeps\Twig\Node\Expression\GetAttrExpression;
 use AptowebDeps\Twig\Node\Expression\NameExpression;
+use AptowebDeps\Twig\Node\Expression\Unary\SpreadUnary;
 use AptowebDeps\Twig\Node\ModuleNode;
 use AptowebDeps\Twig\Node\Node;
 use AptowebDeps\Twig\Node\PrintNode;
@@ -122,7 +124,18 @@ final class SandboxNodeVisitor implements NodeVisitorInterface
     {
         $expr = $node->getNode($name);
         if (($expr instanceof NameExpression || $expr instanceof GetAttrExpression) && !$expr->isGenerator()) {
-            $node->setNode($name, new CheckToStringNode($expr));
+            // Simplify in 4.0 as the spread attribute has been removed there
+            $new = new CheckToStringNode($expr);
+            if ($expr->hasAttribute('spread')) {
+                $new->setAttribute('spread', $expr->getAttribute('spread'));
+            }
+            $node->setNode($name, $new);
+        } elseif ($expr instanceof SpreadUnary) {
+            $this->wrapNode($expr, 'node');
+        } elseif ($expr instanceof ArrayExpression) {
+            foreach ($expr as $name => $_) {
+                $this->wrapNode($expr, $name);
+            }
         }
     }
 

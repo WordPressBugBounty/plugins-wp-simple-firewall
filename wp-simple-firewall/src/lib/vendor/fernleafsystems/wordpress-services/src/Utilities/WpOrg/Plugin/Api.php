@@ -27,7 +27,7 @@ class Api extends ApiBase {
 		$params[ 'slug' ] = $this->getWorkingSlug();
 		$params = Services::DataManipulation()->mergeArraysRecursive( $this->defaultParams(), $params );
 
-		$key = \md5( \serialize( \array_merge( $params, [
+		$key = \hash( 'md5', \serialize( \array_merge( $params, [
 			'cmd'      => $cmd,
 			'function' => 'plugins_api',
 		] ) ) );

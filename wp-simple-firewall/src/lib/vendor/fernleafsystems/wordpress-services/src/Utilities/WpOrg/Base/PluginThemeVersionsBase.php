@@ -67,13 +67,13 @@ abstract class PluginThemeVersionsBase {
 	public function exists( $version, $verifyUrl = false ) {
 
 		$url = $this->getUrlForVersion( $version );
-		$cacheKey = \md5( \serialize( [
+		$cacheKey = \hash( 'md5', \serialize( [
 			'url'      => $url,
 			'function' => 'version_exists'
 		] ) );
 		$exists = $this->getCache( $cacheKey );
 
-		if ( is_null( $exists ) ) {
+		if ( \is_null( $exists ) ) {
 			$exists = \in_array( $version, $this->all() );
 			if ( $exists && $verifyUrl ) {
 				try {

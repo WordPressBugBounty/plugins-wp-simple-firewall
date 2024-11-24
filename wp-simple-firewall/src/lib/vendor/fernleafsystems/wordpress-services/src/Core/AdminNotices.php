@@ -3,6 +3,7 @@
 namespace FernleafSystems\Wordpress\Services\Core;
 
 use FernleafSystems\Wordpress\Services\Services;
+use FernleafSystems\Wordpress\Services\Utilities\PasswordGenerator;
 
 /**
  */
@@ -136,18 +137,18 @@ class AdminNotices {
 	}
 
 	/**
-	 * @param string $sNoticeId
-	 * @param string $sNotice
+	 * @param string $noticeID
+	 * @param string $notice
 	 * @return $this
 	 */
-	public function addAdminNotice( $sNotice, $sNoticeId = '' ) {
-		if ( !empty( $sNotice ) ) {
-			$aCurrentNotices = $this->getNotices();
-			if ( empty( $sNoticeId ) ) {
-				$sNoticeId = md5( uniqid( '', true ) );
+	public function addAdminNotice( $notice, $noticeID = '' ) {
+		if ( !empty( $notice ) ) {
+			$notices = $this->getNotices();
+			if ( empty( $noticeID ) ) {
+				$noticeID = \hash( 'md5', PasswordGenerator::Gen( 12, true, true, false ) );
 			}
-			$aCurrentNotices[ $sNoticeId ] = $sNotice;
-			$this->aAdminNotices = $aCurrentNotices;
+			$notices[ $noticeID ] = $notice;
+			$this->aAdminNotices = $notices;
 		}
 		return $this;
 	}

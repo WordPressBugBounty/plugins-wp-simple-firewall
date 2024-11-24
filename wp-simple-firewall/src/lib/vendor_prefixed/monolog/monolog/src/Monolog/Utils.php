@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by Paul Goodchild on 19-July-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */ declare(strict_types=1);
 
 /*
@@ -254,7 +254,7 @@ final class Utils
         }
 
         $val = (int) $match['val'];
-        switch (strtolower($match['unit'] ?? '')) {
+        switch (strtolower($match['unit'])) {
             case 'g':
                 $val *= 1024;
             case 'm':

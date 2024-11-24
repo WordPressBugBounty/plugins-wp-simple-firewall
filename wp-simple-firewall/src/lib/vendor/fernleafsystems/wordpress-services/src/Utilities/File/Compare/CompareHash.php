@@ -24,7 +24,6 @@ class CompareHash {
 	/**
 	 * @param string $path
 	 * @param string $hashToCompare
-	 * @return bool
 	 * @throws \InvalidArgumentException
 	 */
 	public function isEqualFileSha1( $path, $hashToCompare ) :bool {
@@ -39,6 +38,7 @@ class CompareHash {
 
 	/**
 	 * @throws \InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function isEqualFile( string $path, string $hashToCompare, string $algo = null ) :bool {
 		if ( !Services::WpFs()->isFile( $path ) ) {

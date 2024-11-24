@@ -332,6 +332,19 @@
       "wporg_slug": "sg-cachepress"
     }
   },
+  "simplemembership":        {
+    "identifiers": {
+      "classes": [
+        "\\SimpleWpMembership"
+      ],
+      "constants": [
+        "\\SIMPLE_WP_MEMBERSHIP_VER"
+      ]
+    },
+    "properties":  {
+      "wporg_slug": "simple-membership"
+    }
+  },
   "superforms":              {
     "identifiers": {
       "classes": [

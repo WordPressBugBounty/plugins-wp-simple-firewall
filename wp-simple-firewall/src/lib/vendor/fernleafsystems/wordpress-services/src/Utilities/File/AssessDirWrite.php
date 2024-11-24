@@ -3,6 +3,7 @@
 namespace FernleafSystems\Wordpress\Services\Utilities\File;
 
 use FernleafSystems\Wordpress\Services\Services;
+use FernleafSystems\Wordpress\Services\Utilities\PasswordGenerator;
 
 class AssessDirWrite {
 
@@ -46,7 +47,7 @@ class AssessDirWrite {
 
 		$FS->mkdir( $testDir );
 		if ( $FS->isDir( $testDir ) ) {
-			$file = \path_join( $testDir, uniqid() );
+			$file = \path_join( $testDir, PasswordGenerator::Gen( 12, true, true, false ) );
 			$FS->touch( $file );
 			$canTouchFile = $FS->isAccessibleFile( $file );
 			$FS->deleteFile( $file );
@@ -62,7 +63,7 @@ class AssessDirWrite {
 
 		$canWrite = false;
 		$testFile = \path_join( $this->dir, 'test_write_file.txt' );
-		$uniq = \uniqid();
+		$uniq = PasswordGenerator::Gen( 12, true, true, false );
 		$FS->putFileContent( $testFile, $uniq );
 		if ( $FS->isAccessibleFile( $testFile ) ) {
 			$canWrite = $FS->getFileContent( $testFile ) == $uniq;

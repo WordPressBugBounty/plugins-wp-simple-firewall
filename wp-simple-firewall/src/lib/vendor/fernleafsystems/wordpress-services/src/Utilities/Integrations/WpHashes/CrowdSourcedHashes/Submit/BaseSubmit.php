@@ -21,7 +21,7 @@ abstract class BaseSubmit extends \FernleafSystems\Wordpress\Services\Utilities\
 
 		/** @var RequestVO $req */
 		$req = $this->getRequestVO();
-		$req->hash = \sha1( \json_encode( $this->hashes ) );
+		$req->hash = \hash( 'sha1', \json_encode( $this->hashes ) );
 	}
 
 	protected function getApiUrl() :string {

@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by Paul Goodchild on 19-July-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */ declare(strict_types=1);
 
 /*
@@ -195,6 +195,10 @@ class JsonFormatter extends NormalizerFormatter
             // if the object has specific json serializability we want to make sure we skip the __toString treatment below
             if ($data instanceof \JsonSerializable) {
                 return $data;
+            }
+
+            if (\get_class($data) === '__PHP_Incomplete_Class') {
+                return new \ArrayObject($data);
             }
 
             if (method_exists($data, '__toString')) {

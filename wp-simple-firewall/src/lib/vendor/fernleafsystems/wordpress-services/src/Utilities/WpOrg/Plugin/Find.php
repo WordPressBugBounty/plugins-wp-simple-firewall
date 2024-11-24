@@ -35,6 +35,7 @@ class Find {
 	public const PROFILEPRESS = 'profilepress';
 	public const RESTRICT_CONTENT_PRO = 'restrictcontentpro';
 	public const SITEGROUND_OPTIMIZER = 'sgcachepress';
+	public const SIMPLE_MEMBERSHIP = 'simplemembership';
 	public const SUPER_FORMS = 'superforms';
 	public const SUPPORT_CANDY = 'supportcandy';
 	public const ULTIMATE_MEMBER = 'ultimatemember';

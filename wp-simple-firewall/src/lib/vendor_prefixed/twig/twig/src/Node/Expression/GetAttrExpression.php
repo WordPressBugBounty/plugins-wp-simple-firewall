@@ -9,7 +9,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by Paul Goodchild on 12-September-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */
 
 namespace AptowebDeps\Twig\Node\Expression;
@@ -33,6 +33,7 @@ class GetAttrExpression extends AbstractExpression
     public function compile(Compiler $compiler): void
     {
         $env = $compiler->getEnvironment();
+        $arrayAccessSandbox = false;
 
         // optimize array calls
         if (
@@ -46,17 +47,35 @@ class GetAttrExpression extends AbstractExpression
                 ->raw('(('.$var.' = ')
                 ->subcompile($this->getNode('node'))
                 ->raw(') && is_array(')
-                ->raw($var)
+                ->raw($var);
+
+            if (!$env->hasExtension(SandboxExtension::class)) {
+                $compiler
+                    ->raw(') || ')
+                    ->raw($var)
+                    ->raw(' instanceof ArrayAccess ? (')
+                    ->raw($var)
+                    ->raw('[')
+                    ->subcompile($this->getNode('attribute'))
+                    ->raw('] ?? null) : null)')
+                ;
+
+                return;
+            }
+
+            $arrayAccessSandbox = true;
+
+            $compiler
                 ->raw(') || ')
                 ->raw($var)
-                ->raw(' instanceof ArrayAccess ? (')
+                ->raw(' instanceof ArrayAccess && in_array(')
+                ->raw('get_class('.$var.')')
+                ->raw(', CoreExtension::ARRAY_LIKE_CLASSES, true) ? (')
                 ->raw($var)
                 ->raw('[')
                 ->subcompile($this->getNode('attribute'))
-                ->raw('] ?? null) : null)')
+                ->raw('] ?? null) : ')
             ;
-
-            return;
         }
 
         $compiler->raw('CoreExtension::getAttribute($this->env, $this->source, ');
@@ -85,5 +104,9 @@ class GetAttrExpression extends AbstractExpression
             ->raw(', ')->repr($this->getNode('node')->getTemplateLine())
             ->raw(')')
         ;
+
+        if ($arrayAccessSandbox) {
+            $compiler->raw(')');
+        }
     }
 }

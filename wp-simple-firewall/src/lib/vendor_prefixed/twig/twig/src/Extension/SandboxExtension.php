@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by Paul Goodchild on 12-September-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
  */
 
 namespace AptowebDeps\Twig\Extension;
@@ -121,6 +121,12 @@ final class SandboxExtension extends AbstractExtension
 
     public function ensureToStringAllowed($obj, int $lineno = -1, ?Source $source = null)
     {
+        if (\is_array($obj)) {
+            $this->ensureToStringAllowedForArray($obj, $lineno, $source);
+
+            return $obj;
+        }
+
         if ($this->isSandboxed($source) && \is_object($obj) && method_exists($obj, '__toString')) {
             try {
                 $this->policy->checkMethodAllowed($obj, '__toString');
@@ -133,5 +139,46 @@ final class SandboxExtension extends AbstractExtension
         }
 
         return $obj;
+    }
+
+    private function ensureToStringAllowedForArray(array $obj, int $lineno, ?Source $source, array &$stack = []): void
+    {
+        foreach ($obj as $k => $v) {
+            if (!$v) {
+                continue;
+            }
+
+            if (!\is_array($v)) {
+                $this->ensureToStringAllowed($v, $lineno, $source);
+                continue;
+            }
+
+            if (\PHP_VERSION_ID < 70400) {
+                static $cookie;
+
+                if ($v === $cookie ?? $cookie = new \stdClass()) {
+                    continue;
+                }
+
+                $obj[$k] = $cookie;
+                try {
+                    $this->ensureToStringAllowedForArray($v, $lineno, $source, $stack);
+                } finally {
+                    $obj[$k] = $v;
+                }
+
+                continue;
+            }
+
+            if ($r = \ReflectionReference::fromArrayElement($obj, $k)) {
+                if (isset($stack[$r->getId()])) {
+                    continue;
+                }
+
+                $stack[$r->getId()] = true;
+            }
+
+            $this->ensureToStringAllowedForArray($v, $lineno, $source, $stack);
+        }
     }
 }

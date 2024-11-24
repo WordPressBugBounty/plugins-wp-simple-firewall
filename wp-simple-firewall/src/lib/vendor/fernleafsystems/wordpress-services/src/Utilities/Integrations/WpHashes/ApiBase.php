@@ -139,7 +139,7 @@ abstract class ApiBase {
 		$response = null;
 
 		$url = URL::Build( $this->getApiUrl(), $this->getQueryData() );
-		$sig = \md5( $url );
+		$sig = \hash( 'md5', $url );
 
 		if ( $this->isUseQueryCache() && isset( self::$QueryCache[ $sig ] ) ) {
 			$response = self::$QueryCache[ $sig ];

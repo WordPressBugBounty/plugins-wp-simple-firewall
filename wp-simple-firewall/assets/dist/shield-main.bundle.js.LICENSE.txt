@@ -48,7 +48,7 @@
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! Buttons for DataTables 3.1.2
+/*! Buttons for DataTables 3.2.0
  * © SpryMedia Ltd - datatables.net/license
  */
 
@@ -56,11 +56,11 @@
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! SearchPanes 2.3.2
+/*! SearchPanes 2.3.3
      * © SpryMedia Ltd - datatables.net/license
      */
 
-/*! SearchPanes 2.3.2
+/*! SearchPanes 2.3.3
  * © SpryMedia Ltd - datatables.net/license
  */
 
