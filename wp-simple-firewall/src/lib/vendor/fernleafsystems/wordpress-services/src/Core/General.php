@@ -12,7 +12,7 @@ class General {
 	/**
 	 * @var string
 	 */
-	protected $sWpVersion;
+	protected $wpVersion;
 
 	public function canUseTransients() :bool {
 		return ( new TestCanUseTransients() )->run();
@@ -322,32 +322,34 @@ class General {
 
 	/**
 	 * TODO: Create ClassicPress override class for this stuff
-	 * @param bool $bIgnoreClassicpress if true returns the $wp_version regardless of ClassicPress or not
+	 * @param bool $ignoreClassicpress if true returns the $wp_version regardless of ClassicPress or not
 	 * @return string
 	 */
-	public function getVersion( $bIgnoreClassicpress = false ) {
+	public function getVersion( $ignoreClassicpress = false ) {
 
-		if ( empty( $this->sWpVersion ) ) {
-			$sVersionContents = file_get_contents( ABSPATH.WPINC.'/version.php' );
+		if ( \function_exists( 'wp_get_wp_version' ) ) {
+			$this->wpVersion = wp_get_wp_version();
+		}
+		elseif ( empty( $this->wpVersion ) ) {
+			$contents = \file_get_contents( ABSPATH.WPINC.'/version.php' );
 
-			if ( \preg_match( '/wp_version\s=\s\'([^(\'|")]+)\'/i', $sVersionContents, $aMatches ) ) {
-				$this->sWpVersion = $aMatches[ 1 ];
+			if ( \preg_match( '/wp_version\s=\s\'([^(\'|")]+)\'/i', $contents, $matches ) ) {
+				$this->wpVersion = $matches[ 1 ];
 			}
 			else {
 				global $wp_version;
-				$this->sWpVersion = $wp_version;
+				$this->wpVersion = $wp_version;
 			}
 		}
 
-		if ( $bIgnoreClassicpress || !$this->isClassicPress() ) {
-			$version = $this->sWpVersion;
-		}
-		else {
+		if ( !$ignoreClassicpress && $this->isClassicPress() ) {
 			$version = \classicpress_version();
-			preg_match( '#^(\d+(?:\.\d)+)(.*)$#', $version, $matches );
-			if ( !empty( $matches[ 2 ] ) ) {
+			if ( \preg_match( '#^(\d+(?:\.\d)+)(.*)$#', $version, $matches ) && !empty( $matches[ 2 ] ) ) {
 				$version = $matches[ 1 ];
 			}
+		}
+		else {
+			$version = $this->wpVersion;
 		}
 
 		return $version;

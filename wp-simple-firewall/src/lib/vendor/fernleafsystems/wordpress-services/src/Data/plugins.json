@@ -9,6 +9,7 @@
       ]
     },
     "properties":  {
+      "name":       "ARForms",
       "wporg_slug": "arforms-form-builder"
     }
   },
@@ -28,6 +29,7 @@
       ]
     },
     "properties":  {
+      "name":       "ARMember",
       "wporg_slug": "armember-membership"
     }
   },
@@ -47,6 +49,7 @@
       ]
     },
     "properties":  {
+      "name":       "BuddyBoss",
       "wporg_slug": null
     }
   },
@@ -60,6 +63,7 @@
       ]
     },
     "properties":  {
+      "name":       "BuddyPress",
       "wporg_slug": "buddypress"
     }
   },
@@ -73,6 +77,7 @@
       ]
     },
     "properties":  {
+      "name":       "Caldera Forms",
       "wporg_slug": null
     }
   },
@@ -86,6 +91,7 @@
       ]
     },
     "properties":  {
+      "name":       "Contact Form 7",
       "wporg_slug": "contact-form-7"
     }
   },
@@ -102,6 +108,7 @@
       ]
     },
     "properties":  {
+      "name":       "Classified Listing",
       "wporg_slug": "classified-listing"
     }
   },
@@ -115,6 +122,7 @@
       ]
     },
     "properties":  {
+      "name":       "Easy Digital Downloads",
       "wporg_slug": "easy-digital-downloads"
     }
   },
@@ -128,6 +136,7 @@
       ]
     },
     "properties":  {
+      "name":       "Elementor Pro",
       "wporg_slug": null
     }
   },
@@ -141,6 +150,7 @@
       ]
     },
     "properties":  {
+      "name":       "Fluent Forms",
       "wporg_slug": "fluentform"
     }
   },
@@ -154,6 +164,7 @@
       ]
     },
     "properties":  {
+      "name":       "Formidable Forms",
       "wporg_slug": "formidable"
     }
   },
@@ -167,6 +178,7 @@
       ]
     },
     "properties":  {
+      "name":       "Forminator Forms",
       "wporg_slug": "forminator"
     }
   },
@@ -177,6 +189,7 @@
       ]
     },
     "properties":  {
+      "name":       "Gravity Forms",
       "wporg_slug": null
     }
   },
@@ -190,6 +203,7 @@
       ]
     },
     "properties":  {
+      "name":       "Groundhogg",
       "wporg_slug": "groundhogg"
     }
   },
@@ -204,6 +218,7 @@
       ]
     },
     "properties":  {
+      "name":       "Happyforms",
       "wporg_slug": "happyforms"
     }
   },
@@ -217,6 +232,7 @@
       ]
     },
     "properties":  {
+      "name":       "Kali Forms",
       "wporg_slug": "kali-forms"
     }
   },
@@ -227,6 +243,7 @@
       ]
     },
     "properties":  {
+      "name":       "LearnPress",
       "wporg_slug": "learnpress"
     }
   },
@@ -237,6 +254,7 @@
       ]
     },
     "properties":  {
+      "name":       "LifterLMS",
       "wporg_slug": "lifterlms"
     }
   },
@@ -250,6 +268,7 @@
       ]
     },
     "properties":  {
+      "name":       "MemberPress",
       "wporg_slug": null
     }
   },
@@ -260,6 +279,7 @@
       ]
     },
     "properties":  {
+      "name":       "Ninja Forms",
       "wporg_slug": null
     }
   },
@@ -273,6 +293,7 @@
       ]
     },
     "properties":  {
+      "name":       "Paid Membership Subscriptions",
       "wporg_slug": "paid-member-subscriptions"
     }
   },
@@ -286,6 +307,7 @@
       ]
     },
     "properties":  {
+      "name":       "Profile Builder",
       "wporg_slug": "profile-builder"
     }
   },
@@ -305,6 +327,7 @@
       ]
     },
     "properties":  {
+      "name":       "ProfilePress",
       "wporg_slug": "wp-user-avatar"
     }
   },
@@ -318,6 +341,7 @@
       ]
     },
     "properties":  {
+      "name":       "Restrict Content Pro",
       "wporg_slug": null
     }
   },
@@ -329,12 +353,13 @@
       ]
     },
     "properties":  {
+      "name":       "SiteGround Optimizer",
       "wporg_slug": "sg-cachepress"
     }
   },
   "simplemembership":        {
     "identifiers": {
-      "classes": [
+      "classes":   [
         "\\SimpleWpMembership"
       ],
       "constants": [
@@ -342,6 +367,7 @@
       ]
     },
     "properties":  {
+      "name":       "Simple Membership",
       "wporg_slug": "simple-membership"
     }
   },
@@ -352,6 +378,7 @@
       ]
     },
     "properties":  {
+      "name":       "Super Forms",
       "wporg_slug": null
     }
   },
@@ -365,6 +392,7 @@
       ]
     },
     "properties":  {
+      "name":       "Support Candy",
       "wporg_slug": null
     }
   },
@@ -384,6 +412,7 @@
       ]
     },
     "properties":  {
+      "name":       "Ultimate Member",
       "wporg_slug": "ultimate-member"
     }
   },
@@ -402,6 +431,7 @@
       ]
     },
     "properties":  {
+      "name":       "W3 Total Cache",
       "wporg_slug": "w3-total-cache"
     }
   },
@@ -415,6 +445,7 @@
       ]
     },
     "properties":  {
+      "name":       "weForms",
       "wporg_slug": "weforms"
     }
   },
@@ -425,6 +456,7 @@
       ]
     },
     "properties":  {
+      "name":       "WooCommerce",
       "wporg_slug": "woocommerce"
     }
   },
@@ -438,6 +470,7 @@
       ]
     },
     "properties":  {
+      "name":       "Wordfence",
       "wporg_slug": "wordfence"
     }
   },
@@ -451,6 +484,7 @@
       ]
     },
     "properties":  {
+      "name":       "WPForms",
       "wporg_slug": "wpforms-lite"
     }
   },
@@ -464,6 +498,7 @@
       ]
     },
     "properties":  {
+      "name":       "wpForo",
       "wporg_slug": "wpforo"
     }
   },
@@ -477,6 +512,7 @@
       ]
     },
     "properties":  {
+      "name":       "WP-Members",
       "wporg_slug": null
     }
   },
@@ -491,6 +527,7 @@
       ]
     },
     "properties":  {
+      "name":       "WP Umbrella",
       "wporg_slug": "wp-health"
     }
   }

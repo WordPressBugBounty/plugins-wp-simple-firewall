@@ -3,7 +3,6 @@
 namespace FernleafSystems\Wordpress\Services\Utilities\WpOrg\Plugin;
 
 use FernleafSystems\Wordpress\Services\Core\VOs\Assets\WpPluginVo;
-use FernleafSystems\Wordpress\Services\Services;
 
 class Find {
 
@@ -47,8 +46,6 @@ class Find {
 	public const WP_FORO = 'wpforo';
 	public const WP_MEMBERS = 'wpmembers';
 	public const WP_UMBRELLA = 'wpumbrella';
-
-	private $plugins;
 
 	public function isPluginActive( string $plugin ) :bool {
 		$found = !empty( $this->findPlugin( $plugin ) );
@@ -119,13 +116,6 @@ class Find {
 	}
 
 	public function getPluginIdentifiers( string $plugin ) :array {
-		if ( !isset( $this->plugins ) ) {
-			$raw = Services::Data()->readFileWithInclude( Services::DataDir( 'plugins.json' ) );
-			if ( empty( $raw ) ) {
-				$raw = Services::WpFs()->getFileContent( $raw );
-			}
-			$this->plugins = empty( $raw ) ? [] : \json_decode( $raw, true );
-		}
-		return $this->plugins[ $plugin ][ 'identifiers' ] ?? [];
+		return Data::RetrieveFor( $plugin )[ 'identifiers' ] ?? [];
 	}
 }
