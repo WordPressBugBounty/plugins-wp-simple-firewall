@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by Paul Goodchild on 25-November-2024 using {@see https://github.com/BrianHenryIE/strauss}.
+ * Modified by Paul Goodchild on 24-February-2025 using {@see https://github.com/BrianHenryIE/strauss}.
  */
 
 /*

@@ -61,7 +61,7 @@ class WpPluginVo extends WpBaseVo {
 				break;
 
 			case 'version':
-				$value = $this->Version;
+				$value = (string)$this->Version;
 				break;
 
 			case 'svn_uses_tags':

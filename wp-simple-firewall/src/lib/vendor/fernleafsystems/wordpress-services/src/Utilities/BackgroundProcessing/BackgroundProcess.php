@@ -4,7 +4,7 @@ namespace FernleafSystems\Wordpress\Services\Utilities\BackgroundProcessing;
 
 use FernleafSystems\Wordpress\Services\Services;
 
-abstract class BackgroundProcess extends \WP_Background_Process {
+abstract class BackgroundProcess extends \FernleafSystems\Wordpress\Services\TP\BackgroundProcessing\WP_Background_Process {
 
 	/**
 	 * @var int
@@ -47,7 +47,7 @@ abstract class BackgroundProcess extends \WP_Background_Process {
 	 * Overrides base to simply 'return' instead of exit() this healthcheck
 	 */
 	public function handle_cron_healthcheck() {
-		if ( $this->is_process_running() ) {
+		if ( $this->is_processing() ) {
 			// Background process already running.
 			return;
 		}

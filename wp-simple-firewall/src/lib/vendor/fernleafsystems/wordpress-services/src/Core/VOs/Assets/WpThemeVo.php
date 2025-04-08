@@ -27,8 +27,6 @@ use FernleafSystems\Wordpress\Services\Utilities\WpOrg\Theme;
 class WpThemeVo extends WpBaseVo {
 
 	/**
-	 * WpPluginVo constructor.
-	 * @param string $stylesheet - the name of the theme folder.
 	 * @throws \Exception
 	 */
 	public function __construct( string $stylesheet ) {
@@ -65,9 +63,7 @@ class WpThemeVo extends WpBaseVo {
 					break;
 
 				case 'version':
-					if ( is_null( $value ) ) {
-						$value = $this->Version;
-					}
+					$value = (string)$this->Version;
 					break;
 
 				case 'child_theme':

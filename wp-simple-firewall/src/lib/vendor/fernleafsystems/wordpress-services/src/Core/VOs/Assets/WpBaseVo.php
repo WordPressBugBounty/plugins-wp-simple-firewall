@@ -34,12 +34,30 @@ abstract class WpBaseVo extends DynPropertiesClass {
 		switch ( $key ) {
 
 			case 'wp_info':
-				if ( is_null( $value ) ) {
+				if ( \is_null( $value ) ) {
 					$value = $this->loadWpInfo();
 					$this->wp_info = $value;
 				}
 				break;
 
+			case 'Name':
+			case 'Version':
+			case 'Description':
+			case 'Author':
+			case 'AuthorURI':
+			case 'TextDomain':
+			case 'DomainPath':
+			case 'PluginURI':
+			case 'Network':
+			case 'Title':
+			case 'AuthorName':
+			case 'new_version':
+			case 'url':
+			case 'package':
+			case 'requires':
+			case 'requires_php':
+				$value = (string)$value;
+				break;
 			default:
 				break;
 		}

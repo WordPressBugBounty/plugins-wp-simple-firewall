@@ -66,9 +66,13 @@ abstract class BaseQuery {
 	public function addWhereCompareColumns( string $columnLeft, string $columnRight, string $operator = '=' ) {
 		$schema = $this->getDbH()->getTableSchema();
 		if ( !$schema->hasColumn( $columnLeft ) ) {
+			var_dump(__FUNCTION__);
+			var_dump($schema);
 			throw new ColumnDoesNotExistException( sprintf( 'Column "%s" does not exist in this table', $columnLeft ) );
 		}
 		if ( !$schema->hasColumn( $columnRight ) ) {
+			var_dump(__FUNCTION__);
+			var_dump($schema);
 			throw new ColumnDoesNotExistException( sprintf( 'Column "%s" does not exist in this table', $columnRight ) );
 		}
 
@@ -85,6 +89,8 @@ abstract class BaseQuery {
 		}
 		$schema = $this->getDbH()->getTableSchema();
 		if ( !$schema->hasColumn( $column ) ) {
+			var_dump(debug_backtrace(20));
+			var_dump($schema);
 			throw new ColumnDoesNotExistException( sprintf( 'Column "%s" does not exist in this table', $column ) );
 		}
 
