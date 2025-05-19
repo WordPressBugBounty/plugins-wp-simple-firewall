@@ -10,7 +10,7 @@ class Fs {
 	/**
 	 * @var \WP_Filesystem_Base
 	 */
-	protected $oWpfs = null;
+	protected $wpfs = null;
 
 	/**
 	 * @param string $path
@@ -31,6 +31,10 @@ class Fs {
 		return rtrim( $sBase, DIRECTORY_SEPARATOR ).DIRECTORY_SEPARATOR.ltrim( $sPath, DIRECTORY_SEPARATOR );
 	}
 
+	public function delete( string $path ) :bool {
+		return $this->fs() && $this->fs()->delete( $path, true );
+	}
+
 	/**
 	 * @param string $dir
 	 * @param array  $exclude
@@ -47,6 +51,24 @@ class Fs {
 		else {
 			$this->mkdir( $dir );
 		}
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function enumItemsInDir( string $dir ) :array {
+		$files = [];
+		try {
+			if ( \is_dir( $dir ) ) {
+				foreach ( new \FilesystemIterator( $dir ) as $file ) {
+					/** @var \FilesystemIterator $file */
+					$files[] = $file->getPathname();
+				}
+			}
+		}
+		catch ( \Exception $e ) {
+		}
+		return $files;
 	}
 
 	/**
@@ -71,7 +93,7 @@ class Fs {
 	 * @return bool|null
 	 */
 	public function exists( $path ) :?bool {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		return ( $FS && $FS->exists( $path ) )
 			   || ( \function_exists( 'file_exists' ) ? \file_exists( $path ) : null );
 	}
@@ -237,12 +259,12 @@ class Fs {
 	}
 
 	public function getModifiedTime( string $path ) :int {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		return (int)( $FS ? $FS->mtime( $path ) : @filemtime( $path ) );
 	}
 
 	public function getAccessedTime( string $path ) :int {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		return (int)( $FS ? $FS->atime( $path ) : @fileatime( $path ) );
 	}
 
@@ -258,7 +280,7 @@ class Fs {
 			return null;
 		}
 
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		switch ( $property ) {
 
 			case 'modified' :
@@ -298,7 +320,7 @@ class Fs {
 	 */
 	public function getFileContent( $path, $uncompress = false ) {
 		$contents = null;
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		if ( $FS ) {
 			$contents = $FS->get_contents( $path );
 		}
@@ -332,7 +354,7 @@ class Fs {
 	 * @param $path
 	 */
 	public function getFileSize( $path ) :?int {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 
 		$size = null;
 		if ( $FS && $FS->size( $path ) > 0 ) {
@@ -412,7 +434,7 @@ class Fs {
 			$contents = \gzdeflate( $contents );
 		}
 
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		if ( $FS && $FS->put_contents( $path, $contents, FS_CHMOD_FILE ) ) {
 			return true;
 		}
@@ -429,7 +451,7 @@ class Fs {
 	 * @return bool
 	 */
 	public function deleteDir( $dir ) {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		if ( $FS && $FS->rmdir( $dir, true ) ) {
 			return true;
 		}
@@ -441,7 +463,7 @@ class Fs {
 	 * @return bool|null
 	 */
 	public function deleteFile( $path ) {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		if ( $FS && $FS->delete( $path ) ) {
 			return true;
 		}
@@ -454,7 +476,7 @@ class Fs {
 	 * @return bool|null
 	 */
 	public function move( $pathSource, $pathDestination ) {
-		$FS = $this->getWpfs();
+		$FS = $this->fs();
 		if ( $FS && $FS->move( $pathSource, $pathDestination ) ) {
 			return true;
 		}
@@ -462,13 +484,13 @@ class Fs {
 	}
 
 	public function isDir( string $path ) :bool {
-		return ( $this->hasWpfs() && $this->getWpfs()->is_dir( $path ) )
+		return ( $this->hasWpfs() && $this->fs()->is_dir( $path ) )
 			   || ( \function_exists( 'is_dir' ) && is_dir( $path ) );
 	}
 
 	public function isFile( $path ) :bool {
-		return ( $this->hasWpfs() && $this->getWpfs()->is_file( $path ) )
-			   || ( \function_exists( 'is_file' ) && is_file( $path ) );
+		return ( $this->hasWpfs() && $this->fs()->is_file( $path ) )
+			   || ( \function_exists( 'is_file' ) && \is_file( $path ) );
 	}
 
 	public function isAccessibleDir( string $path ) :bool {
@@ -480,7 +502,7 @@ class Fs {
 	}
 
 	public function isFilesystemAccessDirect() :bool {
-		return $this->getWpfs() instanceof \WP_Filesystem_Direct;
+		return $this->fs() instanceof \WP_Filesystem_Direct;
 	}
 
 	/**
@@ -497,11 +519,10 @@ class Fs {
 	 * @return bool|mixed
 	 */
 	public function touch( $path, $time = null ) {
-		$FS = $this->getWpfs();
 		if ( empty( $time ) ) {
 			$time = \time();
 		}
-		if ( $FS && $FS->touch( $path, $time ) ) {
+		if ( $this->fs() && $this->fs()->touch( $path, $time ) ) {
 			return true;
 		}
 		return \function_exists( 'touch' ) && @\touch( $path, $time );
@@ -510,28 +531,30 @@ class Fs {
 	/**
 	 * @return \WP_Filesystem_Base
 	 */
-	protected function getWpfs() {
-		if ( is_null( $this->oWpfs ) ) {
-			$this->initFileSystem();
-		}
-		return $this->oWpfs;
+	public function fs() {
+		return $this->wpfs ??= $this->initFileSystem();
 	}
 
 	protected function hasWpfs() :bool {
-		return $this->getWpfs() instanceof \WP_Filesystem_Base;
+		return $this->fs() instanceof \WP_Filesystem_Base;
 	}
 
+
+	/**
+	 * @return \WP_Filesystem_Base|mixed|false
+	 */
 	private function initFileSystem() {
-		if ( is_null( $this->oWpfs ) ) {
-			$this->oWpfs = false;
+		if ( \is_null( $this->wpfs ) ) {
+			$this->wpfs = false;
 			require_once( ABSPATH.'wp-admin/includes/file.php' );
 			if ( \WP_Filesystem() ) {
 				global $wp_filesystem;
 				if ( isset( $wp_filesystem ) && is_object( $wp_filesystem ) ) {
-					$this->oWpfs = $wp_filesystem;
+					$this->wpfs = $wp_filesystem;
 				}
 			}
 		}
+		return $this->wpfs;
 	}
 
 	/**

@@ -22,6 +22,7 @@ class ServiceProviders {
 	public const PROVIDER_STATUSCAKE = 'statuscake';
 	public const PROVIDER_STRIPE = 'stripe';
 	public const PROVIDER_UPTIMEROBOT = 'uptimerobot';
+	public const PROVIDER_WORPDRIVE = 'worpdrive';
 	public const PROVIDER_WPROCKET = 'wprocket';
 	public const TYPES_CRAWLERS = 'crawlers';
 	public const TYPES_SERVICES = 'services';

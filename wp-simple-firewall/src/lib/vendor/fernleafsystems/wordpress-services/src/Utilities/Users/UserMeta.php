@@ -15,7 +15,7 @@ class UserMeta extends DynPropertiesClass {
 	/**
 	 * @var static[]
 	 */
-	private static $metas = [];
+	private static array $metas = [];
 
 	/**
 	 * @return static
@@ -62,6 +62,10 @@ class UserMeta extends DynPropertiesClass {
 
 	public function save() {
 		if ( $this->user_id > 0 ) {
+			// Somehow an object got through here for a customer and broke User table rendering.
+			$this->applyFromArray(
+				\array_filter( $this->getRawData(), fn( $item ) => \is_scalar( $item ) || \is_array( $item ) )
+			);
 			Services::WpUsers()
 					->updateUserMeta( $this->getStorageKey(), $this->getRawData(), $this->user_id );
 		}

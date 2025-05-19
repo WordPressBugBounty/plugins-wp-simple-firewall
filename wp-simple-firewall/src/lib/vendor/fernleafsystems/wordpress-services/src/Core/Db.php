@@ -83,6 +83,13 @@ class Db {
 	}
 
 	/**
+	 * @return array|null|object
+	 */
+	public function showTableStatus( $format = OBJECT ) {
+		return $this->selectCustom( sprintf( 'SHOW TABLE STATUS FROM `%s`', DB_NAME ), $format );
+	}
+
+	/**
 	 * @param string   $tableName
 	 * @param callable $callBack
 	 * @return array
