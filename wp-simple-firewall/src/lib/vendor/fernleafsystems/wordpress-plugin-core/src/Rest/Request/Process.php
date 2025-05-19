@@ -111,8 +111,6 @@ abstract class Process {
 				'_wpnonce'
 			] );
 
-			error_log( var_export( $permittedParams, true ) );
-			error_log( var_export( array_keys( $req->get_params() ), true ) );
 			if ( \count( \array_diff_key( $req->get_params(), \array_flip( $permittedParams ) ) ) > 0 ) {
 				throw new InvalidRequestParametersException(
 					sprintf( 'Please only supply parameters that are permitted: %s',
