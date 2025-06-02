@@ -598,17 +598,17 @@
         },
         {
             "name": "fernleafsystems/wordpress-services",
-            "version": "3.12.4",
-            "version_normalized": "3.12.4.0",
+            "version": "3.12.5",
+            "version_normalized": "3.12.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/fernleafsystems/wordpress/wordpress-services.git",
-                "reference": "5d625ecac3bc96c6daf99a83f715c78f65dc516e"
+                "reference": "41b736a41239abc0e5d93951d1da6da8f1f9eff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/fernleafsystems%2Fwordpress%2Fwordpress-services/repository/archive.zip?sha=5d625ecac3bc96c6daf99a83f715c78f65dc516e",
-                "reference": "5d625ecac3bc96c6daf99a83f715c78f65dc516e",
+                "url": "https://gitlab.com/api/v4/projects/fernleafsystems%2Fwordpress%2Fwordpress-services/repository/archive.zip?sha=41b736a41239abc0e5d93951d1da6da8f1f9eff2",
+                "reference": "41b736a41239abc0e5d93951d1da6da8f1f9eff2",
                 "shasum": ""
             },
             "require": {
@@ -624,7 +624,7 @@
                 "soundasleep/html2text": "~0.5.0",
                 "twig/twig": "^1.44 || ^3.10"
             },
-            "time": "2025-05-15T10:52:15+00:00",
+            "time": "2025-06-02T13:13:43+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -645,7 +645,7 @@
             "description": "Base WordPress Services provider for all AptoWeb WordPress plugins",
             "support": {
                 "issues": "https://gitlab.com/fernleafsystems/wordpress/wordpress-services/-/issues",
-                "source": "https://gitlab.com/fernleafsystems/wordpress/wordpress-services/-/tree/3.12.4"
+                "source": "https://gitlab.com/fernleafsystems/wordpress/wordpress-services/-/tree/3.12.5"
             },
             "install-path": "../fernleafsystems/wordpress-services"
         },
