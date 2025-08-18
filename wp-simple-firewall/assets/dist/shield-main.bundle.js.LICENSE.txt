@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap v5.3.6 (https://getbootstrap.com/)
+  * Bootstrap v5.3.7 (https://getbootstrap.com/)
   * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -48,7 +48,7 @@
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! Buttons for DataTables 3.2.3
+/*! Buttons for DataTables 3.2.4
  * © SpryMedia Ltd - datatables.net/license
  */
 
@@ -56,15 +56,15 @@
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! SearchPanes 2.3.3
+/*! SearchPanes 2.3.4
      * © SpryMedia Ltd - datatables.net/license
      */
 
-/*! SearchPanes 2.3.3
+/*! SearchPanes 2.3.4
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! Select for DataTables 3.0.0
+/*! Select for DataTables 3.0.1
  * © SpryMedia Ltd - datatables.net/license/mit
  */
 
