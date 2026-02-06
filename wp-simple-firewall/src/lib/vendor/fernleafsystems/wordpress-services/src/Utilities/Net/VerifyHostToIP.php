@@ -3,35 +3,60 @@
 namespace FernleafSystems\Wordpress\Services\Utilities\Net;
 
 use FernleafSystems\Wordpress\Services\Services;
+use FernleafSystems\Wordpress\Services\Utilities\Integrations\AptoWebApi\Api;
+use IPLib\Address\Type;
 
 class VerifyHostToIP {
 
-	public function run( string $ip, string $hostnameRegex ) :bool {
+	private string $ip;
+
+	private string $crawler;
+
+	private string $hostnameRegex;
+
+	public function __construct( string $ip, string $crawler, string $hostnameRegex ) {
+		$this->ip = $ip;
+		$this->crawler = $crawler;
+		$this->hostnameRegex = $hostnameRegex;
+	}
+
+	public function run() :bool {
 		$srvIP = Services::IP();
 
 		$isVerifiedCrawlerBot = false;
 
 		// 1. Can we resolve the IP to a hostname
-		$hostname = DNS::Reverse( $ip );
-		if ( !empty( $hostname ) && ( $hostname !== $ip ) ) {
+		$hostname = DNS::Reverse( $this->ip );
+		if ( !empty( $hostname ) ) {
 
-			// 2. Does the hostname match the pattern we're expecting?
-			$isHostnameMatch = \preg_match( $hostnameRegex, $hostname );
-			if ( $isHostnameMatch ) {
+			if ( $hostname !== $this->ip ) {
+				// 2. Does the hostname match the pattern we're expecting?
+				$isHostnameMatch = \preg_match( $this->hostnameRegex, $hostname );
+				if ( $isHostnameMatch ) {
 
-				$forwardIP = DNS::Forward( $hostname );
+					$forwardIP = DNS::Forward( $hostname );
 
-				// i.e. the IP could be resolved from the host.
-				if ( $forwardIP !== $hostname && $srvIP->isValidIp( $forwardIP ) ) {
+					// i.e. the IP could be resolved from the host.
+					if ( $forwardIP !== $hostname && $srvIP->isValidIp( $forwardIP ) ) {
 
-					// 3. Did the forward DNS lookup bring us back to the original IP? Win!
-					if ( $srvIP->IpIn( $forwardIP, [ $ip ] ) ) {
-						$isVerifiedCrawlerBot = true;
+						// 3. Did the forward DNS lookup bring us back to the original IP? Win!
+						if ( $srvIP->IpIn( $forwardIP, [ $this->ip ] ) ) {
+							$isVerifiedCrawlerBot = true;
+						}
+						elseif ( $srvIP->getIpVersion( $forwardIP ) !== $srvIP->getIpVersion( $this->ip ) ) {
+							// Perhaps the IP we started with was maybe IPv6, but the forward lookup was IPv4 (or vice-versa)
+							// Now we need to test whether the rDNS for the new forward IP brings us back to the same hostname.
+							$isVerifiedCrawlerBot = DNS::Reverse( $forwardIP ) === $hostname;
+						}
 					}
-					elseif ( $srvIP->getIpVersion( $forwardIP ) !== $srvIP->getIpVersion( $ip ) ) {
-						// Perhaps the IP we started with was maybe IPv6, but the forward lookup was IPv4 (or vice-versa)
-						// Now we need to test whether the rDNS for the new forward IP brings us back to the same hostname.
-						$isVerifiedCrawlerBot = DNS::Reverse( $forwardIP ) === $hostname;
+				}
+			}
+			// rDNS failed, and is IPv6
+			elseif ( $srvIP->version( $this->ip ) === Type::T_IPv6 ) {
+				if ( $this->crawler === 'facebook' ) {
+					$result = ( new Api() )->geoIP( $this->ip );
+					if ( \str_contains( \strtolower( $result[ 'asn' ][ 'organization' ] ?? '' ), 'facebook' ) ) {
+						$isVerifiedCrawlerBot = true;
 					}
 				}
 			}

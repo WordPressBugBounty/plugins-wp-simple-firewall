@@ -146,7 +146,7 @@ class IpID {
 		}
 		elseif ( $this->verifyDNS && ( $this->ignoreUserAgentInChecks || $this->verifyAgent( $crawlerSpec ) ) ) {
 			// Only verify IP if the UserAgent is provided.
-			if ( ( new VerifyHostToIP() )->run( $this->ip, $crawlerSpec[ 'host_pattern' ] ) ) {
+			if ( ( new VerifyHostToIP( $this->ip, $crawlerSlug, $crawlerSpec[ 'host_pattern' ] ) )->run() ) {
 				$updateIpStorage = true;
 				$crawlerIPs[ $crawlerSlug ][ $this->ip ] = $now;
 			}
@@ -157,9 +157,7 @@ class IpID {
 			foreach ( \array_keys( $crawlerIPs ) as $slug ) {
 				$crawlerIPs[ $slug ] = \array_filter(
 					$crawlerIPs[ $slug ],
-					function ( int $ts ) use ( $now ) {
-						return ( $now - $ts ) < \WEEK_IN_SECONDS*2;
-					}
+					fn( int $ts ) => ( $now - $ts ) < \WEEK_IN_SECONDS*2
 				);
 			}
 			Transient::Set( 'apto_crawlerips', $crawlerIPs, defined( '\MONTH_IN_SECONDS' ) ? \MONTH_IN_SECONDS : \WEEK_IN_SECONDS*4 );
