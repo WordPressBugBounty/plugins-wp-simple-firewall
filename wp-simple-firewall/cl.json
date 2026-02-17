@@ -1,4 +1,118 @@
 {
+  "21.2": {
+    "version":     "21.2",
+    "released_at": 1770900000,
+    "hrefs":       {
+      "release": "https://clk.shldscrty.com/shieldrelease212",
+      "upgrade": "https://clk.shldscrty.com/shieldupgradeguide212"
+    },
+    "title":       "Multilingual Shield, Smarter Workflows",
+    "description": [
+      "This release brings broad language support together with faster, clearer admin workflows.",
+      "Everything is packaged as a single major update for a cleaner upgrade experience."
+    ],
+    "items":       [
+      {
+        "type":        "new",
+        "title":       "Shield is now available in nearly 40 languages",
+        "description": [
+          "Translation coverage has been expanded so almost all Shield UI text can be used in your preferred language."
+        ]
+      },
+      {
+        "type":        "new",
+        "title":       "On-demand language downloads",
+        "description": [
+          "Translations are fetched when needed, which keeps plugin installs leaner and reduces package size."
+        ]
+      },
+      {
+        "type":        "new",
+        "title":       "Powerful search for Activity and Traffic Logs",
+        "description": [
+          "Use free-text and targeted filters to quickly find events by IP, user, email, event details, and metadata."
+        ]
+      },
+      {
+        "type":        "new",
+        "title":       "Built-in search syntax helper",
+        "description": [
+          "An in-context guide helps you use advanced search patterns more effectively in log views."
+        ]
+      },
+      {
+        "type":        "new",
+        "title":       "Major plugin UI refresh",
+        "description": [
+          "We've begun rolling out a UI refresh. Not all elements have been updated; more components will be completed with subsequent releases."
+        ]
+      },
+      {
+        "type":        "new",
+        "title":       "Paid Memberships Pro checkout bot protection",
+        "description": [
+          "SilentCAPTCHA now protects Paid Memberships Pro checkout requests."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Faster and cleaner admin experience",
+        "description": [
+          "Dashboard visuals, page performance, and smaller-screen navigation have all been refined."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Improved log and scan performance",
+        "description": [
+          "Log tables load faster and stale malware scan records are cleaned up automatically."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Redesigned security reports and emails",
+        "description": [
+          "Reports are clearer, include richer inline insights, and avoid redundant email noise."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Biweekly report scheduling",
+        "description": [
+          "You can now run scheduled security reports every 2 weeks, in addition to existing reporting intervals."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Clearer Activity Log severity labels",
+        "description": [
+          "Activity events now use consistent severity labels so filtering and triage are easier."
+        ]
+      },
+      {
+        "type":        "improved",
+        "title":       "Stronger upgrade and admin workflow reliability",
+        "description": [
+          "Upgrade handling, redirects, and WordPress admin notice behavior are more reliable and consistent."
+        ]
+      }
+    ],
+    "patches":     [
+      {
+        "version":     "1",
+        "released_at": 1771258000,
+        "items":       [
+          {
+            "type":        "fixed",
+            "title":       "Automatic Translations Download.",
+            "description": [
+              "Fixed the automatic download of translation files."
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "21.0": {
     "version":     "21.0",
     "released_at": 1747300000,
