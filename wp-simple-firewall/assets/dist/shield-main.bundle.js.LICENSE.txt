@@ -36,17 +36,6 @@
  * https://github.com/select2/select2/blob/master/LICENSE.md
  */
 
-/*!
-* jQuery SmartWizard v6.0.6
-* The awesome step wizard plugin for jQuery
-* http://www.techlaboratory.net/jquery-smartwizard
-*
-* Created by Dipu Raj (http://dipu.me)
-*
-* Licensed under the terms of the MIT License
-* https://github.com/techlab/jquery-smartwizard/blob/master/LICENSE
-*/
-
 /*! Bootstrap 5 integration for DataTables' SearchPanes
  * © SpryMedia Ltd - datatables.net/license
  */
