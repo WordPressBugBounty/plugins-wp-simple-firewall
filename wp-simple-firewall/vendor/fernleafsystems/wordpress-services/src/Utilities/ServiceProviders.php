@@ -27,7 +27,7 @@ class ServiceProviders {
 	public const TYPES_CRAWLERS = 'crawlers';
 	public const TYPES_SERVICES = 'services';
 
-	private $providers;
+	private ?array $providers = null;
 
 	public function clearProviders() :void {
 		Transient::Delete( 'apto_provider_ips' );
@@ -37,7 +37,7 @@ class ServiceProviders {
 	 * @return array[][]
 	 */
 	public function getProviders() :array {
-		if ( !isset( $this->providers ) ) {
+		if ( $this->providers === null ) {
 			$IPs = Transient::Get( 'apto_provider_ips' );
 			if ( empty( $IPs ) || !\is_array( $IPs ) ) {
 				$IPs = ( new ProviderIPs() )->getIPs();

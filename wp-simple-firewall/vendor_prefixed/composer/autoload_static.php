@@ -4,7 +4,7 @@
 
 namespace AptowebDeps\Composer\Autoload;
 
-class ComposerStaticInitac144f8c9551b4d04769653423964d48
+class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
 {
     public static $files = array (
         '9e37e3b3b6ede1269b5f09b1e1c8b6bd' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
@@ -64,9 +64,9 @@ class ComposerStaticInitac144f8c9551b4d04769653423964d48
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitac144f8c9551b4d04769653423964d48::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitac144f8c9551b4d04769653423964d48::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitac144f8c9551b4d04769653423964d48::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$classMap;
 
         }, null, ClassLoader::class);
     }

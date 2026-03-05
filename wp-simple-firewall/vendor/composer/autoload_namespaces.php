@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
-    '' => array($vendorDir . '/elliotchance/iterator/src'),
+    '' => array($vendorDir . '/elliotchance/iterator/tests', $vendorDir . '/elliotchance/iterator/src'),
 );

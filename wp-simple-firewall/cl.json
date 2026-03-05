@@ -130,7 +130,7 @@
         ]
       },
       {
-        "version":     "3",
+        "version":     "4",
         "released_at": 1772023000,
         "items":       [
           {
@@ -147,6 +147,24 @@
             "description": [
               "Requests such as /apple-touch-icon.png no longer incorrectly trigger a bottrack_404 offense when the extension is allowlisted."
             ]
+          }
+        ]
+      },
+      {
+        "version":     "6",
+        "released_at": 1772191000,
+        "items":       [
+          {
+            "type":        "new",
+            "title":       "Added helper function to assit with silentCAPTCHA 3rd party integrations."
+          },
+          {
+            "type":        "fixed",
+            "title":       "Javascript collisions on WP Admin dashboard which also broke MainWP dashboard."
+          },
+          {
+            "type":        "security",
+            "title":       "Applied various security advisories to dependencies."
           }
         ]
       }

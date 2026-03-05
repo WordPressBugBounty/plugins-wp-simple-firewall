@@ -11,15 +11,12 @@ use IPLib\Factory;
 
 class IpUtils {
 
-	/**
-	 * @var Utilities\Net\VisitorIpDetection
-	 */
-	private $ipDetector;
+	private Utilities\Net\VisitorIpDetection $ipDetector;
 
 	/**
 	 * @var string[]
 	 */
-	private $aMyIps;
+	private ?array $myIPs = null;
 
 	/**
 	 * It's possible to give a range for $ip to test whether it is contained with the array or ips or ranges.
@@ -223,10 +220,7 @@ class IpUtils {
 	}
 
 	public function getIpDetector() :Utilities\Net\VisitorIpDetection {
-		if ( !isset( $this->ipDetector ) ) {
-			$this->ipDetector = new Utilities\Net\VisitorIpDetection();
-		}
-		return $this->ipDetector;
+		return $this->ipDetector ??= new Utilities\Net\VisitorIpDetection();
 	}
 
 	/**
@@ -281,14 +275,13 @@ class IpUtils {
 	 * @return bool
 	 */
 	public function isValidIp( $ip, $flags = null ) {
-		return filter_var( \trim( $ip ), FILTER_VALIDATE_IP, empty( $flags ) ? 0 : $flags );
+		return \filter_var( \trim( $ip ), \FILTER_VALIDATE_IP, empty( $flags ) ? 0 : $flags );
 	}
 
 	/**
 	 * @param string $ip
-	 * @return bool
 	 */
-	public function isValidIp4Range( $ip ) {
+	public function isValidIp4Range( $ip ) :bool {
 		$range = false;
 		if ( \strpos( $ip, '/' ) ) {
 			[ $ip, $CIDR ] = \explode( '/', $ip );
@@ -299,22 +292,20 @@ class IpUtils {
 
 	/**
 	 * @param string $ip
-	 * @return bool
 	 */
-	public function isValidIp6Range( $ip ) {
-		$bIsRange = false;
+	public function isValidIp6Range( $ip ) :bool {
+		$isRange = false;
 		if ( \strpos( $ip, '/' ) ) {
 			[ $ip, $CIDR ] = \explode( '/', $ip );
-			$bIsRange = $this->isValidIp( $ip ) && ( (int)$CIDR >= 0 && (int)$CIDR <= 128 );
+			$isRange = $this->isValidIp( $ip ) && ( (int)$CIDR >= 0 && (int)$CIDR <= 128 );
 		}
-		return $bIsRange;
+		return $isRange;
 	}
 
 	/**
 	 * @param string $ip
-	 * @return bool
 	 */
-	public function isValidIpOrRange( $ip ) {
+	public function isValidIpOrRange( $ip ) :bool {
 		return $this->isValidIp_PublicRemote( $ip ) || $this->isValidIpRange( $ip );
 	}
 
@@ -348,10 +339,10 @@ class IpUtils {
 	 * @return string[]
 	 */
 	public function getServerPublicIPs( $forceRefresh = false ) :array {
-		if ( $forceRefresh || empty( $this->aMyIps ) ) {
+		if ( $forceRefresh || $this->myIPs === null ) {
 
 			$IPs = Utilities\Options\Transient::Get( 'my_server_ips' );
-			if ( empty( $IPs ) || !is_array( $IPs ) || empty( $IPs[ 'check_at' ] ) ) {
+			if ( empty( $IPs ) || !\is_array( $IPs ) || empty( $IPs[ 'check_at' ] ) ) {
 				$IPs = [
 					'check_at' => 0,
 					'hash'     => '',
@@ -374,9 +365,9 @@ class IpUtils {
 				Utilities\Options\Transient::Set( 'my_server_ips', $IPs, MONTH_IN_SECONDS );
 			}
 
-			$this->aMyIps = $IPs[ 'ips' ];
+			$this->myIPs = \is_array( $IPs[ 'ips' ] ) ? $IPs[ 'ips' ] : [];
 		}
-		return \is_array( $this->aMyIps ) ? $this->aMyIps : [];
+		return $this->myIPs;
 	}
 
 	/**

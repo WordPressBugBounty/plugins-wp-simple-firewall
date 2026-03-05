@@ -9,14 +9,14 @@ class HttpUtil {
 	/**
 	 * @var string[]
 	 */
-	private $downloads;
+	private array $downloads;
 
 	public function __construct() {
 		$this->downloads = [];
 		add_action( 'shutdown', [ $this, 'deleteDownloads' ] );
 	}
 
-	public function deleteDownloads() {
+	public function deleteDownloads() :void {
 		$FS = Services::WpFs();
 		foreach ( $this->downloads as $file ) {
 			if ( $FS->exists( $file ) ) {

@@ -12,7 +12,7 @@ class Api {
 	/**
 	 * @return string[]
 	 */
-	public function getMyIps() {
+	public function getMyIps() :array {
 		return \array_unique( \array_filter( [
 			$this->getMyIp4(),
 			$this->getMyIp6(),

@@ -383,7 +383,8 @@ class ComposerStaticInitShieldPackage
     );
 
     public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/..' . '/elliotchance/iterator/src',
+        0 => __DIR__ . '/..' . '/elliotchance/iterator/tests',
+        1 => __DIR__ . '/..' . '/elliotchance/iterator/src',
     );
 
     public static $classMap = array (

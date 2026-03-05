@@ -16,7 +16,6 @@ class DataManipulation {
 
 	/**
 	 * @param string $path
-	 * @return string
 	 */
 	public function convertLineEndingsLinuxToDos( $path ) :string {
 		return ( new ConvertLineEndings() )->fileLinuxToDos( $path );

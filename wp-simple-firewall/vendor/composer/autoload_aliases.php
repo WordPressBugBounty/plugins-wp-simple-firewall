@@ -396,6 +396,127 @@ namespace AptowebDeps {
     array (
     ),
   ),
+  'CrowdSec\\CapiClient\\Tests\\Constants' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Constants',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Constants',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Integration\\CapiListHandlerTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CapiListHandlerTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Integration',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Integration\\CapiListHandlerTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Integration\\WatcherTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'WatcherTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Integration',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Integration\\WatcherTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\MockedData' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MockedData',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\MockedData',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\PHPUnitUtil' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PHPUnitUtil',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\PHPUnitUtil',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\AbstractClient' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractClient',
+    'isabstract' => true,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\AbstractClient',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\AbstractClientTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractClientTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\AbstractClientTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\CurlTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CurlTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\CurlTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\FileGetContentsTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FileGetContentsTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\FileGetContentsTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\FileStorageTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FileStorageTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\FileStorageTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\CapiClient\\Tests\\Unit\\WatcherTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'WatcherTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\CapiClient\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\CapiClient\\Tests\\Unit\\WatcherTest',
+    'implements' => 
+    array (
+    ),
+  ),
   'CrowdSec\\Common\\Client\\AbstractClient' => 
   array (
     'type' => 'class',
@@ -571,6 +692,138 @@ namespace AptowebDeps {
     'isabstract' => false,
     'namespace' => 'CrowdSec\\Common\\Logger',
     'extends' => 'AptowebDeps\\CrowdSec\\Common\\Logger\\FileLog',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Constants' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Constants',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Constants',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\MockedData' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MockedData',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\MockedData',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\PHPUnitUtil' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PHPUnitUtil',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\PHPUnitUtil',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\AbstractClient' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractClient',
+    'isabstract' => true,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\AbstractClient',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\AbstractClientTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractClientTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\AbstractClientTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\AbstractConfigurationTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractConfigurationTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\AbstractConfigurationTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\ConsoleLogTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ConsoleLogTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\ConsoleLogTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\CurlTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CurlTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\CurlTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\FileGetContentsTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FileGetContentsTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\FileGetContentsTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\FileLogTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FileLogTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\FileLogTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Tests\\Unit\\RequestTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RequestTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Tests\\Unit\\RequestTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CrowdSec\\Common\\Client\\Tests\\Unit\\ResponseTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ResponseTest',
+    'isabstract' => false,
+    'namespace' => 'CrowdSec\\Common\\Client\\Tests\\Unit',
+    'extends' => 'AptowebDeps\\CrowdSec\\Common\\Client\\Tests\\Unit\\ResponseTest',
     'implements' => 
     array (
     ),
