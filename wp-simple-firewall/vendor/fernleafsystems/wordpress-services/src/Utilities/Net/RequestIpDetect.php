@@ -31,6 +31,17 @@ class RequestIpDetect extends BaseIP {
 		return $this->getPublicRequestIPData()[ 'source' ];
 	}
 
+	/**
+	 * Detects and caches the current public request IP details.
+	 * Always returns the full array shape, even when no valid public IP is found.
+	 *
+	 * @return array{
+	 *     source:string,
+	 *     ip:string,
+	 *     ip_id:string,
+	 *     all_ips:array<string, string[]>
+	 * }
+	 */
 	public function getPublicRequestIPData() :array {
 		if ( !isset( $this->visitorIP ) ) {
 

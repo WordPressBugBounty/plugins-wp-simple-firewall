@@ -48,15 +48,11 @@ class ThisRequest extends DynPropertiesClass {
 		$this->carbon = $req->carbon();
 		$this->carbon_tz = $req->carbon( true );
 
-		$this->ip = $req->ip();
+		$ipData = $req->getIpDetector()->getPublicRequestIPData();
+		$this->ip = $ipData[ 'ip' ];
 		$this->ip_is_public = !empty( $this->ip ) && Services::IP()->isValidIp_PublicRemote( $this->ip );
-		try {
-			$this->ip_id = ( new IpID( $this->ip, $this->useragent ) )->run()[ 0 ];
-		}
-		catch ( \Exception $e ) {
-			$this->ip_id = IpID::UNKNOWN;
-		}
-		$this->is_server_loopback = \in_array( $this->ip_id, [ IpID::LOOPBACK, IpID::THIS_SERVER ] );
+		$this->ip_id = $ipData[ 'ip_id' ];
+		$this->is_server_loopback = \in_array( $this->ip_id, [ IpID::LOOPBACK, IpID::THIS_SERVER ], true );
 
 		$this->method = $req->getMethod();
 

@@ -3,7 +3,7 @@
 namespace FernleafSystems\Wordpress\Plugin\Shield\Modules\CommentsFilter\Scan;
 
 use FernleafSystems\Utilities\Logic\ExecOnce;
-use FernleafSystems\Wordpress\Plugin\Shield\Components\CompCons\AntiBot\CoolDownHandler;
+use FernleafSystems\Wordpress\Plugin\Shield\Components\CompCons\SilentCaptcha\CoolDownHandler;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
 use FernleafSystems\Wordpress\Services\Services;
 
@@ -65,7 +65,7 @@ class Scanner {
 				$con->comps->events->fireEvent( 'comment_spam_block' );
 
 				// if we're configured to actually block...
-				if ( $con->comps->opts_lookup->enabledAntiBotCommentSpam() && \in_array( 'antibot', $errorCodes ) ) {
+				if ( $con->comps->opts_lookup->enabledSilentCaptchaCommentSpam() && \in_array( 'antibot', $errorCodes ) ) {
 					$newStatus = $con->opts->optGet( 'comments_default_action_spam_bot' );
 				}
 				elseif ( $con->comps->opts_lookup->enabledHumanCommentSpam()
@@ -99,7 +99,7 @@ class Scanner {
 		$con = self::con();
 		$errors = new \WP_Error();
 
-		if ( $con->comps->bot_signals->isBot() ) {
+		if ( $con->comps->opts_lookup->enabledSilentCaptchaCommentSpam() && $con->comps->bot_signals->isBot() ) {
 			$errors->add( 'antibot', __( 'Failed AntiBot Verification', 'wp-simple-firewall' ) );
 		}
 		elseif ( $con->comps->opts_lookup->enabledHumanCommentSpam() ) {

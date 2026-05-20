@@ -130,13 +130,47 @@ class General {
 	 */
 	private function getCoreChecksums_WP() :array {
 		include_once( ABSPATH.'/wp-admin/includes/update.php' );
-		if ( \function_exists( 'get_core_checksums' ) ) { // if it's loaded, we use it.
-			$data = get_core_checksums( $this->getVersion(), $this->getLocaleForChecksums() );
+
+		$version = $this->getVersion();
+		$locale = $this->getLocaleForChecksums();
+		$data = $this->queryWordPressOrgCoreChecksums( $version, $locale );
+
+		// WordPress.org can lag localized checksum publication, so fall back to wp_hashes.
+		if ( !$this->isUsableCoreChecksums( $data ) ) {
+			$data = $this->queryWpHashesCoreChecksums( $version, $locale );
 		}
-		else {
-			$data = ( new Hashes\WordPress() )->getCurrent();
+
+		return $this->isUsableCoreChecksums( $data ) ? $data : [];
+	}
+
+	/**
+	 * @return string[]|null
+	 */
+	protected function queryWordPressOrgCoreChecksums( string $version, string $locale ) :?array {
+		return \function_exists( 'get_core_checksums' ) ? get_core_checksums( $version, $locale ) : null;
+	}
+
+	/**
+	 * @return string[]|null
+	 */
+	protected function queryWpHashesCoreChecksums( string $version, string $locale ) :?array {
+		return ( new Hashes\WordPress() )->getHashes( $version, $locale, 'md5' );
+	}
+
+	/**
+	 * @param mixed $data
+	 */
+	private function isUsableCoreChecksums( $data ) :bool {
+		$valid = \is_array( $data ) && !empty( $data );
+		if ( $valid ) {
+			foreach ( $data as $file => $hash ) {
+				if ( !\is_string( $file ) || $file === '' || !\is_string( $hash ) || $hash === '' ) {
+					$valid = false;
+					break;
+				}
+			}
 		}
-		return \is_array( $data ) ? $data : [];
+		return $valid;
 	}
 
 	public function getAdminUrl( string $path = '', bool $wpmsOnly = false ) :string {
@@ -594,6 +628,10 @@ class General {
 	public function getDateFormat() :string {
 		$format = $this->getOption( 'date_format' );
 		return empty( $format ) ? 'F j, Y' : $format;
+	}
+
+	public function getWpTimezone() :\DateTimeZone {
+		return \wp_timezone();
 	}
 
 	/**

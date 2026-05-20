@@ -47,14 +47,8 @@ class Request extends DynPropertiesClass {
 	 */
 	private $content;
 
-	/**
-	 * @var RequestIpDetect
-	 */
-	private $requestIpDetector;
+	private RequestIpDetect $requestIpDetector;
 
-	/**
-	 * Request constructor.
-	 */
 	public function __construct() {
 		$this->post = \is_array( $_POST ) ? $_POST : [];
 		$this->query = \is_array( $_GET ) ? $_GET : [];
@@ -89,10 +83,7 @@ class Request extends DynPropertiesClass {
 	}
 
 	public function getIpDetector() :RequestIpDetect {
-		if ( !isset( $this->requestIpDetector ) ) {
-			$this->requestIpDetector = new RequestIpDetect();
-		}
-		return $this->requestIpDetector;
+		return $this->requestIpDetector ??= new RequestIpDetect();
 	}
 
 	public function ip() :string {
@@ -100,10 +91,7 @@ class Request extends DynPropertiesClass {
 	}
 
 	public function getContent() :string {
-		if ( !isset( $this->content ) ) {
-			$this->content = file_get_contents( 'php://input' );
-		}
-		return (string)$this->content;
+		return $this->content ??= (string)file_get_contents( 'php://input' );
 	}
 
 	public function getMethod() :string {
@@ -150,10 +138,7 @@ class Request extends DynPropertiesClass {
 		$carbon->setTimestamp( $this->ts() );
 		$carbon->setLocale( $userLocale ? $WP->getUserLocaleCountry() : $WP->getLocaleCountry() );
 		if ( $setTimezone ) {
-			$TZ = $WP->getOption( 'timezone_string' );
-			if ( !empty( $TZ ) ) {
-				$carbon->setTimezone( $TZ );
-			}
+			$carbon->setTimezone( $WP->getWpTimezone() );
 		}
 		return $carbon;
 	}
@@ -229,7 +214,7 @@ class Request extends DynPropertiesClass {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function cookie( $key, $default = null ) {
@@ -238,7 +223,7 @@ class Request extends DynPropertiesClass {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function env( $key, $default = null ) {
@@ -247,7 +232,7 @@ class Request extends DynPropertiesClass {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function post( $key, $default = null ) {
@@ -256,7 +241,7 @@ class Request extends DynPropertiesClass {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function query( $key, $default = null ) {
@@ -267,7 +252,7 @@ class Request extends DynPropertiesClass {
 	 * POST > GET > COOKIE
 	 * @param string $key
 	 * @param bool   $includeCookies
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function request( $key, $includeCookies = false, $default = null ) {
@@ -325,7 +310,7 @@ class Request extends DynPropertiesClass {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @return mixed|null
 	 */
 	public function server( $key, $default = null ) {

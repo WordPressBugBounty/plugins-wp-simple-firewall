@@ -37,7 +37,7 @@ class GeoIp {
 		return $this->lookupIp( $ip )[ 'country' ][ $prop ] ?? null;
 	}
 
-	public function lookupIp( string $ip ) :array {
+	public function lookupIp( string $ip ) :?array {
 		return $this->results[ $ip ] ??= ( new Api() )->geoIP( $ip );
 	}
 }

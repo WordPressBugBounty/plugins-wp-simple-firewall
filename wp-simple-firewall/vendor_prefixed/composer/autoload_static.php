@@ -4,9 +4,11 @@
 
 namespace AptowebDeps\Composer\Autoload;
 
-class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
+class ComposerStaticInitde284e29301aaaeaaf36dc500b9e254f
 {
     public static $files = array (
+        '9ef954d81cd6112db96657b52578069b' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
+        'ce763bd2817dffbc2c1408fa569ec38c' => __DIR__ . '/..' . '/thecodingmachine/safe/src/functions.php',
         '9e37e3b3b6ede1269b5f09b1e1c8b6bd' => __DIR__ . '/..' . '/twig/twig/src/Resources/core.php',
         '4627f347e2ab6622eb180b82bd029b8a' => __DIR__ . '/..' . '/twig/twig/src/Resources/debug.php',
         '9e8bfd3b708fcb3a3fef2484b3482e76' => __DIR__ . '/..' . '/twig/twig/src/Resources/escaper.php',
@@ -16,17 +18,38 @@ class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
     public static $prefixLengthsPsr4 = array (
         'A' =>
         array (
+            'AptowebDeps\\Webauthn\\MetadataService\\' => 37,
+            'AptowebDeps\\Webauthn\\' => 21,
             'AptowebDeps\\Twig\\' => 17,
             'AptowebDeps\\Symfony\\Component\\Uid\\' => 34,
+            'AptowebDeps\\Symfony\\Component\\Process\\' => 38,
             'AptowebDeps\\Symfony\\Component\\Filesystem\\' => 41,
             'AptowebDeps\\Symfony\\Component\\Config\\' => 37,
+            'AptowebDeps\\Safe\\' => 17,
+            'AptowebDeps\\Nyholm\\Psr7\\' => 24,
+            'AptowebDeps\\Nyholm\\Psr7Server\\' => 30,
             'AptowebDeps\\Monolog\\' => 20,
+            'AptowebDeps\\League\\Uri\\' => 23,
+            'AptowebDeps\\FG\\' => 15,
+            'AptowebDeps\\Dolondro\\GoogleAuthenticator\\' => 41,
             'AptowebDeps\\CrowdSec\\Common\\' => 28,
             'AptowebDeps\\CrowdSec\\CapiClient\\' => 32,
+            'AptowebDeps\\Cose\\' => 17,
+            'AptowebDeps\\CBOR\\' => 17,
+            'AptowebDeps\\Base64Url\\' => 22,
+            'AptowebDeps\\Assert\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'AptowebDeps\\Webauthn\\MetadataService\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/web-auth/metadata-service/src',
+        ),
+        'AptowebDeps\\Webauthn\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/web-auth/webauthn-lib/src',
+        ),
         'AptowebDeps\\Twig\\' =>
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -34,6 +57,10 @@ class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
         'AptowebDeps\\Symfony\\Component\\Uid\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/uid',
+        ),
+        'AptowebDeps\\Symfony\\Component\\Process\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'AptowebDeps\\Symfony\\Component\\Filesystem\\' =>
         array (
@@ -43,9 +70,34 @@ class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
+        'AptowebDeps\\Safe\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/thecodingmachine/safe/src',
+        ),
+        'AptowebDeps\\Nyholm\\Psr7\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/nyholm/psr7/src',
+        ),
+        'AptowebDeps\\Nyholm\\Psr7Server\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/nyholm/psr7-server/src',
+        ),
         'AptowebDeps\\Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'AptowebDeps\\League\\Uri\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/league/uri/src',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces/src',
+        ),
+        'AptowebDeps\\FG\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/fgrosse/phpasn1/lib',
+        ),
+        'AptowebDeps\\Dolondro\\GoogleAuthenticator\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/dolondro/google-authenticator/src',
         ),
         'AptowebDeps\\CrowdSec\\Common\\' =>
         array (
@@ -54,6 +106,22 @@ class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
         'AptowebDeps\\CrowdSec\\CapiClient\\' =>
         array (
             0 => __DIR__ . '/..' . '/crowdsec/capi-client/src',
+        ),
+        'AptowebDeps\\Cose\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/web-auth/cose-lib/src',
+        ),
+        'AptowebDeps\\CBOR\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/spomky-labs/cbor-php/src',
+        ),
+        'AptowebDeps\\Base64Url\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/spomky-labs/base64url/src',
+        ),
+        'AptowebDeps\\Assert\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/beberlei/assert/lib/Assert',
         ),
     );
 
@@ -64,9 +132,9 @@ class ComposerStaticInita854877362e01b14eddabbdc2de9a3be
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita854877362e01b14eddabbdc2de9a3be::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitde284e29301aaaeaaf36dc500b9e254f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitde284e29301aaaeaaf36dc500b9e254f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitde284e29301aaaeaaf36dc500b9e254f::$classMap;
 
         }, null, ClassLoader::class);
     }

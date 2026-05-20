@@ -6,7 +6,6 @@ use FernleafSystems\Utilities\Logic\ExecOnce;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\Integrations\Lib\Bots\Common\BaseBotDetectionController;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
 use FernleafSystems\Wordpress\Services\Services;
-use FernleafSystems\Wordpress\Services\Utilities\WpOrg\Plugin\Data;
 
 class IntegrationsCon {
 
@@ -14,7 +13,9 @@ class IntegrationsCon {
 	use PluginControllerConsumer;
 
 	protected function run() {
-		$this->autoIntegrations();
+		if ( self::con()->this_req->wp_is_admin || self::con()->this_req->wp_is_cron ) {
+			$this->autoIntegrations();
+		}
 	}
 
 	private function autoIntegrations() :void {
@@ -25,26 +26,35 @@ class IntegrationsCon {
 				'profile_hash'  => '',
 			], $opts->optGet( 'auto_integrations_track' ) );
 
+			$currentHash = $this->buildCurrentProfileHash();
 			if ( Services::Request()->carbon()->subMinute()->timestamp > $trk[ 'last_check_at' ]
-				 && !\hash_equals( $trk[ 'profile_hash' ], $this->buildCurrentProfileHash() ) ) {
+				 && !\hash_equals( $trk[ 'profile_hash' ], $currentHash ) ) {
 
 				$trk[ 'last_check_at' ] = Services::Request()->carbon()->timestamp;
-				$trk[ 'profile_hash' ] = $this->buildCurrentProfileHash();
-				$opts->optSet( 'auto_integrations_track', $trk )->store();
+				$trk[ 'profile_hash' ] = $currentHash;
+				$opts->optSet( 'auto_integrations_track', $trk );
 
 				$ints = $this->buildIntegrationsStates();
 				/** @var BaseBotDetectionController $formCon */
 				foreach ( [ self::con()->comps->forms_users, self::con()->comps->forms_spam ] as $formCon ) {
+					$selected = $formCon->getSelectedProviders();
 					foreach ( \array_keys( $formCon->getInstalled() ) as $slug ) {
 						if ( ( $ints[ $slug ][ 'state' ] ?? '' ) === 'available' && $ints[ $slug ][ 'has_cap' ] ) {
-							$opts->optSet( $formCon->getSelectedProvidersOptKey(), \array_merge( $formCon->getSelectedProviders(), [ $slug ] ) );
+							$selected[] = $slug;
 						}
 					}
+					$opts->optSet( $formCon->getSelectedProvidersOptKey(), \array_values( \array_unique( $selected ) ) );
+				}
+				if ( $opts->hasChanges() ) {
+					$opts->store();
 				}
 			}
 		}
 	}
 
+	/**
+	 * @return array<string,array{slug:string,state:string,name:string,has_cap:bool}>
+	 */
 	public function buildIntegrationsStates() :array {
 		$integrations = [];
 		/** @var BaseBotDetectionController $formCon */
@@ -61,8 +71,8 @@ class IntegrationsCon {
 				else {
 					$integrations[ $slug ] = [
 						'slug'    => $slug,
-						'state'   => \in_array( $slug, $formCon->getSelectedProviders() ) ? 'enabled' : 'available',
-						'name'    => Data::RetrieveFor( $slug )[ 'properties' ][ 'name' ],
+						'state'   => \in_array( $slug, $formCon->getSelectedProviders(), true ) ? 'enabled' : 'available',
+						'name'    => $this->providerNameFor( $formCon, $slug ),
 						'has_cap' => $this->hasCapForIntegration( $slug ),
 					];
 				}
@@ -76,6 +86,15 @@ class IntegrationsCon {
 		return $slug === 'wordpress'
 			   || ( isset( $con->comps->forms_spam->enumProviders()[ $slug ] ) && $con->caps->canThirdPartyScanSpam() )
 			   || ( isset( $con->comps->forms_users->enumProviders()[ $slug ] ) && $con->caps->canThirdPartyScanUsers() );
+	}
+
+	private function providerNameFor( BaseBotDetectionController $formCon, string $slug ) :string {
+		foreach ( $formCon->providerOptions() as $option ) {
+			if ( ( $option[ 'value_key' ] ?? '' ) === $slug ) {
+				return (string)( $option[ 'text' ] ?? $slug );
+			}
+		}
+		return $slug;
 	}
 
 	private function buildCurrentProfileHash() :string {

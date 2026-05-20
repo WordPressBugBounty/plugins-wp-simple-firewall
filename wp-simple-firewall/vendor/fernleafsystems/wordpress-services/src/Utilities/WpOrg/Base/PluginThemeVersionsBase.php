@@ -8,14 +8,13 @@ use FernleafSystems\Wordpress\Services\Utilities\WpOrg\Plugin;
 use FernleafSystems\Wordpress\Services\Utilities\WpOrg\Theme;
 
 abstract class PluginThemeVersionsBase {
-
 	use RequestCacheConsumer;
 
 	/**
 	 * @return string[]
 	 */
-	public function all() :array {
-		$versions = \array_filter( \array_keys( $this->allVersionsUrls() ) );
+	public function all(): array {
+		$versions = \array_filter( \array_keys( $this->allVersionsUrls() ), fn( $v ) => !empty( $v ) && \is_string( $v ) );
 		\usort( $versions, 'version_compare' );
 		return $versions;
 	}
@@ -23,14 +22,14 @@ abstract class PluginThemeVersionsBase {
 	/**
 	 * @return string[]
 	 */
-	public function allVersionsUrls() :array {
+	public function allVersionsUrls(): array {
 		$versions = [];
 		$slug = $this->getWorkingSlug();
 		if ( !empty( $slug ) ) {
 			try {
 				$info = $this->getApi()
-							 ->setWorkingSlug( $slug )
-							 ->getInfo();
+				             ->setWorkingSlug( $slug )
+				             ->getInfo();
 				$versions = $info->versions ?? [];
 			}
 			catch ( \Exception $e ) {
@@ -55,8 +54,8 @@ abstract class PluginThemeVersionsBase {
 	 */
 	public function latest() {
 		return $this->getApi()
-					->setWorkingSlug( $this->getWorkingSlug() )
-					->getInfo()->version;
+		            ->setWorkingSlug( $this->getWorkingSlug() )
+		            ->getInfo()->version;
 	}
 
 	/**

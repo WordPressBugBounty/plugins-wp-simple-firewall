@@ -10,24 +10,32 @@ abstract class BaseBotDetectionController {
 	use ExecOnce;
 	use PluginControllerConsumer;
 
+	/**
+	 * @var array<string,class-string<BaseHandler>>
+	 */
 	private array $installedProviders;
 
 	protected function canRun() :bool {
-		return !self::con()->this_req->request_bypasses_all_restrictions;
+		return !self::con()->this_req->request_bypasses_all_restrictions
+			   && $this->isEnabled();
 	}
 
 	/**
-	 * @return BaseHandler[]|string[]
+	 * @return array<string,class-string<BaseHandler>>
 	 */
 	public function getInstalled() :array {
-		return $this->installedProviders ??= \array_filter( $this->enumProviders(), fn( string $p ) => $p::IsProviderAvailable() );
+		return $this->installedProviders ??= \array_filter(
+			$this->enumProviders(),
+			static fn( string $p ) => $p::IsProviderAvailable()
+		);
 	}
 
 	protected function run() {
-		\array_map(
-			fn( string $providerClass ) => ( new $providerClass() )->execute(),
-			\array_intersect_key( $this->getInstalled(), \array_flip( $this->getSelectedProviders() ) )
-		);
+		foreach ( \array_intersect_key( $this->enumProviders(), \array_flip( $this->getSelectedProviders() ) ) as $providerClass ) {
+			if ( $providerClass::IsProviderAvailable() ) {
+				( new $providerClass() )->execute();
+			}
+		}
 	}
 
 	/**
@@ -40,7 +48,14 @@ abstract class BaseBotDetectionController {
 	abstract public function getSelectedProvidersOptKey() :string;
 
 	/**
-	 * @return BaseHandler[]|string[]
+	 * @return array<int,array{value_key:string,text:string}>
+	 */
+	public function providerOptions() :array {
+		return self::con()->opts->optDef( $this->getSelectedProvidersOptKey() )[ 'value_options' ] ?? [];
+	}
+
+	/**
+	 * @return array<string,class-string<BaseHandler>>
 	 */
 	public function enumProviders() :array {
 		return [];

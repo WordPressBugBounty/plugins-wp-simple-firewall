@@ -51,38 +51,35 @@ class WordpressPremiumPluginSlugResolver {
 		$key = \md5( $wpOrgSlug.\serialize( $pluginData ).$baseFileOrStylesheet.$type );
 		if ( !isset( self::$resolverCache[ $key ] ) ) {
 
-			$heuristicsPayload = $this->api->wpPremiumAssetHeuristics()[ $type === 'plugin' ? 'plugins' : 'themes' ] ?? [];
-			if ( \is_array( $heuristicsPayload ) ) {
+			$heuristicsPayload = $this->api->wpPremiumAssetHeuristics()[ $type === 'plugin' ? 'plugins' : 'themes' ];
+			$assetHeuristicsPayloads = $this->findAssetHeuristicsPayloads( $heuristicsPayload, $wpOrgSlug );
+			$bestCandidate = null;
+			$isAmbiguous = false;
 
-				$assetHeuristicsPayloads = $this->findAssetHeuristicsPayloads( $heuristicsPayload, $wpOrgSlug );
-				$bestCandidate = null;
-				$isAmbiguous = false;
-
-				foreach ( $assetHeuristicsPayloads as $assetHeuristics ) {
-					$candidateResolution = $this->resolveCandidate( $assetHeuristics, $pluginData, $baseFileOrStylesheet );
-					if ( !empty( $candidateResolution ) ) {
-						if ( $bestCandidate === null ) {
+			foreach ( $assetHeuristicsPayloads as $assetHeuristics ) {
+				$candidateResolution = $this->resolveCandidate( $assetHeuristics, $pluginData, $baseFileOrStylesheet );
+				if ( !empty( $candidateResolution ) ) {
+					if ( $bestCandidate === null ) {
+						$bestCandidate = $candidateResolution;
+						$isAmbiguous = false;
+					}
+					else {
+						$comparison = $this->compareResolvedCandidates( $candidateResolution, $bestCandidate );
+						if ( $comparison > 0 ) {
 							$bestCandidate = $candidateResolution;
 							$isAmbiguous = false;
 						}
-						else {
-							$comparison = $this->compareResolvedCandidates( $candidateResolution, $bestCandidate );
-							if ( $comparison > 0 ) {
-								$bestCandidate = $candidateResolution;
-								$isAmbiguous = false;
-							}
-							elseif ( $comparison === 0 && $candidateResolution[ 'premium_slug' ] !== $bestCandidate[ 'premium_slug' ] ) {
-								$isAmbiguous = true;
-							}
+						elseif ( $comparison === 0 && $candidateResolution[ 'premium_slug' ] !== $bestCandidate[ 'premium_slug' ] ) {
+							$isAmbiguous = true;
 						}
 					}
 				}
+			}
 
-				if ( !empty( $bestCandidate ) && !$isAmbiguous ) {
-					$resolved[ 'premium_slug' ] = $bestCandidate[ 'premium_slug' ];
-					$resolved[ 'matched_heuristics' ] = $bestCandidate[ 'matched_heuristics' ];
-					$resolved[ 'confidence' ] = $bestCandidate[ 'confidence' ];
-				}
+			if ( !empty( $bestCandidate ) && !$isAmbiguous ) {
+				$resolved[ 'premium_slug' ] = $bestCandidate[ 'premium_slug' ];
+				$resolved[ 'matched_heuristics' ] = $bestCandidate[ 'matched_heuristics' ];
+				$resolved[ 'confidence' ] = $bestCandidate[ 'confidence' ];
 			}
 
 			self::$resolverCache[ $key ] = $resolved;
@@ -93,7 +90,7 @@ class WordpressPremiumPluginSlugResolver {
 	private function findAssetHeuristicsPayloads( array $heuristicsPayload, string $wpOrgSlug ) :array {
 		$assetHeuristicsPayloads = [];
 
-		foreach ( \array_filter( $heuristicsPayload, '\is_array' ) as $candidate ) {
+		foreach ( $heuristicsPayload as $candidate ) {
 			$candidateWpOrgSlug = \strtolower( \trim( (string)( $candidate[ 'wporg_slug' ] ?? '' ) ) );
 			$candidatePremiumSlug = \strtolower( \trim( (string)( $candidate[ 'premium_slug' ] ?? '' ) ) );
 			if ( $candidateWpOrgSlug === $wpOrgSlug || $candidatePremiumSlug === $wpOrgSlug ) {

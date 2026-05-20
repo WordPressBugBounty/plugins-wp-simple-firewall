@@ -14,13 +14,7 @@ class ProcessQueueItem {
 	use PluginControllerConsumer;
 
 	public function run( QueueItemVO $item ) {
-		self::con()
-			->db_con
-			->scan_items
-			->getQueryUpdater()
-			->updateById( $item->qitem_id, [
-				'started_at' => Services::Request()->ts()
-			] );
+		( new RunState() )->markRunning( $item );
 
 		try {
 			$results = $this->runScanOnItem( $item );
@@ -35,10 +29,16 @@ class ProcessQueueItem {
 					'finished_at' => Services::Request()->ts()
 				] );
 
-			( new SetScanCompleted() )->run( $item->scan );
+			( new SetScanCompleted() )->runForQueueItem( $item );
 		}
-		catch ( \Exception $e ) {
-			error_log( $e->getMessage() );
+		catch ( \Throwable $e ) {
+			error_log( \sprintf(
+				'Shield scan processing exception: scan_id=%d qitem_id=%d scan=%s message=%s',
+				$item->scan_id,
+				$item->qitem_id,
+				$item->scan,
+				$e->getMessage()
+			) );
 		}
 	}
 
@@ -46,8 +46,15 @@ class ProcessQueueItem {
 	 * @throws \Exception
 	 */
 	private function runScanOnItem( QueueItemVO $item ) :array {
-		$action = ScanActionFromSlug::GetAction( $item->scan )->applyFromArray( $item->meta );
+		$action = ScanActionFromSlug::GetAction( $item->scan )->applyFromArray( \array_merge(
+			$item->meta,
+			[ 'scan' => $item->scan ]
+		) );
 		$action->items = $item->items;
+		$heartbeat = new QueueHeartbeat();
+		$action->progress_callback = static function () use ( $heartbeat, $item ) :void {
+			$heartbeat->tick( $item->scan_id );
+		};
 
 		$this->getScanner( $action )
 			 ->setScanActionVO( $action )

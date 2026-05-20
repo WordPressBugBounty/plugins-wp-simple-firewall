@@ -16,14 +16,15 @@ abstract class BaseRequestToRestAPI extends Base {
 		return explode( '/', $this->getRestRoute() )[ 0 ];
 	}
 
-	/**
-	 * @see \WP_REST_Request::from_url()
-	 */
 	protected function getRestRoute() :string {
+		if ( \method_exists( $this->req, 'getRestRoute' ) ) {
+			return $this->req->getRestRoute();
+		}
+
 		$req = $this->req;
 		$currentURL = sprintf( 'http%s://%s/%s', is_ssl() ? 's' : '', $req->request->server[ 'HTTP_HOST' ] ?? '', \trim( $req->path, '/' ) );
 
-		if ( $req->wp_is_permalinks_enabled && \str_starts_with( $currentURL, $req->rest_api_root ) ) {
+		if ( $req->wp_is_permalinks_enabled && \strpos( $currentURL, $req->rest_api_root ) === 0 ) {
 			$route = \str_replace( $req->rest_api_root, '', $currentURL );
 		}
 		elseif ( isset( $this->req->request->query[ 'rest_route' ] ) ) {

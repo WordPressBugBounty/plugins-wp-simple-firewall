@@ -24,7 +24,7 @@ class Transient {
 
 	/**
 	 * @param string $key
-	 * @param null   $default
+	 * @param mixed  $default
 	 * @param bool   $ignoreWPMS
 	 * @return mixed|null
 	 */

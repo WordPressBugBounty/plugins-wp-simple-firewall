@@ -76,7 +76,7 @@ abstract class BaseQuery {
 	}
 
 	/**
-	 * @param string|array $value
+	 * @param scalar|array $value
 	 * @return $this
 	 */
 	public function addWhere( string $column, $value, string $operator = '=' ) {

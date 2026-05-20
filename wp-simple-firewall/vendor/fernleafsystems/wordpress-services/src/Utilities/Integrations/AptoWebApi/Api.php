@@ -32,24 +32,45 @@ class Api {
 		return $result ?: null;
 	}
 
+	/**
+	 * @return array{plugins:list<array<string,mixed>>, themes:list<array<string,mixed>>}
+	 */
 	public function wpPremiumAssetHeuristics() :array {
 		$heuristics = Transient::Get( 'aptoweb_api_premium_asset_heuristics' );
-		if ( $heuristics === false ) {
-			$heuristics = $this->extractWordpressHeuristicsPayload( $this->fire( 'wordpress/premium-assets/heuristics' ) );
-			if ( !\is_array( $heuristics ) ) {
-				$heuristics = [];
-			}
+		$shouldPersist = false;
+		if ( !\is_array( $heuristics ) ) {
+			$heuristics = $this->fire( 'wordpress/premium-assets/heuristics' );
+			$shouldPersist = true;
+		}
+		$normalized = $this->normalizeWordpressHeuristicsPayload( $heuristics );
+		if ( !$shouldPersist && $normalized !== $heuristics ) {
+			$shouldPersist = true;
+		}
+		if ( $shouldPersist ) {
+			$heuristics = $normalized;
 			Transient::Set( 'aptoweb_api_premium_asset_heuristics', $heuristics, WEEK_IN_SECONDS );
 		}
-		return $heuristics;
+		return $normalized;
 	}
 
-	private function extractWordpressHeuristicsPayload( ?array $response ) :?array {
-		return $this->extractWithinDataKey( $response );
+	/**
+	 * @return array{plugins:list<array<string,mixed>>, themes:list<array<string,mixed>>}
+	 */
+	private function normalizeWordpressHeuristicsPayload( $payload ) :array {
+		if ( \is_array( $payload ) && \is_array( $payload[ 'data' ] ?? null ) ) {
+			$payload = $payload[ 'data' ];
+		}
+
+		return [
+			'plugins' => $this->normalizeHeuristicsBucket( $payload[ 'plugins' ] ?? null ),
+			'themes'  => $this->normalizeHeuristicsBucket( $payload[ 'themes' ] ?? null ),
+		];
 	}
 
-	private function extractWithinDataKey( ?array $response ) :?array {
-		$data = $response[ 'data' ] ?? null;
-		return \is_array( $data ) ? $data : null;
+	/**
+	 * @return list<array<string,mixed>>
+	 */
+	private function normalizeHeuristicsBucket( $bucket ) :array {
+		return \is_array( $bucket ) ? \array_values( \array_filter( $bucket, '\is_array' ) ) : [];
 	}
 }

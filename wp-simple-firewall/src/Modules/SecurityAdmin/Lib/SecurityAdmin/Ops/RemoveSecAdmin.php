@@ -4,16 +4,16 @@ namespace FernleafSystems\Wordpress\Plugin\Shield\Modules\SecurityAdmin\Lib\Secu
 
 use FernleafSystems\Wordpress\Plugin\Shield\ActionRouter\Actions\Render\Components\Email\SecAdminRemoveConfirm;
 use FernleafSystems\Wordpress\Plugin\Shield\ActionRouter\Actions\Render\Components\Email\SecAdminRemoveNotice;
-use FernleafSystems\Wordpress\Plugin\Shield\ActionRouter\Actions\SecurityAdminRemove;
 use FernleafSystems\Wordpress\Plugin\Shield\Controller\Email\EmailVO;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
+use FernleafSystems\Wordpress\Plugin\Shield\Modules\SecurityAdmin\Lib\SecurityAdmin\SecurityAdminRemoveConfirmHrefBuilder;
 use FernleafSystems\Wordpress\Services\Services;
 
 class RemoveSecAdmin {
 
 	use PluginControllerConsumer;
 
-	public function remove( bool $quietly = false ) {
+	public function remove() {
 		if ( !empty( self::con()->comps->opts_lookup->getSecAdminPIN() ) ) {
 			self::con()->this_req->is_security_admin = true;
 
@@ -29,19 +29,14 @@ class RemoveSecAdmin {
 			// After removing Security Admin entirely, ensure flag remains true since protection is now disabled
 			self::con()->this_req->is_security_admin = true;
 
-			if ( !$quietly ) {
-				$this->sendNotificationEmail();
-			}
+			$this->sendNotificationEmail();
 		}
 	}
 
 	public function sendConfirmationEmail() {
 		$con = self::con();
 
-		$confirmationHref = $con->plugin_urls->noncedPluginAction(
-			SecurityAdminRemove::class,
-			Services::WpGeneral()->getAdminUrl()
-		);
+		$confirmationHref = ( new SecurityAdminRemoveConfirmHrefBuilder() )->build();
 
 		$con->email_con->sendVO(
 			EmailVO::Factory(

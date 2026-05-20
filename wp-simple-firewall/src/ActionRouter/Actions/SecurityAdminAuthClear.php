@@ -6,17 +6,15 @@ use FernleafSystems\Wordpress\Plugin\Shield\Modules\SecurityAdmin\Lib\SecurityAd
 
 class SecurityAdminAuthClear extends SecurityAdminBase {
 
+	use Traits\NonceVerifyRequired;
+
 	public const SLUG = 'sec_admin_auth_clear';
 
 	protected function exec() {
 		( new ToggleSecAdminStatus() )->turnOff();
 
-		$this->response()->action_response_data = [
-			'success' => true,
-		];
-		$this->response()->next_step = [
-			'type' => 'redirect',
-			'url'  => self::con()->plugin_urls->adminRefererOrHome(),
-		];
+		$this->response()
+			 ->setPayloadSuccess( true )
+			 ->setPayloadRedirectNextStep( self::con()->plugin_urls->adminRefererOrHome() );
 	}
 }

@@ -483,11 +483,17 @@ class Fs {
 		return \function_exists( 'rename' ) ? @\rename( $pathSource, $pathDestination ) : null;
 	}
 
+	/**
+	 * @phpstan-impure
+	 */
 	public function isDir( string $path ) :bool {
 		return ( $this->hasWpfs() && $this->fs()->is_dir( $path ) )
 			   || ( \function_exists( 'is_dir' ) && is_dir( $path ) );
 	}
 
+	/**
+	 * @phpstan-impure
+	 */
 	public function isFile( $path ) :bool {
 		return ( $this->hasWpfs() && $this->fs()->is_file( $path ) )
 			   || ( \function_exists( 'is_file' ) && \is_file( $path ) );

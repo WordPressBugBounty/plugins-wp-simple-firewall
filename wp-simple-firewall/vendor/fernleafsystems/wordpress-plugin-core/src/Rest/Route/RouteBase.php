@@ -43,8 +43,8 @@ abstract class RouteBase extends \WP_REST_Controller {
 	}
 
 	/**
-	 * @param array[] $args
-	 * @return array[]
+	 * @param array<string, array<string, mixed>> $args
+	 * @return array<string, array<string, mixed>>
 	 */
 	protected function applyRouteDefaults( array $args ) :array {
 		return \array_map(
@@ -120,7 +120,7 @@ abstract class RouteBase extends \WP_REST_Controller {
 	}
 
 	/**
-	 * @return array[]
+	 * @return array<string, array<string, mixed>>
 	 */
 	protected function getRouteArgs() :array {
 		return \array_merge( $this->getRouteArgsDefaults(), $this->getRouteArgsCustom() );
@@ -131,14 +131,14 @@ abstract class RouteBase extends \WP_REST_Controller {
 	}
 
 	/**
-	 * @return array[]
+	 * @return array<string, array<string, mixed>>
 	 */
 	protected function getRouteArgsCustom() :array {
 		return [];
 	}
 
 	/**
-	 * @return array[][]
+	 * @return array<string, array<string, mixed>>
 	 */
 	protected function getRouteArgsDefaults() :array {
 		return [];

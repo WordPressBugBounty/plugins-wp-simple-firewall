@@ -40,7 +40,7 @@ class CompareHash {
 	 * @throws \InvalidArgumentException
 	 * @throws \Exception
 	 */
-	public function isEqualFile( string $path, string $hashToCompare, string $algo = null ) :bool {
+	public function isEqualFile( string $path, string $hashToCompare, ?string $algo = null ) :bool {
 		if ( !Services::WpFs()->isFile( $path ) ) {
 			throw new \InvalidArgumentException( 'File does not exist on disk to compare' );
 		}

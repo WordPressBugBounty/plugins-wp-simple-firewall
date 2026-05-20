@@ -250,6 +250,132 @@ namespace {
     }
 
 }
+namespace Assert {
+    if(!function_exists('\\Assert\\that')){
+        function that(...$args) {
+            return \AptowebDeps\Assert\that(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Assert\\thatAll')){
+        function thatAll(...$args) {
+            return \AptowebDeps\Assert\thatAll(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Assert\\thatNullOr')){
+        function thatNullOr(...$args) {
+            return \AptowebDeps\Assert\thatNullOr(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Assert\\lazy')){
+        function lazy(...$args) {
+            return \AptowebDeps\Assert\lazy(...func_get_args());
+        }
+    }
+}
+namespace Ramsey\Uuid {
+}
+namespace Safe {
+    if(!function_exists('\\Safe\\base64_decode')){
+        function base64_decode(...$args) {
+            return \AptowebDeps\Safe\base64_decode(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\class_implements')){
+        function class_implements(...$args) {
+            return \AptowebDeps\Safe\class_implements(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\fclose')){
+        function fclose(...$args) {
+            return \AptowebDeps\Safe\fclose(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\file_put_contents')){
+        function file_put_contents(...$args) {
+            return \AptowebDeps\Safe\file_put_contents(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\fopen')){
+        function fopen(...$args) {
+            return \AptowebDeps\Safe\fopen(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\fread')){
+        function fread(...$args) {
+            return \AptowebDeps\Safe\fread(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\fwrite')){
+        function fwrite(...$args) {
+            return \AptowebDeps\Safe\fwrite(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\hex2bin')){
+        function hex2bin(...$args) {
+            return \AptowebDeps\Safe\hex2bin(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\json_decode')){
+        function json_decode(...$args) {
+            return \AptowebDeps\Safe\json_decode(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\json_encode')){
+        function json_encode(...$args) {
+            return \AptowebDeps\Safe\json_encode(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\ksort')){
+        function ksort(...$args) {
+            return \AptowebDeps\Safe\ksort(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\mkdir')){
+        function mkdir(...$args) {
+            return \AptowebDeps\Safe\mkdir(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\openssl_pkey_get_public')){
+        function openssl_pkey_get_public(...$args) {
+            return \AptowebDeps\Safe\openssl_pkey_get_public(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\parse_url')){
+        function parse_url(...$args) {
+            return \AptowebDeps\Safe\parse_url(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\rename')){
+        function rename(...$args) {
+            return \AptowebDeps\Safe\rename(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\rewind')){
+        function rewind(...$args) {
+            return \AptowebDeps\Safe\rewind(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\sprintf')){
+        function sprintf(...$args) {
+            return \AptowebDeps\Safe\sprintf(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\tempnam')){
+        function tempnam(...$args) {
+            return \AptowebDeps\Safe\tempnam(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\unlink')){
+        function unlink(...$args) {
+            return \AptowebDeps\Safe\unlink(...func_get_args());
+        }
+    }
+    if(!function_exists('\\Safe\\unpack')){
+        function unpack(...$args) {
+            return \AptowebDeps\Safe\unpack(...func_get_args());
+        }
+    }
+}
 
 
 namespace AptowebDeps {
@@ -272,6 +398,73 @@ namespace AptowebDeps {
          * @var AutoloadAliasArray
          */
         private array $autoloadAliases = array (
+  'Assert\\Assert' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Assert',
+    'isabstract' => true,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\Assert',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Assert\\Assertion' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Assertion',
+    'isabstract' => false,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\Assertion',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Assert\\AssertionChain' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AssertionChain',
+    'isabstract' => false,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\AssertionChain',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Assert\\InvalidArgumentException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InvalidArgumentException',
+    'isabstract' => false,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\InvalidArgumentException',
+    'implements' => 
+    array (
+      0 => 'Assert\\AssertionFailedException',
+    ),
+  ),
+  'Assert\\LazyAssertion' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LazyAssertion',
+    'isabstract' => false,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\LazyAssertion',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Assert\\LazyAssertionException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LazyAssertionException',
+    'isabstract' => false,
+    'namespace' => 'Assert',
+    'extends' => 'AptowebDeps\\Assert\\LazyAssertionException',
+    'implements' => 
+    array (
+    ),
+  ),
   'CrowdSec\\CapiClient\\Client\\AbstractClient' => 
   array (
     'type' => 'class',
@@ -824,6 +1017,862 @@ namespace AptowebDeps {
     'isabstract' => false,
     'namespace' => 'CrowdSec\\Common\\Client\\Tests\\Unit',
     'extends' => 'AptowebDeps\\CrowdSec\\Common\\Client\\Tests\\Unit\\ResponseTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\GoogleAuthenticator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GoogleAuthenticator',
+    'isabstract' => false,
+    'namespace' => 'Dolondro\\GoogleAuthenticator',
+    'extends' => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\GoogleAuthenticator',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\QrImageGenerator\\EndroidQrImageGenerator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EndroidQrImageGenerator',
+    'isabstract' => false,
+    'namespace' => 'Dolondro\\GoogleAuthenticator\\QrImageGenerator',
+    'extends' => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\QrImageGenerator\\EndroidQrImageGenerator',
+    'implements' => 
+    array (
+      0 => 'Dolondro\\GoogleAuthenticator\\QrImageGenerator\\QrImageGeneratorInterface',
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\QrImageGenerator\\GoogleQrImageGenerator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GoogleQrImageGenerator',
+    'isabstract' => false,
+    'namespace' => 'Dolondro\\GoogleAuthenticator\\QrImageGenerator',
+    'extends' => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\QrImageGenerator\\GoogleQrImageGenerator',
+    'implements' => 
+    array (
+      0 => 'Dolondro\\GoogleAuthenticator\\QrImageGenerator\\QrImageGeneratorInterface',
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\Secret' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Secret',
+    'isabstract' => false,
+    'namespace' => 'Dolondro\\GoogleAuthenticator',
+    'extends' => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\Secret',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\SecretFactory' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SecretFactory',
+    'isabstract' => false,
+    'namespace' => 'Dolondro\\GoogleAuthenticator',
+    'extends' => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\SecretFactory',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\ASNObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ASNObject',
+    'isabstract' => true,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\ASNObject',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\AbstractString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractString',
+    'isabstract' => true,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\AbstractString',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\AbstractTime' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractTime',
+    'isabstract' => true,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\AbstractTime',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Base128' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base128',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Base128',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Composite\\AttributeTypeAndValue' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttributeTypeAndValue',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Composite',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Composite\\AttributeTypeAndValue',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Composite\\RDNString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RDNString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Composite',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Composite\\RDNString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Composite\\RelativeDistinguishedName' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RelativeDistinguishedName',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Composite',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Composite\\RelativeDistinguishedName',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Construct' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Construct',
+    'isabstract' => true,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Construct',
+    'implements' => 
+    array (
+      0 => 'Countable',
+      1 => 'ArrayAccess',
+      2 => 'Iterator',
+      3 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Exception\\NotImplementedException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NotImplementedException',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Exception',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Exception\\NotImplementedException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Exception\\ParserException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ParserException',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Exception',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Exception\\ParserException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\ExplicitlyTaggedObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ExplicitlyTaggedObject',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\ExplicitlyTaggedObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Identifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Identifier',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Identifier',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\OID' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OID',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\OID',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\TemplateParser' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TemplateParser',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\TemplateParser',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\BMPString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BMPString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\BMPString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\BitString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BitString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\BitString',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\Boolean' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Boolean',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\Boolean',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\CharacterString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CharacterString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\CharacterString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\Enumerated' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Enumerated',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\Enumerated',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\GeneralString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GeneralString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\GeneralString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\GeneralizedTime' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GeneralizedTime',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\GeneralizedTime',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\GraphicString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GraphicString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\GraphicString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\IA5String' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IA5String',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\IA5String',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\Integer' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Integer',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\Integer',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\NullObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NullObject',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\NullObject',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\NumericString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NumericString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\NumericString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\ObjectDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ObjectDescriptor',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\ObjectDescriptor',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\ObjectIdentifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ObjectIdentifier',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\ObjectIdentifier',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\OctetString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OctetString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\OctetString',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\PrintableString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PrintableString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\PrintableString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\RelativeObjectIdentifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RelativeObjectIdentifier',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\RelativeObjectIdentifier',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\Sequence' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Sequence',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\Sequence',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\Set' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Set',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\Set',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\T61String' => 
+  array (
+    'type' => 'class',
+    'classname' => 'T61String',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\T61String',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\UTCTime' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UTCTime',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\UTCTime',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\ASN1\\Universal\\UTF8String' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UTF8String',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\UTF8String',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\UniversalString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UniversalString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\UniversalString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\Universal\\VisibleString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'VisibleString',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1\\Universal',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\Universal\\VisibleString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\UnknownConstructedObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UnknownConstructedObject',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\UnknownConstructedObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\ASN1\\UnknownObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UnknownObject',
+    'isabstract' => false,
+    'namespace' => 'FG\\ASN1',
+    'extends' => 'AptowebDeps\\FG\\ASN1\\UnknownObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\Utility\\BigInteger' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BigInteger',
+    'isabstract' => true,
+    'namespace' => 'FG\\Utility',
+    'extends' => 'AptowebDeps\\FG\\Utility\\BigInteger',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\Utility\\BigIntegerBcmath' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BigIntegerBcmath',
+    'isabstract' => false,
+    'namespace' => 'FG\\Utility',
+    'extends' => 'AptowebDeps\\FG\\Utility\\BigIntegerBcmath',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\Utility\\BigIntegerGmp' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BigIntegerGmp',
+    'isabstract' => false,
+    'namespace' => 'FG\\Utility',
+    'extends' => 'AptowebDeps\\FG\\Utility\\BigIntegerGmp',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\AlgorithmIdentifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AlgorithmIdentifier',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509',
+    'extends' => 'AptowebDeps\\FG\\X509\\AlgorithmIdentifier',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\CSR\\Attributes' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Attributes',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509\\CSR',
+    'extends' => 'AptowebDeps\\FG\\X509\\CSR\\Attributes',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\X509\\CSR\\CSR' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CSR',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509\\CSR',
+    'extends' => 'AptowebDeps\\FG\\X509\\CSR\\CSR',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\CertificateExtensions' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CertificateExtensions',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509',
+    'extends' => 'AptowebDeps\\FG\\X509\\CertificateExtensions',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\X509\\CertificateSubject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CertificateSubject',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509',
+    'extends' => 'AptowebDeps\\FG\\X509\\CertificateSubject',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\X509\\PrivateKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PrivateKey',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509',
+    'extends' => 'AptowebDeps\\FG\\X509\\PrivateKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\PublicKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKey',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509',
+    'extends' => 'AptowebDeps\\FG\\X509\\PublicKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\SAN\\DNSName' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DNSName',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509\\SAN',
+    'extends' => 'AptowebDeps\\FG\\X509\\SAN\\DNSName',
+    'implements' => 
+    array (
+    ),
+  ),
+  'FG\\X509\\SAN\\IPAddress' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IPAddress',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509\\SAN',
+    'extends' => 'AptowebDeps\\FG\\X509\\SAN\\IPAddress',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'FG\\X509\\SAN\\SubjectAlternativeNames' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SubjectAlternativeNames',
+    'isabstract' => false,
+    'namespace' => 'FG\\X509\\SAN',
+    'extends' => 'AptowebDeps\\FG\\X509\\SAN\\SubjectAlternativeNames',
+    'implements' => 
+    array (
+      0 => 'FG\\ASN1\\Parsable',
+    ),
+  ),
+  'League\\Uri\\Exceptions\\FileinfoSupportMissing' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FileinfoSupportMissing',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Exceptions',
+    'extends' => 'AptowebDeps\\League\\Uri\\Exceptions\\FileinfoSupportMissing',
+    'implements' => 
+    array (
+      0 => 'League\\Uri\\Contracts\\UriException',
+    ),
+  ),
+  'League\\Uri\\Exceptions\\IdnSupportMissing' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IdnSupportMissing',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Exceptions',
+    'extends' => 'AptowebDeps\\League\\Uri\\Exceptions\\IdnSupportMissing',
+    'implements' => 
+    array (
+      0 => 'League\\Uri\\Contracts\\UriException',
+    ),
+  ),
+  'League\\Uri\\Exceptions\\IdnaConversionFailed' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IdnaConversionFailed',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Exceptions',
+    'extends' => 'AptowebDeps\\League\\Uri\\Exceptions\\IdnaConversionFailed',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\Exceptions\\SyntaxError' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SyntaxError',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Exceptions',
+    'extends' => 'AptowebDeps\\League\\Uri\\Exceptions\\SyntaxError',
+    'implements' => 
+    array (
+      0 => 'League\\Uri\\Contracts\\UriException',
+    ),
+  ),
+  'League\\Uri\\Idna\\Idna' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Idna',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Idna',
+    'extends' => 'AptowebDeps\\League\\Uri\\Idna\\Idna',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\Idna\\IdnaInfo' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IdnaInfo',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Idna',
+    'extends' => 'AptowebDeps\\League\\Uri\\Idna\\IdnaInfo',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\Exceptions\\TemplateCanNotBeExpanded' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TemplateCanNotBeExpanded',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\Exceptions',
+    'extends' => 'AptowebDeps\\League\\Uri\\Exceptions\\TemplateCanNotBeExpanded',
+    'implements' => 
+    array (
+      0 => 'League\\Uri\\Contracts\\UriException',
+    ),
+  ),
+  'League\\Uri\\Http' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Http',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\Http',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\UriInterface',
+      1 => 'JsonSerializable',
+    ),
+  ),
+  'League\\Uri\\HttpFactory' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HttpFactory',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\HttpFactory',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\UriFactoryInterface',
+    ),
+  ),
+  'League\\Uri\\Uri' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Uri',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\Uri',
+    'implements' => 
+    array (
+      0 => 'League\\Uri\\Contracts\\UriInterface',
+    ),
+  ),
+  'League\\Uri\\UriInfo' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UriInfo',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriInfo',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriResolver' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UriResolver',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriResolver',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriString' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UriString',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriString',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriTemplate\\Expression' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Expression',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\UriTemplate',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriTemplate\\Expression',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriTemplate\\Template' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Template',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\UriTemplate',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriTemplate\\Template',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriTemplate\\VarSpecifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'VarSpecifier',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\UriTemplate',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriTemplate\\VarSpecifier',
+    'implements' => 
+    array (
+    ),
+  ),
+  'League\\Uri\\UriTemplate\\VariableBag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'VariableBag',
+    'isabstract' => false,
+    'namespace' => 'League\\Uri\\UriTemplate',
+    'extends' => 'AptowebDeps\\League\\Uri\\UriTemplate\\VariableBag',
     'implements' => 
     array (
     ),
@@ -2015,6 +3064,757 @@ namespace AptowebDeps {
     array (
     ),
   ),
+  'Nyholm\\Psr7Server\\ServerRequestCreator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ServerRequestCreator',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7Server',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7Server\\ServerRequestCreator',
+    'implements' => 
+    array (
+      0 => 'Nyholm\\Psr7Server\\ServerRequestCreatorInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\Factory\\HttplugFactory' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HttplugFactory',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7\\Factory',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Factory\\HttplugFactory',
+    'implements' => 
+    array (
+      0 => 'Http\\Message\\MessageFactory',
+      1 => 'Http\\Message\\StreamFactory',
+      2 => 'Http\\Message\\UriFactory',
+    ),
+  ),
+  'Nyholm\\Psr7\\Factory\\Psr17Factory' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Psr17Factory',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7\\Factory',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Factory\\Psr17Factory',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\RequestFactoryInterface',
+      1 => 'Psr\\Http\\Message\\ResponseFactoryInterface',
+      2 => 'Psr\\Http\\Message\\ServerRequestFactoryInterface',
+      3 => 'Psr\\Http\\Message\\StreamFactoryInterface',
+      4 => 'Psr\\Http\\Message\\UploadedFileFactoryInterface',
+      5 => 'Psr\\Http\\Message\\UriFactoryInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\Request' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Request',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Request',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\RequestInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\Response' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Response',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Response',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\ResponseInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\ServerRequest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ServerRequest',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\ServerRequest',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\ServerRequestInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\Stream' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Stream',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Stream',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\StreamInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\UploadedFile' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UploadedFile',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\UploadedFile',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\UploadedFileInterface',
+    ),
+  ),
+  'Nyholm\\Psr7\\Uri' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Uri',
+    'isabstract' => false,
+    'namespace' => 'Nyholm\\Psr7',
+    'extends' => 'AptowebDeps\\Nyholm\\Psr7\\Uri',
+    'implements' => 
+    array (
+      0 => 'Psr\\Http\\Message\\UriInterface',
+    ),
+  ),
+  'Base64Url\\Base64Url' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base64Url',
+    'isabstract' => false,
+    'namespace' => 'Base64Url',
+    'extends' => 'AptowebDeps\\Base64Url\\Base64Url',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\AbstractCBORObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractCBORObject',
+    'isabstract' => true,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\AbstractCBORObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\CBORObject',
+    ),
+  ),
+  'CBOR\\ByteStringObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ByteStringObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\ByteStringObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\ByteStringWithChunkObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ByteStringWithChunkObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\ByteStringWithChunkObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Decoder' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Decoder',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\Decoder',
+    'implements' => 
+    array (
+      0 => 'CBOR\\DecoderInterface',
+    ),
+  ),
+  'CBOR\\IndefiniteLengthByteStringObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IndefiniteLengthByteStringObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\IndefiniteLengthByteStringObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\IndefiniteLengthListObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IndefiniteLengthListObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\IndefiniteLengthListObject',
+    'implements' => 
+    array (
+      0 => 'Countable',
+      1 => 'IteratorAggregate',
+      2 => 'CBOR\\Normalizable',
+      3 => 'ArrayAccess',
+    ),
+  ),
+  'CBOR\\IndefiniteLengthMapObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IndefiniteLengthMapObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\IndefiniteLengthMapObject',
+    'implements' => 
+    array (
+      0 => 'Countable',
+      1 => 'IteratorAggregate',
+      2 => 'CBOR\\Normalizable',
+      3 => 'ArrayAccess',
+    ),
+  ),
+  'CBOR\\IndefiniteLengthTextStringObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IndefiniteLengthTextStringObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\IndefiniteLengthTextStringObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\InfiniteListObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InfiniteListObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\InfiniteListObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\InfiniteMapObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InfiniteMapObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\InfiniteMapObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\LengthCalculator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LengthCalculator',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\LengthCalculator',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\ListObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ListObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\ListObject',
+    'implements' => 
+    array (
+      0 => 'Countable',
+      1 => 'IteratorAggregate',
+      2 => 'CBOR\\Normalizable',
+      3 => 'ArrayAccess',
+    ),
+  ),
+  'CBOR\\MapItem' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MapItem',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\MapItem',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\MapObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MapObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\MapObject',
+    'implements' => 
+    array (
+      0 => 'Countable',
+      1 => 'IteratorAggregate',
+      2 => 'CBOR\\Normalizable',
+      3 => 'ArrayAccess',
+    ),
+  ),
+  'CBOR\\NegativeIntegerObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NegativeIntegerObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\NegativeIntegerObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\BreakObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BreakObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\BreakObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\OtherObject\\DoublePrecisionFloatObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DoublePrecisionFloatObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\DoublePrecisionFloatObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\FalseObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FalseObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\FalseObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\GenericObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GenericObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\GenericObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\OtherObject\\HalfPrecisionFloatObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HalfPrecisionFloatObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\HalfPrecisionFloatObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\NullObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NullObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\NullObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\OtherObjectManager' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OtherObjectManager',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\OtherObjectManager',
+    'implements' => 
+    array (
+      0 => 'CBOR\\OtherObject\\OtherObjectManagerInterface',
+    ),
+  ),
+  'CBOR\\OtherObject\\SimpleObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SimpleObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\SimpleObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\SinglePrecisionFloatObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SinglePrecisionFloatObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\SinglePrecisionFloatObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\OtherObject\\TrueObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TrueObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\TrueObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\UndefinedObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UndefinedObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 'AptowebDeps\\CBOR\\OtherObject\\UndefinedObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\SignedIntegerObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SignedIntegerObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\SignedIntegerObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\StringStream' => 
+  array (
+    'type' => 'class',
+    'classname' => 'StringStream',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\StringStream',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Stream',
+    ),
+  ),
+  'CBOR\\Tag\\Base16EncodingTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base16EncodingTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\Base16EncodingTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\Base64EncodingTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base64EncodingTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\Base64EncodingTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\Base64Tag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base64Tag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\Base64Tag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\Base64UrlEncodingTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base64UrlEncodingTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\Base64UrlEncodingTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\Base64UrlTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Base64UrlTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\Base64UrlTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\BigFloatTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BigFloatTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\BigFloatTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\CBOREncodingTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CBOREncodingTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\CBOREncodingTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\CBORTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CBORTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\CBORTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\DatetimeTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DatetimeTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\DatetimeTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\DecimalFractionTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DecimalFractionTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\DecimalFractionTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\EpochTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EpochTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\EpochTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\GenericTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'GenericTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\GenericTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\MimeTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MimeTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\MimeTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\NegativeBigIntegerTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NegativeBigIntegerTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\NegativeBigIntegerTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\PositiveBigIntegerTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PositiveBigIntegerTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\PositiveBigIntegerTag',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\TagManager' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TagManager',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\TagManager',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Tag\\TagManagerInterface',
+    ),
+  ),
+  'CBOR\\Tag\\TagObjectManager' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TagObjectManager',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\TagObjectManager',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\Tag\\TimestampTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TimestampTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\TimestampTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\UnsignedBigIntegerTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UnsignedBigIntegerTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\UnsignedBigIntegerTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Tag\\UriTag' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UriTag',
+    'isabstract' => false,
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 'AptowebDeps\\CBOR\\Tag\\UriTag',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\TagObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TagObject',
+    'isabstract' => true,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\TagObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\TextStringObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TextStringObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\TextStringObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\TextStringWithChunkObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TextStringWithChunkObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\TextStringWithChunkObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'CBOR\\UnsignedIntegerObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UnsignedIntegerObject',
+    'isabstract' => false,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\UnsignedIntegerObject',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\Utils' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Utils',
+    'isabstract' => true,
+    'namespace' => 'CBOR',
+    'extends' => 'AptowebDeps\\CBOR\\Utils',
+    'implements' => 
+    array (
+    ),
+  ),
   'Symfony\\Component\\Config\\Builder\\ClassBuilder' => 
   array (
     'type' => 'class',
@@ -2811,6 +4611,177 @@ namespace AptowebDeps {
     array (
     ),
   ),
+  'Symfony\\Component\\Process\\Exception\\InvalidArgumentException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InvalidArgumentException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\InvalidArgumentException',
+    'implements' => 
+    array (
+      0 => 'Symfony\\Component\\Process\\Exception\\ExceptionInterface',
+    ),
+  ),
+  'Symfony\\Component\\Process\\Exception\\LogicException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LogicException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\LogicException',
+    'implements' => 
+    array (
+      0 => 'Symfony\\Component\\Process\\Exception\\ExceptionInterface',
+    ),
+  ),
+  'Symfony\\Component\\Process\\Exception\\ProcessFailedException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ProcessFailedException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\ProcessFailedException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Exception\\ProcessSignaledException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ProcessSignaledException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\ProcessSignaledException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Exception\\ProcessTimedOutException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ProcessTimedOutException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\ProcessTimedOutException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Exception\\RuntimeException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RuntimeException',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\RuntimeException',
+    'implements' => 
+    array (
+      0 => 'Symfony\\Component\\Process\\Exception\\ExceptionInterface',
+    ),
+  ),
+  'Symfony\\Component\\Process\\ExecutableFinder' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ExecutableFinder',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\ExecutableFinder',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\InputStream' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InputStream',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\InputStream',
+    'implements' => 
+    array (
+      0 => 'IteratorAggregate',
+    ),
+  ),
+  'Symfony\\Component\\Process\\PhpExecutableFinder' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PhpExecutableFinder',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\PhpExecutableFinder',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\PhpProcess' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PhpProcess',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\PhpProcess',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Pipes\\AbstractPipes' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractPipes',
+    'isabstract' => true,
+    'namespace' => 'Symfony\\Component\\Process\\Pipes',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Pipes\\AbstractPipes',
+    'implements' => 
+    array (
+      0 => 'Symfony\\Component\\Process\\Pipes\\PipesInterface',
+    ),
+  ),
+  'Symfony\\Component\\Process\\Pipes\\UnixPipes' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UnixPipes',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Pipes',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Pipes\\UnixPipes',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Pipes\\WindowsPipes' => 
+  array (
+    'type' => 'class',
+    'classname' => 'WindowsPipes',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process\\Pipes',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Pipes\\WindowsPipes',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Symfony\\Component\\Process\\Process' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Process',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\Process',
+    'implements' => 
+    array (
+      0 => 'IteratorAggregate',
+    ),
+  ),
+  'Symfony\\Component\\Process\\ProcessUtils' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ProcessUtils',
+    'isabstract' => false,
+    'namespace' => 'Symfony\\Component\\Process',
+    'extends' => 'AptowebDeps\\Symfony\\Component\\Process\\ProcessUtils',
+    'implements' => 
+    array (
+    ),
+  ),
   'Symfony\\Component\\Uid\\AbstractUid' => 
   array (
     'type' => 'class',
@@ -3030,6 +5001,125 @@ namespace AptowebDeps {
     'extends' => 'AptowebDeps\\Symfony\\Component\\Uid\\UuidV6',
     'implements' => 
     array (
+    ),
+  ),
+  'Safe\\DateTimeImmutable' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DateTimeImmutable',
+    'isabstract' => false,
+    'namespace' => 'Safe',
+    'extends' => 'AptowebDeps\\Safe\\DateTimeImmutable',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Safe\\Exceptions\\ArrayException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ArrayException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\ArrayException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\DatetimeException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DatetimeException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\DatetimeException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\FilesystemException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FilesystemException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\FilesystemException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\JsonException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'JsonException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\JsonException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\MiscException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MiscException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\MiscException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\OpensslException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OpensslException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\OpensslException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\SplException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SplException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\SplException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\StringsException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'StringsException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\StringsException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\UrlException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'UrlException',
+    'isabstract' => false,
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 'AptowebDeps\\Safe\\Exceptions\\UrlException',
+    'implements' => 
+    array (
+      0 => 'Safe\\Exceptions\\SafeExceptionInterface',
     ),
   ),
   'Twig\\Attribute\\YieldReady' => 
@@ -4988,6 +7078,1291 @@ namespace AptowebDeps {
     array (
     ),
   ),
+  'Cose\\Algorithm\\Mac\\HS256' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HS256',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Mac\\HS256',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Mac\\HS256Truncated64' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HS256Truncated64',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Mac\\HS256Truncated64',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Mac\\HS384' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HS384',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Mac\\HS384',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Mac\\HS512' => 
+  array (
+    'type' => 'class',
+    'classname' => 'HS512',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Mac\\HS512',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Mac\\Hmac' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Hmac',
+    'isabstract' => true,
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Mac\\Hmac',
+    'implements' => 
+    array (
+      0 => 'Cose\\Algorithm\\Mac\\Mac',
+    ),
+  ),
+  'Cose\\Algorithm\\Manager' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Manager',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Manager',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\ManagerFactory' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ManagerFactory',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\ManagerFactory',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ECDSA' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ECDSA',
+    'isabstract' => true,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ECDSA',
+    'implements' => 
+    array (
+      0 => 'Cose\\Algorithm\\Signature\\Signature',
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ECSignature' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ECSignature',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ECSignature',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ES256' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ES256',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ES256',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ES256K' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ES256K',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ES256K',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ES384' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ES384',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ES384',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\ECDSA\\ES512' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ES512',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\ECDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\ECDSA\\ES512',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\EdDSA\\ED256' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ED256',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\EdDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\EdDSA\\ED256',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\EdDSA\\ED512' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ED512',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\EdDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\EdDSA\\ED512',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\EdDSA\\Ed25519' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Ed25519',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\EdDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\EdDSA\\Ed25519',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\EdDSA\\EdDSA' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EdDSA',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\EdDSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\EdDSA\\EdDSA',
+    'implements' => 
+    array (
+      0 => 'Cose\\Algorithm\\Signature\\Signature',
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\PS256' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PS256',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\PS256',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\PS384' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PS384',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\PS384',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\PS512' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PS512',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\PS512',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\PSSRSA' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PSSRSA',
+    'isabstract' => true,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\PSSRSA',
+    'implements' => 
+    array (
+      0 => 'Cose\\Algorithm\\Signature\\Signature',
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\RS1' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RS1',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\RS1',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\RS256' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RS256',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\RS256',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\RS384' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RS384',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\RS384',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\RS512' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RS512',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\RS512',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\RSA\\RSA' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RSA',
+    'isabstract' => true,
+    'namespace' => 'Cose\\Algorithm\\Signature\\RSA',
+    'extends' => 'AptowebDeps\\Cose\\Algorithm\\Signature\\RSA\\RSA',
+    'implements' => 
+    array (
+      0 => 'Cose\\Algorithm\\Signature\\Signature',
+    ),
+  ),
+  'Cose\\Algorithms' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Algorithms',
+    'isabstract' => true,
+    'namespace' => 'Cose',
+    'extends' => 'AptowebDeps\\Cose\\Algorithms',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\BigInteger' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BigInteger',
+    'isabstract' => false,
+    'namespace' => 'Cose',
+    'extends' => 'AptowebDeps\\Cose\\BigInteger',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Hash' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Hash',
+    'isabstract' => false,
+    'namespace' => 'Cose',
+    'extends' => 'AptowebDeps\\Cose\\Hash',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Key\\Ec2Key' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Ec2Key',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Key',
+    'extends' => 'AptowebDeps\\Cose\\Key\\Ec2Key',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Key\\Key' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Key',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Key',
+    'extends' => 'AptowebDeps\\Cose\\Key\\Key',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Key\\OkpKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OkpKey',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Key',
+    'extends' => 'AptowebDeps\\Cose\\Key\\OkpKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Key\\RsaKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RsaKey',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Key',
+    'extends' => 'AptowebDeps\\Cose\\Key\\RsaKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Key\\SymmetricKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SymmetricKey',
+    'isabstract' => false,
+    'namespace' => 'Cose\\Key',
+    'extends' => 'AptowebDeps\\Cose\\Key\\SymmetricKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Cose\\Verifier' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Verifier',
+    'isabstract' => false,
+    'namespace' => 'Cose',
+    'extends' => 'AptowebDeps\\Cose\\Verifier',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\AbstractDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractDescriptor',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\AbstractDescriptor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\AuthenticatorStatus' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorStatus',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\AuthenticatorStatus',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\BiometricAccuracyDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BiometricAccuracyDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\BiometricAccuracyDescriptor',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\BiometricStatusReport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'BiometricStatusReport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\BiometricStatusReport',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\CodeAccuracyDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CodeAccuracyDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\CodeAccuracyDescriptor',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\DisplayPNGCharacteristicsDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DisplayPNGCharacteristicsDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\DisplayPNGCharacteristicsDescriptor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\DistantSingleMetadata' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DistantSingleMetadata',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\DistantSingleMetadata',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\EcdaaTrustAnchor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EcdaaTrustAnchor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\EcdaaTrustAnchor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\ExtensionDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ExtensionDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\ExtensionDescriptor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataService' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MetadataService',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataService',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataStatement' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MetadataStatement',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataStatement',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataStatementFetcher' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MetadataStatementFetcher',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataStatementFetcher',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataTOCPayload' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MetadataTOCPayload',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataTOCPayload',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataTOCPayloadEntry' => 
+  array (
+    'type' => 'class',
+    'classname' => 'MetadataTOCPayloadEntry',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataTOCPayloadEntry',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\PatternAccuracyDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PatternAccuracyDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\PatternAccuracyDescriptor',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\RgbPaletteEntry' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RgbPaletteEntry',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\RgbPaletteEntry',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\RogueListEntry' => 
+  array (
+    'type' => 'class',
+    'classname' => 'RogueListEntry',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\RogueListEntry',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\SingleMetadata' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SingleMetadata',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\SingleMetadata',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\StatusReport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'StatusReport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\StatusReport',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\Utils' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Utils',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\Utils',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\MetadataService\\VerificationMethodANDCombinations' => 
+  array (
+    'type' => 'class',
+    'classname' => 'VerificationMethodANDCombinations',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\VerificationMethodANDCombinations',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\VerificationMethodDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'VerificationMethodDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\VerificationMethodDescriptor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\MetadataService\\Version' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Version',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 'AptowebDeps\\Webauthn\\MetadataService\\Version',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AndroidKeyAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AndroidKeyAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AndroidKeyAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AndroidSafetyNetAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AndroidSafetyNetAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AndroidSafetyNetAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AppleAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AppleAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AppleAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AttestationObject' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttestationObject',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AttestationObject',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AttestationObjectLoader' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttestationObjectLoader',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AttestationObjectLoader',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AttestationStatement' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttestationStatement',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AttestationStatement',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AttestationStatementSupportManager' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttestationStatementSupportManager',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\AttestationStatementSupportManager',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\FidoU2FAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'FidoU2FAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\FidoU2FAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\NoneAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NoneAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\NoneAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\PackedAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PackedAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\PackedAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\TPMAttestationStatementSupport' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TPMAttestationStatementSupport',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestationStatement\\TPMAttestationStatementSupport',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AttestedCredentialData' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AttestedCredentialData',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AttestedCredentialData',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\AuthenticationExtension' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticationExtension',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\AuthenticationExtension',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientInputs' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticationExtensionsClientInputs',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientInputs',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+      1 => 'Countable',
+      2 => 'IteratorAggregate',
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientOutputs' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticationExtensionsClientOutputs',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientOutputs',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+      1 => 'Countable',
+      2 => 'IteratorAggregate',
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientOutputsLoader' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticationExtensionsClientOutputsLoader',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\AuthenticationExtensionsClientOutputsLoader',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\ExtensionOutputCheckerHandler' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ExtensionOutputCheckerHandler',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\ExtensionOutputCheckerHandler',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\ExtensionOutputError' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ExtensionOutputError',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\ExtensionOutputError',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorAssertionResponse' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorAssertionResponse',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorAssertionResponse',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorAssertionResponseValidator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorAssertionResponseValidator',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorAssertionResponseValidator',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorAttestationResponse' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorAttestationResponse',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorAttestationResponse',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorAttestationResponseValidator' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorAttestationResponseValidator',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorAttestationResponseValidator',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorData' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorData',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorData',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorResponse' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorResponse',
+    'isabstract' => true,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorResponse',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\AuthenticatorSelectionCriteria' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AuthenticatorSelectionCriteria',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\AuthenticatorSelectionCriteria',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\CertificateChainChecker\\OpenSSLCertificateChainChecker' => 
+  array (
+    'type' => 'class',
+    'classname' => 'OpenSSLCertificateChainChecker',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\CertificateChainChecker',
+    'extends' => 'AptowebDeps\\Webauthn\\CertificateChainChecker\\OpenSSLCertificateChainChecker',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\CertificateChainChecker\\CertificateChainChecker',
+    ),
+  ),
+  'Webauthn\\CertificateToolbox' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CertificateToolbox',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\CertificateToolbox',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\CollectedClientData' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CollectedClientData',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\CollectedClientData',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\Counter\\ThrowExceptionIfInvalid' => 
+  array (
+    'type' => 'class',
+    'classname' => 'ThrowExceptionIfInvalid',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\Counter',
+    'extends' => 'AptowebDeps\\Webauthn\\Counter\\ThrowExceptionIfInvalid',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\Counter\\CounterChecker',
+    ),
+  ),
+  'Webauthn\\Credential' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Credential',
+    'isabstract' => true,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\Credential',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredential' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredential',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredential',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialCreationOptions' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialCreationOptions',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialCreationOptions',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialDescriptor' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialDescriptor',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialDescriptor',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialDescriptorCollection' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialDescriptorCollection',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialDescriptorCollection',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+      1 => 'Countable',
+      2 => 'IteratorAggregate',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialEntity' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialEntity',
+    'isabstract' => true,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialEntity',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialLoader' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialLoader',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialLoader',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialOptions' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialOptions',
+    'isabstract' => true,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialOptions',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialParameters' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialParameters',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialParameters',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialRequestOptions' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialRequestOptions',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialRequestOptions',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialRpEntity' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialRpEntity',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialRpEntity',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialSource' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialSource',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialSource',
+    'implements' => 
+    array (
+      0 => 'JsonSerializable',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialUserEntity' => 
+  array (
+    'type' => 'class',
+    'classname' => 'PublicKeyCredentialUserEntity',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\PublicKeyCredentialUserEntity',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\Server' => 
+  array (
+    'type' => 'class',
+    'classname' => 'Server',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\Server',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\StringStream' => 
+  array (
+    'type' => 'class',
+    'classname' => 'StringStream',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\StringStream',
+    'implements' => 
+    array (
+      0 => 'CBOR\\Stream',
+    ),
+  ),
+  'Webauthn\\TokenBinding\\IgnoreTokenBindingHandler' => 
+  array (
+    'type' => 'class',
+    'classname' => 'IgnoreTokenBindingHandler',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TokenBinding',
+    'extends' => 'AptowebDeps\\Webauthn\\TokenBinding\\IgnoreTokenBindingHandler',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TokenBinding\\TokenBindingHandler',
+    ),
+  ),
+  'Webauthn\\TokenBinding\\SecTokenBindingHandler' => 
+  array (
+    'type' => 'class',
+    'classname' => 'SecTokenBindingHandler',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TokenBinding',
+    'extends' => 'AptowebDeps\\Webauthn\\TokenBinding\\SecTokenBindingHandler',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TokenBinding\\TokenBindingHandler',
+    ),
+  ),
+  'Webauthn\\TokenBinding\\TokenBinding' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TokenBinding',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TokenBinding',
+    'extends' => 'AptowebDeps\\Webauthn\\TokenBinding\\TokenBinding',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\TokenBinding\\TokenBindingNotSupportedHandler' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TokenBindingNotSupportedHandler',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TokenBinding',
+    'extends' => 'AptowebDeps\\Webauthn\\TokenBinding\\TokenBindingNotSupportedHandler',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TokenBinding\\TokenBindingHandler',
+    ),
+  ),
+  'Webauthn\\TrustPath\\CertificateTrustPath' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CertificateTrustPath',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TrustPath',
+    'extends' => 'AptowebDeps\\Webauthn\\TrustPath\\CertificateTrustPath',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TrustPath\\TrustPath',
+    ),
+  ),
+  'Webauthn\\TrustPath\\EcdaaKeyIdTrustPath' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EcdaaKeyIdTrustPath',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TrustPath',
+    'extends' => 'AptowebDeps\\Webauthn\\TrustPath\\EcdaaKeyIdTrustPath',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TrustPath\\TrustPath',
+    ),
+  ),
+  'Webauthn\\TrustPath\\EmptyTrustPath' => 
+  array (
+    'type' => 'class',
+    'classname' => 'EmptyTrustPath',
+    'isabstract' => false,
+    'namespace' => 'Webauthn\\TrustPath',
+    'extends' => 'AptowebDeps\\Webauthn\\TrustPath\\EmptyTrustPath',
+    'implements' => 
+    array (
+      0 => 'Webauthn\\TrustPath\\TrustPath',
+    ),
+  ),
+  'Webauthn\\TrustPath\\TrustPathLoader' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TrustPathLoader',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\TrustPath',
+    'extends' => 'AptowebDeps\\Webauthn\\TrustPath\\TrustPathLoader',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\U2FPublicKey' => 
+  array (
+    'type' => 'class',
+    'classname' => 'U2FPublicKey',
+    'isabstract' => false,
+    'namespace' => 'Webauthn',
+    'extends' => 'AptowebDeps\\Webauthn\\U2FPublicKey',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Webauthn\\Util\\CoseSignatureFixer' => 
+  array (
+    'type' => 'class',
+    'classname' => 'CoseSignatureFixer',
+    'isabstract' => true,
+    'namespace' => 'Webauthn\\Util',
+    'extends' => 'AptowebDeps\\Webauthn\\Util\\CoseSignatureFixer',
+    'implements' => 
+    array (
+    ),
+  ),
   'Monolog\\Handler\\FormattableHandlerTrait' => 
   array (
     'type' => 'trait',
@@ -5018,6 +8393,56 @@ namespace AptowebDeps {
       0 => 'AptowebDeps\\Monolog\\Handler\\WebRequestRecognizerTrait',
     ),
   ),
+  'Nyholm\\Psr7\\MessageTrait' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'MessageTrait',
+    'namespace' => 'Nyholm\\Psr7',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Nyholm\\Psr7\\MessageTrait',
+    ),
+  ),
+  'Nyholm\\Psr7\\RequestTrait' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'RequestTrait',
+    'namespace' => 'Nyholm\\Psr7',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Nyholm\\Psr7\\RequestTrait',
+    ),
+  ),
+  'Nyholm\\Psr7\\StreamTrait' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'StreamTrait',
+    'namespace' => 'Nyholm\\Psr7',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Nyholm\\Psr7\\StreamTrait',
+    ),
+  ),
+  'Safe\\Exceptions\\Traits\\CreatesFromPhpError' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'CreatesFromPhpError',
+    'namespace' => 'Safe\\Exceptions\\Traits',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Safe\\Exceptions\\Traits\\CreatesFromPhpError',
+    ),
+  ),
+  'Assert\\AssertionFailedException' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'AssertionFailedException',
+    'namespace' => 'Assert',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Assert\\AssertionFailedException',
+    ),
+  ),
   'CrowdSec\\CapiClient\\Client\\CapiHandler\\CapiHandlerInterface' => 
   array (
     'type' => 'interface',
@@ -5046,6 +8471,166 @@ namespace AptowebDeps {
     'extends' => 
     array (
       0 => 'AptowebDeps\\CrowdSec\\Common\\Client\\RequestHandler\\RequestHandlerInterface',
+    ),
+  ),
+  'Dolondro\\GoogleAuthenticator\\QrImageGenerator\\QrImageGeneratorInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'QrImageGeneratorInterface',
+    'namespace' => 'Dolondro\\GoogleAuthenticator\\QrImageGenerator',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Dolondro\\GoogleAuthenticator\\QrImageGenerator\\QrImageGeneratorInterface',
+    ),
+  ),
+  'FG\\ASN1\\Parsable' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Parsable',
+    'namespace' => 'FG\\ASN1',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\FG\\ASN1\\Parsable',
+    ),
+  ),
+  'League\\Uri\\Contracts\\AuthorityInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'AuthorityInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\AuthorityInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\DataPathInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'DataPathInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\DataPathInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\DomainHostInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'DomainHostInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\DomainHostInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\FragmentInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'FragmentInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\FragmentInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\HostInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'HostInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\HostInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\IpHostInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'IpHostInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\IpHostInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\PathInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'PathInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\PathInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\PortInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'PortInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\PortInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\QueryInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'QueryInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\QueryInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\SegmentedPathInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'SegmentedPathInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\SegmentedPathInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\UriComponentInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'UriComponentInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\UriComponentInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\UriException' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'UriException',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\UriException',
+    ),
+  ),
+  'League\\Uri\\Contracts\\UriInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'UriInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\UriInterface',
+    ),
+  ),
+  'League\\Uri\\Contracts\\UserInfoInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'UserInfoInterface',
+    'namespace' => 'League\\Uri\\Contracts',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\League\\Uri\\Contracts\\UserInfoInterface',
     ),
   ),
   'Monolog\\Formatter\\FormatterInterface' => 
@@ -5126,6 +8711,76 @@ namespace AptowebDeps {
     'extends' => 
     array (
       0 => 'AptowebDeps\\Monolog\\ResettableInterface',
+    ),
+  ),
+  'Nyholm\\Psr7Server\\ServerRequestCreatorInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'ServerRequestCreatorInterface',
+    'namespace' => 'Nyholm\\Psr7Server',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Nyholm\\Psr7Server\\ServerRequestCreatorInterface',
+    ),
+  ),
+  'CBOR\\CBORObject' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'CBORObject',
+    'namespace' => 'CBOR',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\CBORObject',
+    ),
+  ),
+  'CBOR\\DecoderInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'DecoderInterface',
+    'namespace' => 'CBOR',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\DecoderInterface',
+    ),
+  ),
+  'CBOR\\Normalizable' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Normalizable',
+    'namespace' => 'CBOR',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\Normalizable',
+    ),
+  ),
+  'CBOR\\OtherObject\\OtherObjectManagerInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'OtherObjectManagerInterface',
+    'namespace' => 'CBOR\\OtherObject',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\OtherObject\\OtherObjectManagerInterface',
+    ),
+  ),
+  'CBOR\\Stream' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Stream',
+    'namespace' => 'CBOR',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\Stream',
+    ),
+  ),
+  'CBOR\\Tag\\TagManagerInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'TagManagerInterface',
+    'namespace' => 'CBOR\\Tag',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\CBOR\\Tag\\TagManagerInterface',
     ),
   ),
   'Symfony\\Component\\Config\\Builder\\ConfigBuilderGeneratorInterface' => 
@@ -5318,6 +8973,36 @@ namespace AptowebDeps {
       0 => 'AptowebDeps_Pfx_Stringable',
     ),
   ),
+  'Symfony\\Component\\Process\\Exception\\ExceptionInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'ExceptionInterface',
+    'namespace' => 'Symfony\\Component\\Process\\Exception',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Symfony\\Component\\Process\\Exception\\ExceptionInterface',
+    ),
+  ),
+  'Symfony\\Component\\Process\\Pipes\\PipesInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'PipesInterface',
+    'namespace' => 'Symfony\\Component\\Process\\Pipes',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Symfony\\Component\\Process\\Pipes\\PipesInterface',
+    ),
+  ),
+  'Safe\\Exceptions\\SafeExceptionInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'SafeExceptionInterface',
+    'namespace' => 'Safe\\Exceptions',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Safe\\Exceptions\\SafeExceptionInterface',
+    ),
+  ),
   'Twig\\Cache\\CacheInterface' => 
   array (
     'type' => 'interface',
@@ -5436,6 +9121,116 @@ namespace AptowebDeps {
     'extends' => 
     array (
       0 => 'AptowebDeps\\Twig\\TokenParser\\TokenParserInterface',
+    ),
+  ),
+  'Cose\\Algorithm\\Algorithm' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Algorithm',
+    'namespace' => 'Cose\\Algorithm',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Cose\\Algorithm\\Algorithm',
+    ),
+  ),
+  'Cose\\Algorithm\\Mac\\Mac' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Mac',
+    'namespace' => 'Cose\\Algorithm\\Mac',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Cose\\Algorithm\\Mac\\Mac',
+    ),
+  ),
+  'Cose\\Algorithm\\Signature\\Signature' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'Signature',
+    'namespace' => 'Cose\\Algorithm\\Signature',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Cose\\Algorithm\\Signature\\Signature',
+    ),
+  ),
+  'Webauthn\\MetadataService\\MetadataStatementRepository' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'MetadataStatementRepository',
+    'namespace' => 'Webauthn\\MetadataService',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\MetadataService\\MetadataStatementRepository',
+    ),
+  ),
+  'Webauthn\\AttestationStatement\\AttestationStatementSupport' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'AttestationStatementSupport',
+    'namespace' => 'Webauthn\\AttestationStatement',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\AttestationStatement\\AttestationStatementSupport',
+    ),
+  ),
+  'Webauthn\\AuthenticationExtensions\\ExtensionOutputChecker' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'ExtensionOutputChecker',
+    'namespace' => 'Webauthn\\AuthenticationExtensions',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\AuthenticationExtensions\\ExtensionOutputChecker',
+    ),
+  ),
+  'Webauthn\\CertificateChainChecker\\CertificateChainChecker' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'CertificateChainChecker',
+    'namespace' => 'Webauthn\\CertificateChainChecker',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\CertificateChainChecker\\CertificateChainChecker',
+    ),
+  ),
+  'Webauthn\\Counter\\CounterChecker' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'CounterChecker',
+    'namespace' => 'Webauthn\\Counter',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\Counter\\CounterChecker',
+    ),
+  ),
+  'Webauthn\\PublicKeyCredentialSourceRepository' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'PublicKeyCredentialSourceRepository',
+    'namespace' => 'Webauthn',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\PublicKeyCredentialSourceRepository',
+    ),
+  ),
+  'Webauthn\\TokenBinding\\TokenBindingHandler' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'TokenBindingHandler',
+    'namespace' => 'Webauthn\\TokenBinding',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\TokenBinding\\TokenBindingHandler',
+    ),
+  ),
+  'Webauthn\\TrustPath\\TrustPath' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'TrustPath',
+    'namespace' => 'Webauthn\\TrustPath',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Webauthn\\TrustPath\\TrustPath',
     ),
   ),
 );

@@ -1,10 +1,11 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace FernleafSystems\Wordpress\Plugin\Shield\Modules\HackGuard\Scan\Queue;
 
 use FernleafSystems\Utilities\Logic\ExecOnce;
 use FernleafSystems\Wordpress\Plugin\Shield\DBs\ScanItems\Ops as ScanItemsDB;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\HackGuard\Scan\Init\ScansStatus;
+use FernleafSystems\Wordpress\Plugin\Shield\Modules\HackGuard\Scan\ScanStatus;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
 
 class Controller {
@@ -12,32 +13,29 @@ class Controller {
 	use ExecOnce;
 	use PluginControllerConsumer;
 
-	/**
-	 * @var Build\QueueBuilder
-	 */
-	private $queueBuilder;
+	private ?Build\QueueBuilder $queueBuilder = null;
 
-	/**
-	 * @var QueueProcessor
-	 */
-	private $queueProcessor;
+	private ?QueueProcessor $queueProcessor = null;
 
-	protected function run() {
+	private ?QueueWatchdog $queueWatchdog = null;
+
+	protected function run() :void {
 		add_action( 'wp_loaded', [ $this, 'onWpLoaded' ] );
 	}
 
-	public function onWpLoaded() {
+	public function onWpLoaded() :void {
 		$this->getQueueBuilder();
 		$this->getQueueProcessor();
+		$this->getQueueWatchdog()->register();
 	}
 
 	/**
 	 * @return bool[]
 	 */
-	public function getScansRunningStates() :array {
+	public function getScansRunningStates( ?array $enqueued = null ) :array {
 		$scans = \array_fill_keys( self::con()->comps->scans->getScanSlugs(), false );
-		foreach ( ( new ScansStatus() )->enqueued() as $enqueued ) {
-			$scans[ $enqueued ] = true;
+		foreach ( $enqueued ?? ( new ScansStatus() )->enqueued() as $scan ) {
+			$scans[ $scan ] = true;
 		}
 		return $scans;
 	}
@@ -52,21 +50,23 @@ class Controller {
 	/**
 	 * @return float
 	 */
-	public function getScanJobProgress() {
+	public function getScanJobProgress() :float {
 		/** @var ScanItemsDB\Select $selector */
 		$selector = self::con()->db_con->scan_items->getQuerySelector();
 
-		$countsAll = $selector->countAllForEachScan();
-		$countsUnfinished = $selector->countUnfinishedForEachScan();
+		$progressCounts = $selector->countProgressForEachScan();
 
-		if ( empty( $countsAll ) || empty( $countsUnfinished ) ) {
-			$progress = 1;
+		if ( empty( $progressCounts ) ) {
+			$progress = 1.0;
 		}
 		else {
-			$progress = 0;
-			$eachScanWeight = 1/count( $countsAll );
-			foreach ( \array_keys( $countsAll ) as $scan ) {
-				$progress += $eachScanWeight*( 1 - ( ( $countsUnfinished[ $scan ] ?? 0 )/$countsAll[ $scan ] ) );
+			$progress = 0.0;
+			$eachScanWeight = 1/count( $progressCounts );
+			foreach ( $progressCounts as $counts ) {
+				$total = (int)$counts[ 'total' ];
+				if ( $total > 0 ) {
+					$progress += $eachScanWeight*( 1 - ( ( (int)$counts[ 'unfinished' ] )/$total ) );
+				}
 			}
 		}
 
@@ -74,14 +74,21 @@ class Controller {
 	}
 
 	public function hasRunningScans() :bool {
-		return \count( $this->getRunningScans() ) > 0 || \count( self::con()->comps->scans->getScansToBuild() ) > 0;
+		return self::con()->db_con->scans->getQuerySelector()
+				   ->filterByNotFinished()
+				   ->addWhereIn( 'status', ScanStatus::ACTIVE )
+				   ->count() > 0;
 	}
 
 	public function getQueueBuilder() :Build\QueueBuilder {
-		return $this->queueBuilder ?? $this->queueBuilder = new Build\QueueBuilder( 'shield_scanqbuild' );
+		return $this->queueBuilder ??= new Build\QueueBuilder();
 	}
 
 	public function getQueueProcessor() :QueueProcessor {
-		return $this->queueProcessor ?? $this->queueProcessor = ( new QueueProcessor( 'shield_scanq' ) )->setExpirationInterval( \MINUTE_IN_SECONDS*10 );
+		return $this->queueProcessor ??= new QueueProcessor();
+	}
+
+	public function getQueueWatchdog() :QueueWatchdog {
+		return $this->queueWatchdog ??= new QueueWatchdog();
 	}
 }

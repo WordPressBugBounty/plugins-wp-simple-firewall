@@ -8,10 +8,9 @@ use FernleafSystems\Wordpress\Services\Services;
 /**
  * @property string $prefix
  * @property int    $user_id
- * @property array  $flash_msg
+ * @property ?array $flash_msg
  */
 class UserMeta extends DynPropertiesClass {
-
 	/**
 	 * @var static[]
 	 */
@@ -67,7 +66,7 @@ class UserMeta extends DynPropertiesClass {
 				\array_filter( $this->getRawData(), fn( $item ) => \is_scalar( $item ) || \is_array( $item ) )
 			);
 			Services::WpUsers()
-					->updateUserMeta( $this->getStorageKey(), $this->getRawData(), $this->user_id );
+			        ->updateUserMeta( $this->getStorageKey(), $this->getRawData(), $this->user_id );
 		}
 	}
 
@@ -81,7 +80,7 @@ class UserMeta extends DynPropertiesClass {
 		$this->save();
 	}
 
-	protected function getStorageKey() :string {
+	protected function getStorageKey(): string {
 		return $this->prefix.'-meta';
 	}
 }

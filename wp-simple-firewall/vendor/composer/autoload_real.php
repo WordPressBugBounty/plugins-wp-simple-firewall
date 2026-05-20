@@ -24,14 +24,14 @@ class ComposerAutoloaderInitShieldPackage
 
         require __DIR__ . '/platform_check.php';
 
-        spl_autoload_register(array('ComposerAutoloaderInitShieldPackage', 'loadClassLoader'), true, true);
+        spl_autoload_register(array('ComposerAutoloaderInitShieldPackage', 'loadClassLoader'), true, false);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(__DIR__));
         spl_autoload_unregister(array('ComposerAutoloaderInitShieldPackage', 'loadClassLoader'));
 
         require __DIR__ . '/autoload_static.php';
         call_user_func(\Composer\Autoload\ComposerStaticInitShieldPackage::getInitializer($loader));
 
-        $loader->register(true);
+        $loader->register(false);
 
         $filesToLoad = \Composer\Autoload\ComposerStaticInitShieldPackage::$files;
         $requireFile = \Closure::bind(static function ($fileIdentifier, $file) {

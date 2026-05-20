@@ -6,6 +6,7 @@ use FernleafSystems\Wordpress\Plugin\Shield\DBs\ActivityLogs\{
 	LoadLogs,
 	LogRecord
 };
+use FernleafSystems\Wordpress\Plugin\Shield\DBs\Common\IpAddressSql;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\AuditTrail\Lib\ActivityLogMessageBuilder;
 use FernleafSystems\Wordpress\Plugin\Shield\Tables\DataTables\Build\ForActivityLog;
 use FernleafSystems\Wordpress\Plugin\Shield\Tables\DataTables\LoadData\BaseBuildTableData;
@@ -48,14 +49,15 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 			function ( $log ) {
 				$this->log = $log;
 				$data = $this->log->getRawData();
+				$user = $this->getColumnContent_User();
 				$data[ 'ip' ] = $this->log->ip;
 				$data[ 'rid' ] = $this->log->rid ?? __( 'Unknown', 'wp-simple-firewall' );
-				$data[ 'identity' ] = $this->getColumnContent_Identity();
+				$data[ 'identity' ] = $this->getColumnContent_Identity( $user );
 				$data[ 'event' ] = self::con()->comps->events->getEventName( $this->log->event_slug );
 				$this->log->created_at = \max( $this->log->updated_at, $this->log->created_at );
-				$data[ 'created_since' ] = $this->getColumnContent_Date( $this->log->created_at );
+				$data[ 'created_since' ] = $this->getColumnContent_ActivityDate( $this->log->created_at );
 				$data[ 'message' ] = $this->getColumnContent_Message();
-				$data[ 'user' ] = $this->getColumnContent_User();
+				$data[ 'user' ] = $user;
 				$data[ 'uid' ] = $this->getColumnContent_UserID();
 				$data[ 'level' ] = $this->getColumnContent_Level();
 				$data[ 'severity' ] = $this->getColumnContent_SeverityIcon();
@@ -102,7 +104,7 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 						}
 						break;
 					case 'ip':
-						$wheres[] = sprintf( "`ips`.`ip`=INET6_ATON('%s')", \array_pop( $selected ) );
+						$wheres[] = IpAddressSql::equality( '`ips`.`ip`', \array_pop( $selected ) );
 						break;
 					case 'user':
 						if ( \count( $selected ) > 0 ) {
@@ -170,6 +172,10 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 		return $loader;
 	}
 
+	public function exportGetRecordsLoader() :LoadLogs {
+		return $this->getRecordsLoader();
+	}
+
 	private function buildSqlWhereForEventTextSearch() :string {
 		if ( !$this->eventTextSearchComputed ) {
 			$this->eventTextSearchComputed = true;
@@ -220,47 +226,124 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 	}
 
 	private function getColumnContent_UserID() :string {
-		return $this->log->meta_data[ 'uid' ] ?? '-';
+		return (string)( $this->log->meta_data[ 'uid' ] ?? '-' );
 	}
 
-	protected function getColumnContent_Identity() :string {
+	protected function getColumnContent_Identity( string $user ) :string {
 		$ip = (string)$this->log->ip;
-		if ( !empty( $ip ) ) {
-			$ipID = $this->resolveIpIdentity( $ip );
-			if ( $ipID !== null ) {
-				if ( $ipID[ 0 ] === IpID::THIS_SERVER ) {
-					$id = __( 'This Server', 'wp-simple-firewall' );
-				}
-				elseif ( $ipID[ 0 ] === IpID::VISITOR ) {
-					$id = __( 'Your Current IP', 'wp-simple-firewall' );
-				}
-				elseif ( $ipID[ 0 ] === IpID::UNKNOWN ) {
-					$id = __( 'Unidentified', 'wp-simple-firewall' );
-				}
-				else {
-					$id = sprintf( '<code>%s</code>', $ipID[ 1 ] );
-				}
-			}
-			else {
-				$id = '';
-			}
+		$primaryBadges = \array_filter( [
+			empty( $ip ) ? '' : $this->buildSourceIdentityBadge( $ip ),
+			$this->buildUserIdentityBadge( $user ),
+		] );
 
-			$loggedIn = \is_numeric( $this->getColumnContent_UserID() );
-			$content = \implode( '', \array_filter( [
-				sprintf( '%s',
-					$loggedIn ?
-						sprintf( '%s and authenticated as %s', $id, $this->getColumnContent_User() )
-						: sprintf( '%s and not authenticated', $id )
-				),
-				sprintf( '<h6 class="text-nowrap mb-0">%s</h6>',
-					$this->getIpAnalysisLink( $ip )
-				),
-			] ) );
+		$rows = [];
+		if ( !empty( $primaryBadges ) ) {
+			$rows[] = \sprintf(
+				'<div class="activity-log-identity__primary">%s</div>',
+				\implode( '', $primaryBadges )
+			);
+		}
+
+		$rows[] = \sprintf(
+			'<div class="activity-log-identity__ip">%s</div>',
+			$this->buildRawIpBadge( $ip )
+		);
+
+		return \sprintf( '<div class="activity-log-identity">%s</div>', \implode( '', $rows ) );
+	}
+
+	private function buildSourceIdentityBadge( string $ip ) :string {
+		$ipID = $this->resolveIpIdentity( $ip );
+		if ( $ipID === null || $ipID[ 0 ] === IpID::UNKNOWN ) {
+			return '';
+		}
+
+		if ( $ipID[ 0 ] === IpID::THIS_SERVER ) {
+			$label = __( 'This Server', 'wp-simple-firewall' );
+		}
+		elseif ( $ipID[ 0 ] === IpID::VISITOR ) {
+			$label = __( 'Your IP', 'wp-simple-firewall' );
 		}
 		else {
-			$content = 'No IP';
+			$label = (string)$ipID[ 1 ];
 		}
-		return $content;
+
+		return empty( $label ) ? '' : $this->renderIdentityBadge(
+			esc_html( $label ),
+			'activity-log-identity__badge--source',
+			self::con()->svgs->iconClass( 'cloud-check' )
+		);
+	}
+
+	private function buildUserIdentityBadge( string $user ) :string {
+		return $user === '-' ? '' : $this->renderIdentityBadge(
+			$user,
+			'activity-log-identity__badge--user',
+			self::con()->svgs->iconClass( 'person' )
+		);
+	}
+
+	private function buildRawIpBadge( string $ip ) :string {
+		if ( !empty( $ip ) ) {
+			return $this->renderIdentityBadge(
+				$this->getIdentityRawIpLink( $ip ),
+				'activity-log-identity__badge--ip',
+				self::con()->svgs->iconClass( 'globe2' ),
+				[
+					'data-bs-toggle' => 'tooltip',
+					'data-bs-title'  => $ip,
+				]
+			);
+		}
+
+		return $this->renderIdentityBadge(
+			esc_html( __( 'No IP', 'wp-simple-firewall' ) ),
+			'activity-log-identity__badge--ip activity-log-identity__badge--no-ip',
+			self::con()->svgs->iconClass( 'globe2' )
+		);
+	}
+
+	private function renderIdentityBadge(
+		string $content,
+		string $classes,
+		string $iconClass,
+		array $attributes = []
+	) :string {
+		$attributes[ 'class' ] = \trim( sprintf( 'activity-log-identity__badge %s', $classes ) );
+
+		return sprintf(
+			'<span%s><i class="%s activity-log-identity__badge-icon" aria-hidden="true"></i><span class="activity-log-identity__badge-label">%s</span></span>',
+			$this->renderHtmlAttributes( $attributes ),
+			esc_attr( $iconClass ),
+			$content
+		);
+	}
+
+	private function getIdentityRawIpLink( string $ip ) :string {
+		// Keep the identity badge contract identical for full and investigation Activity Log tables.
+		return parent::getIpAnalysisLink( $ip );
+	}
+
+	private function getColumnContent_ActivityDate( int $ts ) :string {
+		return sprintf(
+			'<span class="activity-log-date" data-bs-toggle="tooltip" data-bs-title="%s">%s</span>',
+			esc_attr( Services::WpGeneral()->getTimeStringForDisplay( $ts ) ),
+			esc_html( Services::Request()
+			                  ->carbon( true )
+			                  ->setTimestamp( $ts )
+			                  ->diffForHumans() )
+		);
+	}
+
+	private function renderHtmlAttributes( array $attributes ) :string {
+		$rendered = [];
+		foreach ( $attributes as $key => $value ) {
+			if ( $value === null || $value === '' ) {
+				continue;
+			}
+			$rendered[] = sprintf( '%s="%s"', esc_attr( (string)$key ), esc_attr( (string)$value ) );
+		}
+		return empty( $rendered ) ? '' : ' '.\implode( ' ', $rendered );
 	}
 
 	protected function getColumnContent_User() :string {
@@ -291,7 +374,7 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 			$label,
 			$label,
 			$this->log->rid,
-			sprintf( '<span class="meta-icon">%s</span>', self::con()->svgs->raw( 'tags.svg' ) )
+			sprintf( '<span class="meta-icon"><i class="%s" aria-hidden="true"></i></span>', self::con()->svgs->iconClass( 'tags.svg' ) )
 		);
 	}
 
@@ -314,7 +397,7 @@ class BuildActivityLogTableData extends BaseBuildTableData {
 						];
 		$displayLevel = isset( $levelDetails[ $level ] ) ? $level : 'notice';
 		return sprintf( '<div class="severity-%s severity-icon">%s</div>', $displayLevel,
-			self::con()->svgs->raw( $levelDetails[ $displayLevel ][ 'icon' ] )
+			sprintf( '<i class="%s" aria-hidden="true"></i>', self::con()->svgs->iconClass( $levelDetails[ $displayLevel ][ 'icon' ] ) )
 		);
 	}
 }

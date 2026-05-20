@@ -6,11 +6,24 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AptowebDeps\\Webauthn\\MetadataService\\' => array($vendorDir . '/web-auth/metadata-service/src'),
+    'AptowebDeps\\Webauthn\\' => array($vendorDir . '/web-auth/webauthn-lib/src'),
     'AptowebDeps\\Twig\\' => array($vendorDir . '/twig/twig/src'),
     'AptowebDeps\\Symfony\\Component\\Uid\\' => array($vendorDir . '/symfony/uid'),
+    'AptowebDeps\\Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'AptowebDeps\\Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'AptowebDeps\\Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
+    'AptowebDeps\\Safe\\' => array($vendorDir . '/thecodingmachine/safe/src'),
+    'AptowebDeps\\Nyholm\\Psr7\\' => array($vendorDir . '/nyholm/psr7/src'),
+    'AptowebDeps\\Nyholm\\Psr7Server\\' => array($vendorDir . '/nyholm/psr7-server/src'),
     'AptowebDeps\\Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'AptowebDeps\\League\\Uri\\' => array($vendorDir . '/league/uri/src', $vendorDir . '/league/uri-interfaces/src'),
+    'AptowebDeps\\FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
+    'AptowebDeps\\Dolondro\\GoogleAuthenticator\\' => array($vendorDir . '/dolondro/google-authenticator/src'),
     'AptowebDeps\\CrowdSec\\Common\\' => array($vendorDir . '/crowdsec/common/src'),
     'AptowebDeps\\CrowdSec\\CapiClient\\' => array($vendorDir . '/crowdsec/capi-client/src'),
+    'AptowebDeps\\Cose\\' => array($vendorDir . '/web-auth/cose-lib/src'),
+    'AptowebDeps\\CBOR\\' => array($vendorDir . '/spomky-labs/cbor-php/src'),
+    'AptowebDeps\\Base64Url\\' => array($vendorDir . '/spomky-labs/base64url/src'),
+    'AptowebDeps\\Assert\\' => array($vendorDir . '/beberlei/assert/lib/Assert'),
 );

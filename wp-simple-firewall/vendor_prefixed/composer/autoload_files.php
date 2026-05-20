@@ -6,6 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    '9ef954d81cd6112db96657b52578069b' => $vendorDir . '/beberlei/assert/lib/Assert/functions.php',
+    'ce763bd2817dffbc2c1408fa569ec38c' => $vendorDir . '/thecodingmachine/safe/src/functions.php',
     '9e37e3b3b6ede1269b5f09b1e1c8b6bd' => $vendorDir . '/twig/twig/src/Resources/core.php',
     '4627f347e2ab6622eb180b82bd029b8a' => $vendorDir . '/twig/twig/src/Resources/debug.php',
     '9e8bfd3b708fcb3a3fef2484b3482e76' => $vendorDir . '/twig/twig/src/Resources/escaper.php',

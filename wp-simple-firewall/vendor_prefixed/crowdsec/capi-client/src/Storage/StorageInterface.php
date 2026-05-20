@@ -15,6 +15,8 @@ namespace AptowebDeps\CrowdSec\CapiClient\Storage;
  *
  * @copyright Copyright (c) 2022+ CrowdSec
  * @license   MIT License
+ *
+ * @psalm-api
  */
 interface StorageInterface
 {

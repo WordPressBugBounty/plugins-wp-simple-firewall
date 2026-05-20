@@ -10,12 +10,9 @@ class HttpHeadersCon {
 	use ExecOnce;
 	use PluginControllerConsumer;
 
-	private $pushed = false;
+	private bool $pushed = false;
 
-	/**
-	 * @var array
-	 */
-	private $headers = [];
+	private array $headers = [];
 
 	protected function canRun() :bool {
 		return !self::con()->this_req->request_bypasses_all_restrictions;
@@ -120,7 +117,7 @@ class HttpHeadersCon {
 
 	private function setContentSecurityPolicyHeader() :array {
 		$opts = self::con()->opts;
-		$rules = ( $opts->optIs( 'enable_x_content_security_policy', 'Y' ) && self::con()->isPremiumActive() ) ?
+		$rules = ( $opts->optIs( 'enable_x_content_security_policy', 'Y' ) && self::con()->caps->canHttpHeadersCSP() ) ?
 			\array_filter( \array_map( '\trim', $opts->optGet( 'xcsp_custom' ) ) ) : [];
 		return empty( $rules ) ? [] : [ 'Content-Security-Policy' => \implode( ' ', $rules ) ];
 	}

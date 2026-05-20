@@ -9,7 +9,7 @@ class ApiException extends \Exception {
 
 	private $subErrorCode;
 
-	public function __construct( $message = '', $code = 0, int $subCode = 0, \Throwable $previous = null ) {
+	public function __construct( $message = '', $code = 0, int $subCode = 0, ?\Throwable $previous = null ) {
 		parent::__construct( $message, empty( $code ) ? static::DEFAULT_ERROR_CODE : $code, $previous );
 		$this->subErrorCode = $subCode;
 	}
