@@ -26,6 +26,7 @@ return array(
     'LZCompressor\\' => array($vendorDir . '/nullpunkt/lz-string-php/src/LZCompressor'),
     'IPLib\\' => array($vendorDir . '/mlocati/ip-lib/src'),
     'Html2Text\\' => array($vendorDir . '/soundasleep/html2text/src'),
+    'FernleafSystems\\WorpdriveClient\\' => array($vendorDir . '/fernleafsystems/worpdrive-client/src'),
     'FernleafSystems\\Wordpress\\Services\\' => array($vendorDir . '/fernleafsystems/wordpress-services/src'),
     'FernleafSystems\\Wordpress\\Plugin\\Shield\\' => array($baseDir . '/src'),
     'FernleafSystems\\Wordpress\\Plugin\\Core\\' => array($vendorDir . '/fernleafsystems/wordpress-plugin-core/src'),

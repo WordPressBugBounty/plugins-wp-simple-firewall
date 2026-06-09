@@ -72,17 +72,17 @@
         },
         {
             "name": "crowdsec/capi-client",
-            "version": "v3.5.2",
-            "version_normalized": "3.5.2.0",
+            "version": "v3.5.3",
+            "version_normalized": "3.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/crowdsecurity/php-capi-client.git",
-                "reference": "733fdfbe95495c4b8e392eb55eac510c59678aef"
+                "reference": "fe366acb0a035eee4f8dc92c16015e4a1de5004a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/crowdsecurity/php-capi-client/zipball/733fdfbe95495c4b8e392eb55eac510c59678aef",
-                "reference": "733fdfbe95495c4b8e392eb55eac510c59678aef",
+                "url": "https://api.github.com/repos/crowdsecurity/php-capi-client/zipball/fe366acb0a035eee4f8dc92c16015e4a1de5004a",
+                "reference": "fe366acb0a035eee4f8dc92c16015e4a1de5004a",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
             "suggest": {
                 "ext-curl": "*"
             },
-            "time": "2026-02-06T08:59:37+00:00",
+            "time": "2026-06-03T10:11:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -135,7 +135,7 @@
             ],
             "support": {
                 "issues": "https://github.com/crowdsecurity/php-capi-client/issues",
-                "source": "https://github.com/crowdsecurity/php-capi-client/tree/v3.5.2"
+                "source": "https://github.com/crowdsecurity/php-capi-client/tree/v3.5.3"
             },
             "install-path": "../crowdsec/capi-client"
         },

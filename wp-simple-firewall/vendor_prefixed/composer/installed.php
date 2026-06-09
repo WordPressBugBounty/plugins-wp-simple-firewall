@@ -28,9 +28,9 @@
     ),
     'crowdsec/capi-client' => 
     array (
-      'pretty_version' => 'v3.5.2',
-      'version' => '3.5.2.0',
-      'reference' => '733fdfbe95495c4b8e392eb55eac510c59678aef',
+      'pretty_version' => 'v3.5.3',
+      'version' => '3.5.3.0',
+      'reference' => 'fe366acb0a035eee4f8dc92c16015e4a1de5004a',
       'type' => 'library',
       'install_path' => __DIR__ . '/../crowdsec/capi-client',
       'aliases' => 

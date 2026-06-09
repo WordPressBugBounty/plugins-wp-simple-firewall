@@ -3,11 +3,13 @@
 namespace FernleafSystems\Wordpress\Plugin\Shield\Rest\Worpdrive\v1\Route;
 
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
+use FernleafSystems\Wordpress\Plugin\Shield\Rest\Worpdrive\Host\ShieldWorpdriveHost;
 use FernleafSystems\Wordpress\Plugin\Shield\Rest\Worpdrive\v1\Process\StandardWorpdriveByCallable;
 use FernleafSystems\Wordpress\Services\Utilities\{
 	Net\IpID,
 	ServiceProviders
 };
+use FernleafSystems\WorpdriveClient\Host\WorpdriveRuntime;
 
 abstract class BaseWorpdrive extends \FernleafSystems\Wordpress\Plugin\Shield\Rest\v1\Route\Base {
 
@@ -46,9 +48,12 @@ abstract class BaseWorpdrive extends \FernleafSystems\Wordpress\Plugin\Shield\Re
 	protected function processRequest( \WP_REST_Request $req ) :array {
 		/** @var StandardWorpdriveByCallable $pro */
 		$pro = $this->getRequestProcessor();
-		return $pro->setWpRestRequest( $req )
-				   ->setProcessCallable( ( new RouteProcessorMap() )->map()[ static::class ] )
-				   ->run();
+		return WorpdriveRuntime::withHost(
+			new ShieldWorpdriveHost(),
+			fn() => $pro->setWpRestRequest( $req )
+						->setProcessCallable( ( new RouteProcessorMap() )->map()[ static::class ] )
+						->run()
+		);
 	}
 
 	public function getRoutePathPrefix() :string {
@@ -61,16 +66,20 @@ abstract class BaseWorpdrive extends \FernleafSystems\Wordpress\Plugin\Shield\Re
 	protected function customValidateRequestArg( $value, \WP_REST_Request $request, string $reqArgKey ) {
 		switch ( $reqArgKey ) {
 			case 'dir':
-				// Validate against split paths. If no split paths, then no \dirname()
 				$valid = new \WP_Error( 'Directory provided does not appear to be valid.' );
-				foreach (
-					\array_filter( [
-						'/'.\trim( wp_normalize_path( ABSPATH ) ),
-						\dirname( wp_normalize_path( ABSPATH ) )
-					] ) as $root
-				) {
-					if ( \str_starts_with( $value, $root ) ) {
-						$valid = true;
+				if ( \is_string( $value ) ) {
+					$dir = \trailingslashit( wp_normalize_path( $value ) );
+					$normAbs = wp_normalize_path( ABSPATH );
+					foreach (
+						\array_filter( [
+							\trailingslashit( $normAbs ),
+							\trailingslashit( \dirname( $normAbs ) ),
+						] ) as $root
+					) {
+						if ( $dir === $root ) {
+							$valid = true;
+							break;
+						}
 					}
 				}
 				break;

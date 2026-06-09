@@ -64,6 +64,7 @@ class ComposerStaticInitShieldPackage
         ),
         'F' =>
         array (
+            'FernleafSystems\\WorpdriveClient\\' => 32,
             'FernleafSystems\\Wordpress\\Services\\' => 35,
             'FernleafSystems\\Wordpress\\Plugin\\Shield\\' => 40,
             'FernleafSystems\\Wordpress\\Plugin\\Core\\' => 38,
@@ -163,6 +164,10 @@ class ComposerStaticInitShieldPackage
         'Html2Text\\' =>
         array (
             0 => __DIR__ . '/..' . '/soundasleep/html2text/src',
+        ),
+        'FernleafSystems\\WorpdriveClient\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/fernleafsystems/worpdrive-client/src',
         ),
         'FernleafSystems\\Wordpress\\Services\\' =>
         array (

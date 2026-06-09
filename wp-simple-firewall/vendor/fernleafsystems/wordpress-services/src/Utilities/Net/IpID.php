@@ -141,12 +141,14 @@ class IpID {
 		}
 
 		$updateIpStorage = false;
+		$hostnameRegex = $crawlerSpec[ 'host_pattern' ] ?? null;
 		if ( \array_key_exists( $this->ip, $crawlerIPs[ $crawlerSlug ] ) ) {
 			$updateIpStorage = $now - $crawlerIPs[ $crawlerSlug ][ $this->ip ] > 60;
 		}
-		elseif ( $this->verifyDNS && ( $this->ignoreUserAgentInChecks || $this->verifyAgent( $crawlerSpec ) ) ) {
+		elseif ( $this->verifyDNS && $this->hasValidHostPattern( $hostnameRegex )
+				 && ( $this->ignoreUserAgentInChecks || $this->verifyAgent( $crawlerSpec ) ) ) {
 			// Only verify IP if the UserAgent is provided.
-			if ( ( new VerifyHostToIP( $this->ip, $crawlerSlug, $crawlerSpec[ 'host_pattern' ] ) )->run() ) {
+			if ( ( new VerifyHostToIP( $this->ip, $crawlerSlug, $hostnameRegex ) )->run() ) {
 				$updateIpStorage = true;
 				$crawlerIPs[ $crawlerSlug ][ $this->ip ] = $now;
 			}
@@ -164,6 +166,12 @@ class IpID {
 		}
 
 		return \array_key_exists( $this->ip, $crawlerIPs[ $crawlerSlug ] );
+	}
+
+	private function hasValidHostPattern( $hostnameRegex ) :bool {
+		return \is_string( $hostnameRegex )
+			   && $hostnameRegex !== ''
+			   && @\preg_match( $hostnameRegex, '' ) !== false;
 	}
 
 	public function setVerifyDNS( bool $verify = true ) :self {

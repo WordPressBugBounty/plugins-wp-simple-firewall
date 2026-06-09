@@ -47,7 +47,7 @@ class ServiceProviders {
 						$IPs = \json_decode( $raw, true );
 					}
 				}
-				Transient::Set( 'apto_provider_ips', $IPs, DAY_IN_SECONDS );
+				Transient::Set( 'apto_provider_ips', $IPs, HOUR_IN_SECONDS*6 );
 			}
 			$this->providers = \is_array( $IPs ) ? $IPs : [];
 		}
