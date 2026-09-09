@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Handler;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LoggerInterface;
 use AptowebDeps\Monolog\Formatter\FormatterInterface;
 
 /**

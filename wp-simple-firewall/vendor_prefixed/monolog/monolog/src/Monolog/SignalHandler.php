@@ -11,8 +11,8 @@
 
 namespace AptowebDeps\Monolog;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LogLevel;
 use ReflectionExtension;
 
 /**

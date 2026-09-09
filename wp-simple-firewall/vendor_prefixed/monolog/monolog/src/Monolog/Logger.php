@@ -13,9 +13,9 @@ namespace AptowebDeps\Monolog;
 
 use DateTimeZone;
 use AptowebDeps\Monolog\Handler\HandlerInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\InvalidArgumentException;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\InvalidArgumentException;
+use AptowebDeps\Psr\Log\LogLevel;
 use Throwable;
 use Stringable;
 
@@ -475,7 +475,7 @@ class Logger implements LoggerInterface, ResettableInterface
     /**
      * Gets the name of the logging level.
      *
-     * @throws \Psr\Log\InvalidArgumentException If level is not defined
+     * @throws \AptowebDeps\Psr\Log\InvalidArgumentException If level is not defined
      *
      * @phpstan-param  Level     $level
      * @phpstan-return LevelName
@@ -493,7 +493,7 @@ class Logger implements LoggerInterface, ResettableInterface
      * Converts PSR-3 levels to Monolog ones if necessary
      *
      * @param  string|int                        $level Level number (monolog) or name (PSR-3)
-     * @throws \Psr\Log\InvalidArgumentException If level is not defined
+     * @throws \AptowebDeps\Psr\Log\InvalidArgumentException If level is not defined
      *
      * @phpstan-param  Level|LevelName|LogLevel::* $level
      * @phpstan-return Level

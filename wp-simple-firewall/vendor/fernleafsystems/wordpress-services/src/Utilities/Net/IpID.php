@@ -37,6 +37,8 @@ class IpID {
 	}
 
 	/**
+	 * Identifies the IP address and returns its identity key at index 0 and display name at index 1.
+	 *
 	 * @return string[]
 	 * @throws \Exception
 	 */
@@ -52,6 +54,9 @@ class IpID {
 		if ( $srvIP->isTrueLoopback( $this->ip ) ) {
 			$theSlug = self::LOOPBACK;
 			$theName = 'Loopback';
+		}
+		elseif ( $srvIP->isPrivateIP( $this->ip ) ) {
+			[ $theSlug, $theName ] = $this->getFallbackIdentity();
 		}
 		elseif ( $srvIP->IpIn( $this->ip, $srvIP->getServerPublicIPs() ) ) {
 			$theSlug = self::THIS_SERVER;
@@ -85,18 +90,20 @@ class IpID {
 			}
 
 			if ( empty( $theSlug ) ) {
-				if ( $srvIP->IpIn( $this->ip, [ Services::Request()->ip() ] ) ) {
-					$theSlug = self::VISITOR;
-					$theName = 'You';
-				}
-				else {
-					$theSlug = self::UNKNOWN;
-					$theName = 'Unknown';
-				}
+				[ $theSlug, $theName ] = $this->getFallbackIdentity();
 			}
 		}
 
 		return [ $theSlug, $theName ];
+	}
+
+	/**
+	 * @return array{0:string,1:string}
+	 */
+	private function getFallbackIdentity() :array {
+		return Services::IP()->IpIn( $this->ip, [ Services::Request()->ip() ] )
+			? [ self::VISITOR, 'You' ]
+			: [ self::UNKNOWN, 'Unknown' ];
 	}
 
 	public static function IsIpInProviderCollection( string $ip, array $collection ) :bool {

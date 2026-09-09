@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AptowebDeps\CrowdSec\Common\Logger;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LoggerInterface;
 
 /**
  * Abstract class for Monolog logger implementation.

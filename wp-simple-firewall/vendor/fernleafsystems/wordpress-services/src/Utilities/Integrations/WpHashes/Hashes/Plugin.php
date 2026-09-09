@@ -6,7 +6,7 @@ use FernleafSystems\Wordpress\Services;
 
 class Plugin extends PluginThemeBase {
 
-	public const TYPE = 'plugin';
+	public const TYPE = 'p';
 
 	/**
 	 * @return array|null

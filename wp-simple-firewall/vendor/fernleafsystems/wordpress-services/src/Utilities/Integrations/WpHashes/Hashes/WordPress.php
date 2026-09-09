@@ -5,7 +5,6 @@ namespace FernleafSystems\Wordpress\Services\Utilities\Integrations\WpHashes\Has
 use FernleafSystems\Wordpress\Services\Services;
 
 class WordPress extends AssetHashesBase {
-
 	public const TYPE = 'wordpress';
 
 	/**
@@ -17,9 +16,12 @@ class WordPress extends AssetHashesBase {
 	public function getHashes( $version, $locale = null, $hashAlgo = null ) {
 		/** @var RequestVO $req */
 		$req = $this->getRequestVO();
+		$req->type = static::TYPE;
 		$req->version = $version;
 		$req->hash = $hashAlgo;
-		$req->locale = $this->normalizeLocale( empty( $locale ) ? Services::WpGeneral()->getLocaleForChecksums() : $locale );
+		$req->locale = $this->normalizeLocale(
+			empty( $locale ) ? Services::WpGeneral()->getLocaleForChecksums() : $locale
+		);
 		return $this->query();
 	}
 
@@ -31,7 +33,7 @@ class WordPress extends AssetHashesBase {
 		return $this->getHashes( $WP->getVersion(), $WP->getLocaleForChecksums() );
 	}
 
-	protected function getApiUrl() :string {
+	protected function getApiUrl(): string {
 		/** @var RequestVO $req */
 		$req = $this->getRequestVO();
 
@@ -42,16 +44,10 @@ class WordPress extends AssetHashesBase {
 			\strtolower( (string)$req->hash ),
 		] );
 
-		return sprintf(
-			'%s/v%s/%s/%s',
-			static::API_URL,
-			static::API_VERSION,
-			$this->getApiEndpoint(),
-			\implode( '/', $data )
-		);
+		return sprintf( '%s/v%s/%s/%s', static::API_URL, static::API_VERSION, $this->getApiEndpoint(), \implode( '/', $data ) );
 	}
 
-	private function normalizeLocale( string $locale ) :string {
+	private function normalizeLocale( string $locale ): string {
 		$locale = \str_replace( '-', '_', \trim( $locale ) );
 		if ( empty( $locale ) ) {
 			return '';

@@ -1,8 +1,8 @@
 {
     "properties": {
-        "version": "22.1.3",
-        "release_timestamp": 1781000000,
-        "build": "202606.0901",
+        "version": "22.2.2",
+        "release_timestamp": 1788860000,
+        "build": "202609.0801",
         "slug_parent": "icwp",
         "slug_plugin": "wpsf",
         "text_domain": "wp-simple-firewall",
@@ -10,7 +10,6 @@
         "wpms_network_admin_only": true,
         "logging_enabled": true,
         "show_dashboard_widget": true,
-        "show_admin_bar_menu": true,
         "autoupdate": "confidence",
         "autoupdate_days": 5,
         "enable_premium": true
@@ -294,6 +293,7 @@
             "integrations": {
                 "slug": "integrations",
                 "name": "Integrations",
+                "tagline": "Configure available security integrations with 3rd party services and plugins.",
                 "show_central": true,
                 "reqs": {
                     "dbs": [
@@ -1555,6 +1555,33 @@
                 "sensitive": true
             },
             {
+                "key": "hidden_plugins_alert_state",
+                "section": "section_hidden",
+                "type": "array",
+                "default": [],
+                "transferable": false,
+                "tracking_exclude": true,
+                "sensitive": true
+            },
+            {
+                "key": "cloaked_plugin_findings",
+                "section": "section_hidden",
+                "type": "array",
+                "default": [],
+                "transferable": false,
+                "tracking_exclude": true,
+                "sensitive": true
+            },
+            {
+                "key": "ignored_hidden_plugins",
+                "section": "section_hidden",
+                "type": "array",
+                "default": [],
+                "transferable": false,
+                "tracking_exclude": true,
+                "sensitive": true
+            },
+            {
                 "key": "is_scan_cron",
                 "section": "section_hidden",
                 "tracking_exclude": true,
@@ -1710,7 +1737,7 @@
                 "beacon_id": 424,
                 "name": "silentCAPTCHA Bot Minimum Score",
                 "summary": "silentCAPTCHA Bot Minimum Score (Percentage)",
-                "description": "When using Shield's silentCAPTCHA system, this is the threshold used for testing (between 1 and 99)."
+                "description": "Set this minimum score to 0 to disable silentCAPTCHA bot checking on normal page requests, including its front-end cookie and JavaScript. Values from 1 to 99 set the minimum score required to treat a visitor as human."
             },
             {
                 "key": "antibot_high_reputation_minimum",
@@ -2686,6 +2713,17 @@
             {
                 "key": "email_can_send_verified_at",
                 "section": "section_hidden",
+                "tracking_exclude": true,
+                "transferable": false,
+                "type": "integer",
+                "default": 0,
+                "min": 0
+            },
+            {
+                "key": "email_can_send_verification_sent_at",
+                "section": "section_hidden",
+                "tracking_exclude": true,
+                "transferable": false,
                 "type": "integer",
                 "default": 0,
                 "min": 0
@@ -3216,10 +3254,7 @@
             },
             {
                 "key": "importexport_whitelist",
-                "section": "section_importexport",
-                "zone_comp_slugs": [
-                    "import_export"
-                ],
+                "section": "section_hidden",
                 "transferable": false,
                 "sensitive": true,
                 "default": [],
@@ -3232,10 +3267,7 @@
             },
             {
                 "key": "importexport_whitelist_notify",
-                "section": "section_importexport",
-                "zone_comp_slugs": [
-                    "import_export"
-                ],
+                "section": "section_hidden",
                 "default": "N",
                 "type": "checkbox",
                 "link_info": "",
@@ -3274,10 +3306,6 @@
                         "text": "Disabled"
                     },
                     {
-                        "value_key": "hourly",
-                        "text": "Hourly"
-                    },
-                    {
                         "value_key": "daily",
                         "text": "Daily"
                     },
@@ -3305,10 +3333,6 @@
                     {
                         "value_key": "disabled",
                         "text": "Disabled"
-                    },
-                    {
-                        "value_key": "hourly",
-                        "text": "Hourly"
                     },
                     {
                         "value_key": "daily",
@@ -3359,6 +3383,32 @@
                 "name": "Shield Deactivated",
                 "summary": "Be alerted when the Shield plugin is deactivated",
                 "description": "Be alerted when the Shield plugin is deactivated."
+            },
+            {
+                "key": "instant_alert_hidden_plugins",
+                "section": "section_alerts",
+                "zone_comp_slugs": [
+                    "instant_alerts",
+                    "reporting"
+                ],
+                "type": "select",
+                "default": "email",
+                "value_options": [
+                    {
+                        "value_key": "disabled",
+                        "text": "Disabled"
+                    },
+                    {
+                        "value_key": "email",
+                        "text": "Email"
+                    }
+                ],
+                "beacon_id": 788,
+                "link_info": "",
+                "link_blog": "",
+                "name": "Cloaked Plugins",
+                "summary": "Be alerted when a plugin is cloaked from the WordPress admin list",
+                "description": "Be alerted when a plugin or must-use plugin exists on disk but is cloaked from the WordPress admin plugin list."
             },
             {
                 "key": "instant_alert_admins",
@@ -3709,13 +3759,15 @@
                 "key": "importexport_secretkey_expires_at",
                 "section": "section_hidden",
                 "type": "integer",
-                "default": 0
+                "default": 0,
+                "transferable": false
             },
             {
                 "key": "importexport_handshake_expires_at",
                 "section": "section_hidden",
                 "type": "integer",
-                "default": 0
+                "default": 0,
+                "transferable": false
             },
             {
                 "key": "snapi_data",
@@ -3742,6 +3794,7 @@
                 "section": "section_hidden",
                 "type": "text",
                 "default": "",
+                "transferable": false,
                 "sensitive": true
             },
             {
@@ -3749,7 +3802,31 @@
                 "section": "section_hidden",
                 "type": "array",
                 "default": [],
+                "transferable": false,
                 "sensitive": true
+            },
+            {
+                "key": "importexport_sites_migrated_at",
+                "section": "section_hidden",
+                "type": "integer",
+                "default": 0,
+                "transferable": false
+            },
+            {
+                "key": "importexport_pending_network_invites",
+                "section": "section_hidden",
+                "type": "array",
+                "default": [],
+                "transferable": false,
+                "sensitive": true
+            },
+            {
+                "key": "importexport_network_invite_block_until",
+                "section": "section_hidden",
+                "type": "integer",
+                "default": 0,
+                "transferable": false,
+                "tracking_exclude": true
             },
             {
                 "key": "test_rest_data",
@@ -3768,6 +3845,7 @@
                 "key": "xfer_excluded",
                 "section": "section_hidden",
                 "type": "array",
+                "transferable": false,
                 "default": []
             },
             {
@@ -3797,37 +3875,18 @@
             },
             {
                 "key": "enable_logger",
-                "section": "section_log_requests",
-                "zone_comp_slugs": [
-                    "request_logging",
-                    "request_live_logging"
-                ],
-                "default": "N",
+                "section": "section_hidden",
+                "default": "Y",
                 "type": "checkbox",
-                "link_info": "https://clk.shldscrty.com/hf",
-                "link_blog": "",
-                "beacon_id": 153,
-                "name": "Enable Request Logging",
-                "summary": "Log Requests To Your WordPress Site",
-                "description": "Monitor web requests sent to your WordPress site."
+                "transferable": false,
+                "tracking_exclude": true
             },
             {
                 "key": "enable_live_log",
-                "section": "section_log_requests",
-                "zone_comp_slugs": [
-                    "request_logging",
-                    "request_live_logging"
-                ],
-                "cap": "traffic_live_log",
-                "premium": true,
+                "section": "section_hidden",
                 "default": "N",
                 "type": "checkbox",
-                "beacon_id": 759,
-                "link_info": "",
-                "link_blog": "",
-                "name": "Live Logging",
-                "summary": "Enable Live Logging Of All Traffic",
-                "description": "Switch-on logging of all site traffic."
+                "transferable": false
             },
             {
                 "key": "enable_limiter",
@@ -4802,7 +4861,23 @@
                             "default": 0,
                             "comment": "Total"
                         }
-                    }
+                    },
+                    "indices": [
+                        {
+                            "key_name": "created_at_event",
+                            "columns": [
+                                "created_at",
+                                "event"
+                            ]
+                        },
+                        {
+                            "key_name": "event_created_at",
+                            "columns": [
+                                "event",
+                                "created_at"
+                            ]
+                        }
+                    ]
                 },
                 "file_locker": {
                     "name": "File Locker Data",
@@ -4859,6 +4934,214 @@
                             "comment": "Notification Sent"
                         }
                     }
+                },
+                "import_export_profiles": {
+                    "name": "Import/Export Profiles",
+                    "slug": "importexport_profiles",
+                    "is_core": false,
+                    "autoexpire": 0,
+                    "has_updated_at": true,
+                    "has_created_at": true,
+                    "has_deleted_at": false,
+                    "col_older_than": "created_at",
+                    "cols_custom": {
+                        "slug": {
+                            "macro_type": "varchar",
+                            "length": 64,
+                            "attr": [
+                                "NOT NULL",
+                                "UNIQUE"
+                            ],
+                            "comment": "Profile Slug"
+                        },
+                        "label": {
+                            "macro_type": "varchar",
+                            "length": 128,
+                            "comment": "Profile Label"
+                        },
+                        "is_default": {
+                            "macro_type": "bool",
+                            "default": 0,
+                            "comment": "Default Profile?"
+                        },
+                        "config": {
+                            "macro_type": "mediumtext",
+                            "comment": "Profile Configuration"
+                        }
+                    }
+                },
+                "import_export_sites": {
+                    "name": "Import/Export Sites",
+                    "slug": "importexport_sites",
+                    "is_core": false,
+                    "autoexpire": 0,
+                    "has_updated_at": true,
+                    "has_created_at": true,
+                    "has_deleted_at": true,
+                    "col_older_than": "created_at",
+                    "cols_custom": {
+                        "url": {
+                            "macro_type": "url",
+                            "length": 512,
+                            "comment": "Canonical Site URL"
+                        },
+                        "url_hash": {
+                            "macro_type": "varchar",
+                            "length": 32,
+                            "attr": [
+                                "NOT NULL",
+                                "UNIQUE"
+                            ],
+                            "comment": "Canonical URL Hash"
+                        },
+                        "import_id": {
+                            "macro_type": "varchar",
+                            "length": 64,
+                            "comment": "Slave Import ID"
+                        },
+                        "profile_ref": {
+                            "macro_type": "unsigned_int",
+                            "length": 11,
+                            "default": 0,
+                            "comment": "Assigned Profile ID"
+                        },
+                        "source": {
+                            "macro_type": "varchar",
+                            "length": 32,
+                            "comment": "Registration Source"
+                        },
+                        "status": {
+                            "macro_type": "varchar",
+                            "length": 32,
+                            "default": "active",
+                            "comment": "Registration Status"
+                        },
+                        "queue_status": {
+                            "macro_type": "varchar",
+                            "length": 32,
+                            "default": "idle",
+                            "comment": "Queue Status"
+                        },
+                        "priority": {
+                            "macro_type": "unsigned_int",
+                            "type": "smallint",
+                            "length": 5,
+                            "default": 0,
+                            "comment": "Queue Priority"
+                        },
+                        "last_ping_http_code": {
+                            "macro_type": "unsigned_int",
+                            "type": "smallint",
+                            "length": 3,
+                            "default": 0,
+                            "comment": "Last Ping HTTP Code"
+                        },
+                        "last_ping_error": {
+                            "macro_type": "mediumtext",
+                            "comment": "Last Ping Error"
+                        },
+                        "last_export_result_code": {
+                            "macro_type": "varchar",
+                            "length": 32,
+                            "comment": "Last Export Result Code"
+                        },
+                        "last_export_error": {
+                            "macro_type": "mediumtext",
+                            "comment": "Last Export Error"
+                        },
+                        "ping_attempts_total": {
+                            "macro_type": "unsigned_int",
+                            "length": 11,
+                            "default": 0,
+                            "comment": "Total Ping Attempts"
+                        },
+                        "consecutive_failures": {
+                            "macro_type": "unsigned_int",
+                            "length": 11,
+                            "default": 0,
+                            "comment": "Consecutive Failures"
+                        },
+                        "meta": {
+                            "macro_type": "meta"
+                        }
+                    },
+                    "cols_timestamps": {
+                        "queued_at": {
+                            "comment": "Queued At"
+                        },
+                        "picked_at": {
+                            "comment": "Picked At"
+                        },
+                        "lock_until": {
+                            "comment": "Lock Until"
+                        },
+                        "next_ping_at": {
+                            "comment": "Next Ping At"
+                        },
+                        "expected_export_by": {
+                            "comment": "Expected Export By"
+                        },
+                        "last_ping_attempt_at": {
+                            "comment": "Last Ping Attempt At"
+                        },
+                        "last_ping_success_at": {
+                            "comment": "Last Ping Success At"
+                        },
+                        "last_ping_failure_at": {
+                            "comment": "Last Ping Failure At"
+                        },
+                        "last_export_request_at": {
+                            "comment": "Last Export Request At"
+                        },
+                        "last_export_success_at": {
+                            "comment": "Last Export Success At"
+                        },
+                        "last_export_failure_at": {
+                            "comment": "Last Export Failure At"
+                        }
+                    },
+                    "indices": [
+                        {
+                            "key_name": "due_queue",
+                            "columns": [
+                                "status",
+                                "queue_status",
+                                "next_ping_at",
+                                "lock_until"
+                            ]
+                        },
+                        {
+                            "key_name": "waiting_export",
+                            "columns": [
+                                "queue_status",
+                                "expected_export_by"
+                            ]
+                        },
+                        {
+                            "key_name": "last_ping_success",
+                            "columns": [
+                                "last_ping_success_at"
+                            ]
+                        },
+                        {
+                            "key_name": "last_ping_failure",
+                            "columns": [
+                                "last_ping_failure_at"
+                            ]
+                        },
+                        {
+                            "key_name": "last_export_success",
+                            "columns": [
+                                "last_export_success_at"
+                            ]
+                        },
+                        {
+                            "key_name": "last_export_failure",
+                            "columns": [
+                                "last_export_failure_at"
+                            ]
+                        }
+                    ]
                 },
                 "ips": {
                     "name": "IP Addresses",
@@ -5025,7 +5308,7 @@
                         },
                         "malai_status": {
                             "macro_type": "varchar",
-                            "length": 20,
+                            "length": 24,
                             "default": "''",
                             "comment": "The status of the file from malai"
                         },
@@ -5244,7 +5527,7 @@
                         "item_id": {
                             "macro_type": "varchar",
                             "length": 256,
-                            "comment": "Result Item ID"
+                            "comment": "Legacy canonical scan-result identity. AFS paths longer than 256 characters are an accepted limitation pending replacement result storage; do not change this column in place without a migration and index-compatibility design."
                         },
                         "asset_type": {
                             "macro_type": "varchar",
@@ -5483,7 +5766,7 @@
                             "comment": "Scan Completed At"
                         },
                         "meta": {
-                            "macro_type": "meta",
+                            "macro_type": "mediumtext",
                             "comment": "Scan Meta Info"
                         }
                     },
@@ -5550,6 +5833,10 @@
                         "items": {
                             "macro_type": "text",
                             "comment": "Array of scan items"
+                        },
+                        "item_count": {
+                            "macro_type": "unsigned_int",
+                            "comment": "Number of scan items in this queue row"
                         },
                         "started_at": {
                             "macro_type": "timestamp",
@@ -6127,7 +6414,7 @@
             "login_success": {
                 "level": "info",
                 "offense": false,
-                "stat": false
+                "stat": true
             },
             "loginpage_load": {
                 "level": "info",
@@ -6226,6 +6513,18 @@
                     "plugin",
                     "version",
                     "name"
+                ],
+                "level": "warning",
+                "audit_multiple": true
+            },
+            "plugin_hidden_detected": {
+                "audit_params": [
+                    "plugin",
+                    "type",
+                    "hidden_by",
+                    "status",
+                    "name",
+                    "version"
                 ],
                 "level": "warning",
                 "audit_multiple": true

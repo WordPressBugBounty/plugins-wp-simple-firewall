@@ -64,12 +64,7 @@ class MapHandler extends \FernleafSystems\WorpdriveClient\Filesystem\BaseFsHandl
 			$map->finishLargeListing( true );
 			$this->host()->filesystem()->putFileContent(
 				$this->pathToProgress(),
-				wp_json_encode( [
-					'completed_dirs'        => $track->completed(),
-					'most_recent_file'      => $track->getMostRecentFile(),
-					'total_completed_dirs'  => $track->totalDirsComplete(),
-					'total_completed_files' => $track->totalFilesComplete(),
-				] )
+				wp_json_encode( $track->toProgressArray() )
 			);
 		}
 		catch ( \Exception $e ) {
@@ -84,10 +79,6 @@ class MapHandler extends \FernleafSystems\WorpdriveClient\Filesystem\BaseFsHandl
 			'map_count'            => $track->totalFilesComplete(),
 			'latest_file'          => $track->getMostRecentFile(),
 			'wpcfg_remapped'       => (int)$this->wpCfgRemapped,
-			/*
-			'dirs_this_round'      => $track->getDirsThisRound(),
-			'latest_file'          => $track->getMostRecentFile(),
-			*/
 		];
 	}
 
@@ -155,21 +146,26 @@ class MapHandler extends \FernleafSystems\WorpdriveClient\Filesystem\BaseFsHandl
 		$dirsCompleted = [];
 		$mostRecentFile = null;
 		$totalDirs = $totalFiles = 0;
+		$activeEntryDir = null;
+		$activeEntryOffset = 0;
 		if ( \is_file( $this->pathToProgress() ) ) {
 			$raw = $this->host()->filesystem()->getFileContent( $this->pathToProgress() );
 			if ( !empty( $raw ) ) {
 				$rawProgress = \json_decode( $raw, true );
 				if ( !empty( $rawProgress ) && \is_array( $rawProgress ) ) {
-					[
-						'completed_dirs'        => $dirsCompleted,
-						'most_recent_file'      => $mostRecentFile,
-						'total_completed_dirs'  => $totalDirs,
-						'total_completed_files' => $totalFiles,
-					] = $rawProgress;
+					$dirsCompleted = \is_array( $rawProgress[ 'completed_dirs' ] ?? null ) ? $rawProgress[ 'completed_dirs' ] : [];
+					$mostRecentFile = \is_string( $rawProgress[ 'most_recent_file' ] ?? null ) ? $rawProgress[ 'most_recent_file' ] : null;
+					$totalDirs = \max( 0, (int)( $rawProgress[ 'total_completed_dirs' ] ?? 0 ) );
+					$totalFiles = \max( 0, (int)( $rawProgress[ 'total_completed_files' ] ?? 0 ) );
+					$activeEntryDir = \is_string( $rawProgress[ 'active_entry_dir' ] ?? null ) ? $rawProgress[ 'active_entry_dir' ] : null;
+					if ( $activeEntryDir === null && \is_string( $rawProgress[ 'active_file_dir' ] ?? null ) ) {
+						$activeEntryDir = $rawProgress[ 'active_file_dir' ];
+					}
+					$activeEntryOffset = \max( 0, (int)( $rawProgress[ 'active_entry_offset' ] ?? ( $rawProgress[ 'active_file_offset' ] ?? 0 ) ) );
 				}
 			}
 		}
-		return new MapProgressTracker( $dirsCompleted, $mostRecentFile, $totalDirs, $totalFiles );
+		return new MapProgressTracker( $dirsCompleted, $mostRecentFile, $totalDirs, $totalFiles, $activeEntryDir, $activeEntryOffset );
 	}
 
 	private function mapURL() :string {

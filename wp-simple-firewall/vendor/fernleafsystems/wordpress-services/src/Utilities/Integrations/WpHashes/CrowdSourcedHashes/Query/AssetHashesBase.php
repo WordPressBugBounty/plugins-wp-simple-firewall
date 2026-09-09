@@ -3,6 +3,7 @@
 namespace FernleafSystems\Wordpress\Services\Utilities\Integrations\WpHashes\CrowdSourcedHashes\Query;
 
 use FernleafSystems\Wordpress\Services\Utilities\Integrations\WpHashes\CrowdSourcedHashes\Base;
+use FernleafSystems\Wordpress\Services\Utilities\Integrations\WpHashes\AssetRequest;
 
 abstract class AssetHashesBase extends Base {
 
@@ -12,15 +13,22 @@ abstract class AssetHashesBase extends Base {
 	protected function getApiUrl() :string {
 		/** @var RequestVO $req */
 		$req = $this->getRequestVO();
-		return sprintf( '%s/%s/%s/%s', parent::getApiUrl(), $req->type, $req->slug, $req->version );
+		return sprintf( '%s/%s', parent::getApiUrl(), AssetRequest::path( [ $req->type, $req->slug, $req->version ] ) );
 	}
 
 	public function getHashes( string $type, string $slug, string $version ) :array {
+		$type = AssetRequest::normalizeShortType( $type );
+		$slug = AssetRequest::normalizeSlug( $slug );
+		$version = AssetRequest::normalizeVersion( $version, true );
+		if ( $type === null || $slug === null || $version === null ) {
+			return [];
+		}
+
 		/** @var RequestVO $req */
 		$req = $this->getRequestVO();
 		$req->type = $type;
-		$req->slug = \trim( sanitize_key( $slug ), '-_' );
-		$req->version = \trim( $version, 'v' );
+		$req->slug = $slug;
+		$req->version = $version;
 		$result = $this->query();
 		return \is_array( $result ) ? $result : [];
 	}

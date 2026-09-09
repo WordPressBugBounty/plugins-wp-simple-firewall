@@ -29,7 +29,7 @@ use Traversable;
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  *
  * @method static bool allAlnum(mixed[] $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric for all values.
- * @method static bool allBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined for all values.
+ * @method static bool allBase64(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string for all values.
  * @method static bool allBetween(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit for all values.
  * @method static bool allBetweenExclusive(mixed[] $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit for all values.
  * @method static bool allBetweenLength(mixed[] $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths for all values.
@@ -118,7 +118,7 @@ use Traversable;
  * @method static bool allVersion(string[] $version1, string $operator, string $version2, string|callable $message = null, string $propertyPath = null) Assert comparison of two versions for all values.
  * @method static bool allWriteable(string[] $value, string|callable $message = null, string $propertyPath = null) Assert that the value is something writeable for all values.
  * @method static bool nullOrAlnum(mixed|null $value, string|callable $message = null, string $propertyPath = null) Assert that value is alphanumeric or that the value is null.
- * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that a constant is defined or that the value is null.
+ * @method static bool nullOrBase64(string|null $value, string|callable $message = null, string $propertyPath = null) Assert that the given string is a valid base64 string or that the value is null.
  * @method static bool nullOrBetween(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater or equal than a lower limit, and less than or equal to an upper limit or that the value is null.
  * @method static bool nullOrBetweenExclusive(mixed|null $value, mixed $lowerLimit, mixed $upperLimit, string|callable $message = null, string $propertyPath = null) Assert that a value is greater than a lower limit, and less than an upper limit or that the value is null.
  * @method static bool nullOrBetweenLength(mixed|null $value, int $minLength, int $maxLength, string|callable $message = null, string $propertyPath = null, string $encoding = 'utf8') Assert that string length is between min and max lengths or that the value is null.
@@ -1390,7 +1390,7 @@ class Assertion
             (?:/ (?:[\pL\pN\-._\~!$&\'()*+,;=:@]|%%[0-9A-Fa-f]{2})* )*          # a path
             (?:\? (?:[\pL\pN\-._\~!$&\'\[\]()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?   # a query (optional)
             (?:\# (?:[\pL\pN\-._\~!$&\'()*+,;=:@/?]|%%[0-9A-Fa-f]{2})* )?       # a fragment (optional)
-        $~ixu';
+        $~ixuD';
         $pattern = \sprintf($pattern, \implode('|', $protocols));
         if (!\preg_match($pattern, $value)) {
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" was expected to be a valid URL starting with http or https'), static::stringify($value));
@@ -1409,7 +1409,7 @@ class Assertion
     public static function alnum($value, $message = null, ?string $propertyPath = null): bool
     {
         try {
-            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)', $message, $propertyPath);
+            static::regex($value, '(^([a-zA-Z]{1}[a-zA-Z0-9]*)$)D', $message, $propertyPath);
         } catch (Throwable $e) {
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not alphanumeric, starting with letters and containing only letters and numbers.'), static::stringify($value));
             throw static::createException($value, $message, static::INVALID_ALNUM, $propertyPath);
@@ -1562,11 +1562,7 @@ class Assertion
      */
     public static function uuid($value, $message = null, ?string $propertyPath = null): bool
     {
-        $value = \str_replace(['urn:', 'uuid:', '{', '}'], '', $value);
-        if ('00000000-0000-0000-0000-000000000000' === $value) {
-            return true;
-        }
-        if (!\preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/', $value)) {
+        if (!\preg_match('/^(?:urn:)?(?:uuid:)?(\{)?[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}(?(1)\})$/D', $value)) {
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid UUID.'), static::stringify($value));
             throw static::createException($value, $message, static::INVALID_UUID, $propertyPath);
         }
@@ -1584,7 +1580,7 @@ class Assertion
      */
     public static function e164($value, $message = null, ?string $propertyPath = null): bool
     {
-        if (!\preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
+        if (!\preg_match('/^\+?[1-9]\d{1,14}$/D', $value)) {
             $message = \sprintf(static::generateMessage($message ?: 'Value "%s" is not a valid E164.'), static::stringify($value));
             throw static::createException($value, $message, static::INVALID_E164, $propertyPath);
         }
@@ -2103,7 +2099,7 @@ class Assertion
         return true;
     }
     /**
-     * Assert that a constant is defined.
+     * Assert that the given string is a valid base64 string.
      *
      * @param string $value
      * @param string|callable|null $message

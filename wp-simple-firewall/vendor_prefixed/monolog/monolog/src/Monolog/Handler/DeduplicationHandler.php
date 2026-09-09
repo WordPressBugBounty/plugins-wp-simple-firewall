@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Handler;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Simple handler wrapper that deduplicates log records across multiple requests

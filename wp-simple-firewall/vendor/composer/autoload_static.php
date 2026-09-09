@@ -43,7 +43,6 @@ class ComposerStaticInitShieldPackage
         ),
         'P' =>
         array (
-            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Container\\' => 14,
@@ -127,10 +126,6 @@ class ComposerStaticInitShieldPackage
         'Ramsey\\Collection\\' =>
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
-        ),
-        'Psr\\Log\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' =>
         array (

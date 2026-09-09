@@ -11,7 +11,7 @@ use AptowebDeps\CrowdSec\Common\Client\RequestHandler\Curl;
 use AptowebDeps\CrowdSec\Common\Client\RequestHandler\RequestHandlerInterface;
 use AptowebDeps\Monolog\Handler\NullHandler;
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LoggerInterface;
 
 /**
  * The low level CrowdSec REST Client.

@@ -13,7 +13,7 @@ namespace AptowebDeps\Monolog\Handler;
 
 use AptowebDeps\Monolog\Logger;
 use AptowebDeps\Monolog\ResettableInterface;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Base Handler class providing basic level/bubble support

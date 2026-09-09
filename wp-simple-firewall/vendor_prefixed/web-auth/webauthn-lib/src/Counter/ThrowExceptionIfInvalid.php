@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace AptowebDeps\Webauthn\Counter;
 
 use AptowebDeps\Assert\Assertion;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
+use AptowebDeps\Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\NullLogger;
 use Throwable;
 use AptowebDeps\Webauthn\PublicKeyCredentialSource;
 

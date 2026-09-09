@@ -16,7 +16,7 @@ use AptowebDeps\Monolog\Handler\FingersCrossed\ActivationStrategyInterface;
 use AptowebDeps\Monolog\Logger;
 use AptowebDeps\Monolog\ResettableInterface;
 use AptowebDeps\Monolog\Formatter\FormatterInterface;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Buffers all records until a certain level is reached

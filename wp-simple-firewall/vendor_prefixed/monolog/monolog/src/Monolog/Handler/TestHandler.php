@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Handler;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Used for testing purposes.

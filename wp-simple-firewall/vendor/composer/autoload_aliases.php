@@ -3179,6 +3179,84 @@ namespace AptowebDeps {
       0 => 'Psr\\Http\\Message\\UriInterface',
     ),
   ),
+  'Psr\\Log\\AbstractLogger' => 
+  array (
+    'type' => 'class',
+    'classname' => 'AbstractLogger',
+    'isabstract' => true,
+    'namespace' => 'Psr\\Log',
+    'extends' => 'AptowebDeps\\Psr\\Log\\AbstractLogger',
+    'implements' => 
+    array (
+      0 => 'Psr\\Log\\LoggerInterface',
+    ),
+  ),
+  'Psr\\Log\\InvalidArgumentException' => 
+  array (
+    'type' => 'class',
+    'classname' => 'InvalidArgumentException',
+    'isabstract' => false,
+    'namespace' => 'Psr\\Log',
+    'extends' => 'AptowebDeps\\Psr\\Log\\InvalidArgumentException',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Psr\\Log\\LogLevel' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LogLevel',
+    'isabstract' => false,
+    'namespace' => 'Psr\\Log',
+    'extends' => 'AptowebDeps\\Psr\\Log\\LogLevel',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Psr\\Log\\NullLogger' => 
+  array (
+    'type' => 'class',
+    'classname' => 'NullLogger',
+    'isabstract' => false,
+    'namespace' => 'Psr\\Log',
+    'extends' => 'AptowebDeps\\Psr\\Log\\NullLogger',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Psr\\Log\\Test\\DummyTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'DummyTest',
+    'isabstract' => false,
+    'namespace' => 'Psr\\Log\\Test',
+    'extends' => 'AptowebDeps\\Psr\\Log\\Test\\DummyTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Psr\\Log\\Test\\LoggerInterfaceTest' => 
+  array (
+    'type' => 'class',
+    'classname' => 'LoggerInterfaceTest',
+    'isabstract' => true,
+    'namespace' => 'Psr\\Log\\Test',
+    'extends' => 'AptowebDeps\\Psr\\Log\\Test\\LoggerInterfaceTest',
+    'implements' => 
+    array (
+    ),
+  ),
+  'Psr\\Log\\Test\\TestLogger' => 
+  array (
+    'type' => 'class',
+    'classname' => 'TestLogger',
+    'isabstract' => false,
+    'namespace' => 'Psr\\Log\\Test',
+    'extends' => 'AptowebDeps\\Psr\\Log\\Test\\TestLogger',
+    'implements' => 
+    array (
+    ),
+  ),
   'Base64Url\\Base64Url' => 
   array (
     'type' => 'class',
@@ -8423,6 +8501,26 @@ namespace AptowebDeps {
       0 => 'AptowebDeps\\Nyholm\\Psr7\\StreamTrait',
     ),
   ),
+  'Psr\\Log\\LoggerAwareTrait' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'LoggerAwareTrait',
+    'namespace' => 'Psr\\Log',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Psr\\Log\\LoggerAwareTrait',
+    ),
+  ),
+  'Psr\\Log\\LoggerTrait' => 
+  array (
+    'type' => 'trait',
+    'traitname' => 'LoggerTrait',
+    'namespace' => 'Psr\\Log',
+    'use' => 
+    array (
+      0 => 'AptowebDeps\\Psr\\Log\\LoggerTrait',
+    ),
+  ),
   'Safe\\Exceptions\\Traits\\CreatesFromPhpError' => 
   array (
     'type' => 'trait',
@@ -8721,6 +8819,26 @@ namespace AptowebDeps {
     'extends' => 
     array (
       0 => 'AptowebDeps\\Nyholm\\Psr7Server\\ServerRequestCreatorInterface',
+    ),
+  ),
+  'Psr\\Log\\LoggerAwareInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'LoggerAwareInterface',
+    'namespace' => 'Psr\\Log',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Psr\\Log\\LoggerAwareInterface',
+    ),
+  ),
+  'Psr\\Log\\LoggerInterface' => 
+  array (
+    'type' => 'interface',
+    'interfacename' => 'LoggerInterface',
+    'namespace' => 'Psr\\Log',
+    'extends' => 
+    array (
+      0 => 'AptowebDeps\\Psr\\Log\\LoggerInterface',
     ),
   ),
   'CBOR\\CBORObject' => 

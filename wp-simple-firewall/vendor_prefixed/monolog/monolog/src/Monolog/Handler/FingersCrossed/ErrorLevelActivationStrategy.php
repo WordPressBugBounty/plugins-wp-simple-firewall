@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Handler\FingersCrossed;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Error level based activation strategy.

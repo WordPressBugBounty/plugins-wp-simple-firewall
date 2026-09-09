@@ -2,8 +2,8 @@
   'root' => 
   array (
     'name' => 'fernleafsystems/wp-plugin-shield',
-    'pretty_version' => '22.0.x-dev',
-    'version' => '22.0.9999999.9999999-dev',
+    'pretty_version' => '22.2.x-dev',
+    'version' => '22.2.9999999.9999999-dev',
     'reference' => NULL,
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',
@@ -16,9 +16,9 @@
   array (
     'beberlei/assert' => 
     array (
-      'pretty_version' => 'v3.3.3',
-      'version' => '3.3.3.0',
-      'reference' => 'b5fd8eacd8915a1b627b8bfc027803f1939734dd',
+      'pretty_version' => 'v3.3.4',
+      'version' => '3.3.4.0',
+      'reference' => 'f193f4613c7d7fbcee2c05e4daff4061d49c040e',
       'type' => 'library',
       'install_path' => __DIR__ . '/../beberlei/assert',
       'aliases' => 
@@ -100,9 +100,9 @@
     ),
     'monolog/monolog' => 
     array (
-      'pretty_version' => '2.11.0',
-      'version' => '2.11.0.0',
-      'reference' => '37308608e599f34a1a4845b16440047ec98a172a',
+      'pretty_version' => '2.11.1',
+      'version' => '2.11.1.0',
+      'reference' => 'bf2403f591c5a431b6e0e1170cbadd3d64499564',
       'type' => 'library',
       'install_path' => __DIR__ . '/../monolog/monolog',
       'aliases' => 
@@ -129,6 +129,18 @@
       'reference' => '4335801d851f554ca43fa6e7d2602141538854dc',
       'type' => 'library',
       'install_path' => __DIR__ . '/../nyholm/psr7-server',
+      'aliases' => 
+      array (
+      ),
+      'dev_requirement' => false,
+    ),
+    'psr/log' => 
+    array (
+      'pretty_version' => '1.1.4',
+      'version' => '1.1.4.0',
+      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
+      'type' => 'library',
+      'install_path' => __DIR__ . '/../psr/log',
       'aliases' => 
       array (
       ),

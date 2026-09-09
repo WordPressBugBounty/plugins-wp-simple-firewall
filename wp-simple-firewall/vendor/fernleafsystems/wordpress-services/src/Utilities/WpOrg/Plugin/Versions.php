@@ -12,7 +12,9 @@ class Versions extends PluginThemeVersionsBase {
 	 * @return Api
 	 */
 	protected function getApi() {
-		return new Api();
+		$api = new Api();
+		$api->fields = [ 'versions' => true ];
+		return $api;
 	}
 
 	protected function getUrlForVersion( string $version ) :string {

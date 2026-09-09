@@ -14,7 +14,7 @@ namespace AptowebDeps\Monolog\Handler;
 use AptowebDeps\Monolog\Logger;
 use AptowebDeps\Monolog\ResettableInterface;
 use AptowebDeps\Monolog\Formatter\FormatterInterface;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Simple handler wrapper that filters records based on a list of levels

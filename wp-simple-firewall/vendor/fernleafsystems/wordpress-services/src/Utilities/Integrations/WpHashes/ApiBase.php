@@ -61,7 +61,7 @@ abstract class ApiBase {
 	 * @return RequestVO|mixed
 	 */
 	protected function getRequestVO() {
-		return $this->req ?? $this->req = $this->newReqVO();
+		return $this->req ??= $this->newReqVO();
 	}
 
 	/**

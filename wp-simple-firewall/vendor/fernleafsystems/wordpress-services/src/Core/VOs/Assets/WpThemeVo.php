@@ -38,7 +38,9 @@ class WpThemeVo extends WpBaseVo {
 		$this->wp_theme = $t;
 		$this->stylesheet = $stylesheet;
 		$this->active = $WPT->isActive( $stylesheet );
-		$this->is_child = $this->active && $WPT->isActiveThemeAChild();
+		$isChild = $t->get_stylesheet() !== $t->get_template();
+		$this->is_child = $this->active && $isChild;
+		$this->is_inactive_child = !$this->active && $isChild;
 		$this->is_parent = !$this->active && $WPT->isActiveParent( $stylesheet );
 	}
 
@@ -133,8 +135,7 @@ class WpThemeVo extends WpBaseVo {
 	protected function loadWpInfo() {
 		$info = false;
 		try {
-			// TODO: Edge-case - inactive Child Themes
-			if ( !$this->is_child ) {
+			if ( !$this->is_child && !$this->is_inactive_child ) {
 				$info = ( new Theme\Api() )
 					->setWorkingSlug( $this->stylesheet )
 					->getInfo();

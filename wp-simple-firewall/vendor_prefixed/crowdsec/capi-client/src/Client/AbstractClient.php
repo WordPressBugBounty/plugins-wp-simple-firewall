@@ -7,7 +7,7 @@ namespace AptowebDeps\CrowdSec\CapiClient\Client;
 use AptowebDeps\CrowdSec\CapiClient\Client\CapiHandler\CapiHandlerInterface;
 use AptowebDeps\CrowdSec\CapiClient\Client\CapiHandler\Curl;
 use AptowebDeps\CrowdSec\Common\Client\AbstractClient as CommonAbstractClient;
-use Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LoggerInterface;
 
 /**
  * The low level CrowdSec CAPI Client.

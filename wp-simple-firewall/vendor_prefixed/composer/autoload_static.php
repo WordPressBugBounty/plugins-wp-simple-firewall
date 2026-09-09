@@ -4,7 +4,7 @@
 
 namespace AptowebDeps\Composer\Autoload;
 
-class ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526
+class ComposerStaticInitaa6555e3c86f543d52cf360866c06ebe
 {
     public static $files = array (
         '9ef954d81cd6112db96657b52578069b' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
@@ -26,6 +26,7 @@ class ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526
             'AptowebDeps\\Symfony\\Component\\Filesystem\\' => 41,
             'AptowebDeps\\Symfony\\Component\\Config\\' => 37,
             'AptowebDeps\\Safe\\' => 17,
+            'AptowebDeps\\Psr\\Log\\' => 20,
             'AptowebDeps\\Nyholm\\Psr7\\' => 24,
             'AptowebDeps\\Nyholm\\Psr7Server\\' => 30,
             'AptowebDeps\\Monolog\\' => 20,
@@ -73,6 +74,10 @@ class ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526
         'AptowebDeps\\Safe\\' =>
         array (
             0 => __DIR__ . '/..' . '/thecodingmachine/safe/src',
+        ),
+        'AptowebDeps\\Psr\\Log\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'AptowebDeps\\Nyholm\\Psr7\\' =>
         array (
@@ -132,9 +137,9 @@ class ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc024470f88dbe6f4c8480f6d75d46526::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitaa6555e3c86f543d52cf360866c06ebe::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitaa6555e3c86f543d52cf360866c06ebe::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitaa6555e3c86f543d52cf360866c06ebe::$classMap;
 
         }, null, ClassLoader::class);
     }

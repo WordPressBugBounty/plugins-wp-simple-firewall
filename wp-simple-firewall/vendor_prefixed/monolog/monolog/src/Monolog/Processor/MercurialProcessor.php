@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Processor;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Injects Hg branch and Hg revision number in all records

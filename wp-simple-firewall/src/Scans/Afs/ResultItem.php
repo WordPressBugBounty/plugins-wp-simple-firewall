@@ -4,10 +4,11 @@ namespace FernleafSystems\Wordpress\Plugin\Shield\Scans\Afs;
 
 use FernleafSystems\Wordpress\Plugin\Shield\DBs\Malware\Ops\Record;
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
+use FernleafSystems\Wordpress\Services\Services;
 
 /**
  * @property string $path_full
- * @property string $path_fragment  - relative to ABSPATH
+ * @property string $path_fragment  - filesystem-service canonical file item ID
  * @property bool   $is_in_core
  * @property bool   $is_in_plugin
  * @property bool   $is_in_theme
@@ -21,16 +22,16 @@ use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
  * @property int    $malware_record_id
  * @property string $ptg_slug
  * @property string $asset_version
+ * @property string $comparison_basis
  * @property string $checksum_sha256
  */
-class ResultItem extends \FernleafSystems\Wordpress\Plugin\Shield\Scans\Base\ResultItem {
+class ResultItem extends \FernleafSystems\Wordpress\Plugin\Shield\Scans\Base\FileResultItem {
 
 	use PluginControllerConsumer;
 
-	/**
-	 * @var ?Record
-	 */
-	private $record = null;
+	private ?Record $record = null;
+
+	private bool $recordLoaded = false;
 
 	public function getStatuses() :array {
 		$statuses = [];
@@ -79,19 +80,32 @@ class ResultItem extends \FernleafSystems\Wordpress\Plugin\Shield\Scans\Base\Res
 		], \array_flip( $this->getStatuses() ) );
 	}
 
-	public function getDescriptionForAudit() :string {
-		return $this->path_fragment;
+	public function hasNonMalwareFinding() :bool {
+		return $this->is_unrecognised
+			   || $this->is_unidentified
+			   || $this->is_missing
+			   || $this->is_checksumfail;
 	}
 
 	public function getMalwareRecord() :?Record {
-		if ( empty( $this->record ) && isset( $this->malware_record_id ) ) {
-			$this->record = self::con()
-				->db_con
-				->malware
-				->getQuerySelector()
-				->byId( $this->malware_record_id );
+		if ( !$this->recordLoaded ) {
+			$this->recordLoaded = true;
+			$this->record = null;
+			if ( $this->malware_record_id > 0 ) {
+				$this->record = self::con()
+					->db_con
+					->malware
+					->getQuerySelector()
+					->byId( $this->malware_record_id );
+			}
 		}
 		return $this->record;
+	}
+
+	public function setMalwareRecord( ?Record $record ) :self {
+		$this->record = $record;
+		$this->recordLoaded = true;
+		return $this;
 	}
 
 	public function __get( string $key ) {
@@ -100,7 +114,10 @@ class ResultItem extends \FernleafSystems\Wordpress\Plugin\Shield\Scans\Base\Res
 		switch ( $key ) {
 			case 'path_full':
 				if ( empty( $value ) ) {
-					$value = path_join( wp_normalize_path( ABSPATH ), $this->path_fragment );
+					$pathFragment = (string)$this->path_fragment;
+					$value = Services::WpFs()->isAbsPath( $pathFragment )
+						? $pathFragment
+						: path_join( wp_normalize_path( ABSPATH ), $pathFragment );
 				}
 				break;
 			case 'mal_sig':

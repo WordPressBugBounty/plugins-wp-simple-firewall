@@ -14,6 +14,7 @@ return array(
     'AptowebDeps\\Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'AptowebDeps\\Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
     'AptowebDeps\\Safe\\' => array($vendorDir . '/thecodingmachine/safe/src'),
+    'AptowebDeps\\Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'AptowebDeps\\Nyholm\\Psr7\\' => array($vendorDir . '/nyholm/psr7/src'),
     'AptowebDeps\\Nyholm\\Psr7Server\\' => array($vendorDir . '/nyholm/psr7-server/src'),
     'AptowebDeps\\Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),

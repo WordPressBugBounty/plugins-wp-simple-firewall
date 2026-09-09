@@ -9,7 +9,7 @@ use AptowebDeps\CrowdSec\CapiClient\Client\CapiHandler\CapiHandlerInterface;
 use AptowebDeps\CrowdSec\CapiClient\Configuration\Watcher as WatcherConfig;
 use AptowebDeps\CrowdSec\CapiClient\Storage\StorageInterface;
 use AptowebDeps\CrowdSec\Common\Client\ClientException as CommonClientException;
-use Psr\Log\LoggerInterface;
+use AptowebDeps\Psr\Log\LoggerInterface;
 use AptowebDeps\Symfony\Component\Config\Definition\Processor;
 use AptowebDeps\Symfony\Component\Uid\Uuid;
 

@@ -13,7 +13,7 @@ namespace AptowebDeps\Monolog\Handler;
 
 use AptowebDeps\Monolog\Logger;
 use AptowebDeps\Monolog\Utils;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Sends notifications through the pushover api to mobile phones

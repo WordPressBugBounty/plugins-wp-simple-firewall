@@ -12,7 +12,7 @@
 namespace AptowebDeps\Monolog\Processor;
 
 use AptowebDeps\Monolog\Logger;
-use Psr\Log\LogLevel;
+use AptowebDeps\Psr\Log\LogLevel;
 
 /**
  * Injects line/file:class/function where the log message came from
