@@ -71,9 +71,12 @@ class HttpRequest extends DynPropertiesClass {
 			if ( !empty( $method ) ) {
 				$this->setMethod( $method );
 			}
-			$this->lastResponse = $this->send();
+			$response = $this->send();
+			$this->lastResponse = $response;
+			$this->lastError = null;
 		}
 		catch ( \Exception $e ) {
+			$this->lastResponse = null;
 			$this->lastError = new \WP_Error( 'odp-http-error', $e->getMessage() );
 		}
 		return $this;
@@ -96,10 +99,12 @@ class HttpRequest extends DynPropertiesClass {
 	 * @throws \Exception
 	 */
 	private function send() :WpHttpResponseVo {
-		if ( wp_http_validate_url( $this->url ) === false ) {
+		$url = $this->url;
+		$requestArgs = $this->getRequestArgs();
+		if ( wp_http_validate_url( $url ) === false ) {
 			throw new \Exception( 'URL is invalid' );
 		}
-		$mResult = wp_remote_request( $this->url, $this->getRequestArgs() );
+		$mResult = wp_remote_request( $url, $requestArgs );
 		if ( is_wp_error( $mResult ) ) {
 			throw new \Exception( $mResult->get_error_message() );
 		}
