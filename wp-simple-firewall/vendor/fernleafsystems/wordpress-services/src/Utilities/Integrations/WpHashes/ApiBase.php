@@ -9,7 +9,7 @@ use FernleafSystems\Wordpress\Services\Utilities\URL;
 
 abstract class ApiBase {
 
-	public const API_URL = 'https://api.orlesecurity.com/api/apto-wphashes';
+	public const API_URL = 'https://wphashes.com/api/apto-wphashes';
 	public const API_VERSION = 1;
 	public const API_ENDPOINT = '';
 	public const REQUEST_TYPE = 'GET';

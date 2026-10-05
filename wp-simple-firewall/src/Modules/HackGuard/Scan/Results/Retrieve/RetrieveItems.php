@@ -58,30 +58,16 @@ class RetrieveItems extends RetrieveBase {
 	}
 
 	public function retrieveLatestForFindings( array $stateMetaKeys = [] ) :ResultsSet {
-		$stateMetaKeys = $this->sanitizeStateMetaKeys( $stateMetaKeys );
+		$stateMetaKeys = \array_values( \array_unique( \array_filter( \array_map(
+			static fn( $stateMetaKey ): string => \preg_replace( '/[^a-z0-9_]/i', '', (string)$stateMetaKey ) ?? '',
+			$stateMetaKeys
+		) ) ) );
 
 		$wheres = ( new LatestScanResultWheresBuilder() )->forLatestResults( $this->getScanController()->getSlug() );
 		if ( !empty( $stateMetaKeys ) ) {
 			$wheres[] = $this->buildStateMetaExistsWhere( $stateMetaKeys );
 		}
 		return $this->retrieveByWheres( $wheres );
-	}
-
-	public function retrieveActiveProblemFindings( array $stateMetaKeys = [] ) :ResultsSet {
-		$stateMetaKeys = $this->sanitizeStateMetaKeys( $stateMetaKeys );
-		$wheres = ( new LatestScanResultWheresBuilder() )->forActiveProblems( $this->getScanController()->getSlug() );
-		if ( !empty( $stateMetaKeys ) ) {
-			$wheres[] = $this->buildStateMetaExistsWhere( $stateMetaKeys );
-		}
-		return $this->retrieveByWheres( $wheres );
-	}
-
-	/** @return list<non-empty-string> */
-	private function sanitizeStateMetaKeys( array $stateMetaKeys ) :array {
-		return \array_values( \array_unique( \array_filter( \array_map(
-			static fn( $stateMetaKey ) :string => \preg_replace( '/[^a-z0-9_]/i', '', (string)$stateMetaKey ) ?? '',
-			$stateMetaKeys
-		) ) ) );
 	}
 
 	/**
@@ -235,7 +221,7 @@ class RetrieveItems extends RetrieveBase {
 	 * @return array<string,mixed>
 	 */
 	private function buildResultItemData( ScanResultVO $vo, string $scanSlug ) :array {
-		$itemData = $vo->meta;
+		$itemData = \is_array( $vo->meta ) ? $vo->meta : [];
 
 		if ( $scanSlug === AfsScanController::SCAN_SLUG && $vo->item_type === ResultItemsHandler::ITEM_TYPE_FILE ) {
 			unset( $itemData[ 'path_full' ], $itemData[ 'path_fragment' ], $itemData[ 'file_path' ] );
@@ -359,7 +345,6 @@ class RetrieveItems extends RetrieveBase {
 		} );
 	}
 
-	/** @param list<non-empty-string> $stateMetaKeys */
 	private function buildStateMetaExistsWhere( array $stateMetaKeys ): string {
 		$metaTable = self::con()->db_con->scan_result_item_meta->getTable();
 		$exists = \array_map(
@@ -370,7 +355,7 @@ class RetrieveItems extends RetrieveBase {
 					$stateMetaKey
 				);
 			},
-			$stateMetaKeys
+			\array_values( \array_filter( $stateMetaKeys ) )
 		);
 
 		return \sprintf( '(%s)', \implode( ' OR ', $exists ) );

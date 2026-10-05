@@ -8,7 +8,6 @@ use FernleafSystems\Wordpress\Plugin\Shield\ActionRouter\{
 	Actions\ScanResultsTableAction
 };
 use FernleafSystems\Wordpress\Plugin\Shield\Modules\HackGuard\Scan\Results\Retrieve\ScanResultsScopeResolver;
-use FernleafSystems\Wordpress\Plugin\Shield\Modules\PluginControllerConsumer;
 use FernleafSystems\Wordpress\Plugin\Shield\Tables\DataTables\Build\Scans\{
 	ForMalware,
 	ForPluginTheme,
@@ -24,7 +23,6 @@ use FernleafSystems\Wordpress\Plugin\Shield\Tables\DataTables\Build\Scans\{
  *   datatables_init_attr?:string,
  *   table_action_attr?:string,
  *   results_display_options_attr:string,
- *   malware_refresh_attr:?string,
  *   render_item_analysis_attr?:string,
  *   full_log_href:string,
  *   full_log_text:string,
@@ -38,7 +36,6 @@ use FernleafSystems\Wordpress\Plugin\Shield\Tables\DataTables\Build\Scans\{
  * }
  */
 class ScanResultsTableContractBuilder {
-	use PluginControllerConsumer;
 
 	private ScanResultsScopeResolver $scopeResolver;
 	private ScanResultsDisplayOptions $displayOptions;
@@ -123,7 +120,6 @@ class ScanResultsTableContractBuilder {
 	 * @phpstan-return ScanResultsTableContract
 	 */
 	public function buildMalware( string $fullLogHref, array $scanResultsActionData = [] ) :array {
-		$con = self::con();
 		$scope = $this->scopeResolver->normalizeActionScope(
 			ScanResultsScopeResolver::SCOPE_TYPE_MALWARE,
 			ScanResultsScopeResolver::SCOPE_TYPE_MALWARE
@@ -142,13 +138,7 @@ class ScanResultsTableContractBuilder {
 			ActionData::Build( ScanResultsTableAction::class, true, $tableActionData ),
 			$fullLogHref,
 			__( 'Full Scan Results', 'wp-simple-firewall' ),
-			$this->buildDisplayNotice( $scope, $tableActionData ),
-			$con->caps->canScanMalwareMalai() && !$con->comps->scans->AFS()->isRestricted()
-				? [
-					'label'       => __( 'Refresh malware assessments', 'wp-simple-firewall' ),
-					'description' => __( 'Check MALAI for updated results for all active malware findings.', 'wp-simple-firewall' ),
-				]
-				: null
+			$this->buildDisplayNotice( $scope, $tableActionData )
 		);
 	}
 
@@ -156,7 +146,6 @@ class ScanResultsTableContractBuilder {
 	 * @param array<string,mixed> $datatablesInit
 	 * @param array<string,mixed> $tableAction
 	 * @phpstan-param ScanResultsDisplayNotice $displayNotice
-	 * @param array{label:string,description:string}|null $malwareRefresh
 	 * @phpstan-return ScanResultsTableContract
 	 */
 	private function buildTableContract(
@@ -167,8 +156,7 @@ class ScanResultsTableContractBuilder {
 		array $tableAction,
 		string $fullLogHref,
 		string $fullLogText,
-		array $displayNotice,
-		?array $malwareRefresh = null
+		array $displayNotice
 	) :array {
 		return [
 			'title'                     => $title,
@@ -177,7 +165,6 @@ class ScanResultsTableContractBuilder {
 			'datatables_init_attr'      => $this->encodeJsonAttr( $datatablesInit ),
 			'table_action_attr'         => $this->encodeJsonAttr( $tableAction ),
 			'results_display_options_attr' => $this->encodeJsonAttr( $tableAction[ 'results_display_options' ] ),
-			'malware_refresh_attr'      => $malwareRefresh === null ? null : $this->encodeJsonAttr( $malwareRefresh ),
 			'render_item_analysis_attr' => $this->encodeJsonAttr(
 				ActionData::BuildAjaxRender( Components\Scans\ItemAnalysis\Container::class )
 			),

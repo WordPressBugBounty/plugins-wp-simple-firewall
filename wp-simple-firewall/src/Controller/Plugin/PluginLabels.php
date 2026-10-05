@@ -16,9 +16,7 @@ class PluginLabels {
 
 	public function applyLabels( $plugins ) {
 		$con = self::con();
-		if ( \is_array( $plugins ) && \is_array( $plugins[ $con->base_file ] ?? null ) ) {
-			$plugins[ $con->base_file ] = \array_merge( $plugins[ $con->base_file ], $con->labels->getRawData() );
-		}
+		$plugins[ $con->base_file ] = \array_merge( $plugins[ $con->base_file ] ?? [], $con->labels->getRawData() );
 		return $plugins;
 	}
 }
