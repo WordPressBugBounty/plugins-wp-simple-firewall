@@ -4,7 +4,7 @@
 
 namespace AptowebDeps\Composer\Autoload;
 
-class ComposerStaticInitfd28a0e96e70fd86f800ae53146cc0ac
+class ComposerStaticInit554fcd340951d5f2564a753df3ccbf8e
 {
     public static $files = array (
         '9ef954d81cd6112db96657b52578069b' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
@@ -137,9 +137,9 @@ class ComposerStaticInitfd28a0e96e70fd86f800ae53146cc0ac
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfd28a0e96e70fd86f800ae53146cc0ac::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfd28a0e96e70fd86f800ae53146cc0ac::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitfd28a0e96e70fd86f800ae53146cc0ac::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit554fcd340951d5f2564a753df3ccbf8e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit554fcd340951d5f2564a753df3ccbf8e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit554fcd340951d5f2564a753df3ccbf8e::$classMap;
 
         }, null, ClassLoader::class);
     }
