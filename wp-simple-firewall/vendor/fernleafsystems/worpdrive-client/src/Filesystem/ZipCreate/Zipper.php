@@ -53,7 +53,7 @@ class Zipper {
 		foreach ( $sources as $archivePath => $sourcePath ) {
 			$files[] = [
 				PCLZIP_ATT_FILE_NAME          => $sourcePath,
-				PCLZIP_ATT_FILE_NEW_FULL_NAME => $archivePath,
+				PCLZIP_ATT_FILE_NEW_FULL_NAME => (string)$archivePath,
 			];
 		}
 
@@ -80,7 +80,7 @@ class Zipper {
 			throw new \Exception( sprintf( 'Failed to create new Zip file: %s', \is_int( $openResult ) ? (string)$openResult : 'unknown error' ) );
 		}
 		foreach ( $sources as $archivePath => $sourcePath ) {
-			if ( !$zip->addFile( $sourcePath, $archivePath ) ) {
+			if ( !$zip->addFile( $sourcePath, (string)$archivePath ) ) {
 				$zip->close();
 				throw new \Exception( sprintf( 'Failed to add requested file to ZIP: %s', $archivePath ) );
 			}
@@ -180,6 +180,6 @@ class Zipper {
 	}
 
 	private function normaliseArchivePath( string $path ) :string {
-		return \rtrim( \ltrim( \str_replace( '\\', '/', $path ), '/' ), '/' );
+		return \rtrim( \ltrim( $path, '/' ), '/' );
 	}
 }

@@ -1,8 +1,8 @@
 {
     "properties": {
-        "version": "22.2.6",
-        "release_timestamp": 1791227000,
-        "build": "202610.0503",
+        "version": "22.3.2",
+        "release_timestamp": 1793100000,
+        "build": "202610.2701",
         "slug_parent": "icwp",
         "slug_plugin": "wpsf",
         "text_domain": "wp-simple-firewall",
@@ -1536,6 +1536,13 @@
                 "default": []
             },
             {
+                "key": "shieldbackups_enabled",
+                "section": "section_hidden",
+                "type": "checkbox",
+                "default": "Y",
+                "transferable": false
+            },
+            {
                 "key": "delay_tracking",
                 "section": "section_hidden",
                 "type": "array",
@@ -1682,6 +1689,19 @@
                 "name": "SureSend Emails",
                 "summary": "SureSend Emails",
                 "description": "SureSend Emails."
+            },
+            {
+                "key": "silentcaptcha_cookie_free",
+                "section": "section_silentcaptcha",
+                "zone_comp_slugs": [
+                    "silent_captcha",
+                    "module_ips"
+                ],
+                "default": "N",
+                "type": "checkbox",
+                "name": "Cookie-free silentCAPTCHA",
+                "summary": "Run silentCAPTCHA without setting its visitor cookie",
+                "description": "Browsers keep silentCAPTCHA check times in local storage instead of a cookie, and check in more often. Purge your page cache after changing this option."
             },
             {
                 "key": "silentcaptcha_complexity",
@@ -4297,6 +4317,11 @@
             }
         ],
         "defs": {
+            "silentcaptcha_refresh_seconds": {
+                "ordinary": 300,
+                "form": 120,
+                "login": 60
+            },
             "restricted_pages_users": [
                 "user-edit.php",
                 "users.php"
@@ -6044,6 +6069,42 @@
             "attempt_deactivation": {
                 "level": "warning",
                 "offense": true
+            },
+            "backup_finished": {
+                "audit_params": [
+                    "result",
+                    "duration"
+                ],
+                "level": "notice",
+                "stat": false
+            },
+            "backup_refused_disabled": {
+                "audit_params": [
+                    "ip",
+                    "route"
+                ],
+                "level": "warning",
+                "stat": false
+            },
+            "backup_refused_ip": {
+                "audit_params": [
+                    "ip",
+                    "route"
+                ],
+                "level": "warning",
+                "stat": false
+            },
+            "backup_refused_paused": {
+                "audit_params": [
+                    "ip",
+                    "route"
+                ],
+                "level": "warning",
+                "stat": false
+            },
+            "backup_started": {
+                "level": "notice",
+                "stat": false
             },
             "block_anonymous_restapi": {
                 "audit_params": [

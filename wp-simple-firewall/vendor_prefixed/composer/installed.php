@@ -2,8 +2,8 @@
   'root' => 
   array (
     'name' => 'fernleafsystems/wp-plugin-shield',
-    'pretty_version' => '22.2.x-dev',
-    'version' => '22.2.9999999.9999999-dev',
+    'pretty_version' => '22.3.x-dev',
+    'version' => '22.3.9999999.9999999-dev',
     'reference' => NULL,
     'type' => 'wordpress-plugin',
     'install_path' => __DIR__ . '/../',
@@ -184,9 +184,9 @@
     ),
     'symfony/filesystem' => 
     array (
-      'pretty_version' => 'v5.4.45',
-      'version' => '5.4.45.0',
-      'reference' => '57c8294ed37d4a055b77057827c67f9558c95c54',
+      'pretty_version' => 'v5.4.54',
+      'version' => '5.4.54.0',
+      'reference' => 'c4a6cc5733386414f6d17d744ee5ad8b445e349d',
       'type' => 'library',
       'install_path' => __DIR__ . '/../symfony/filesystem',
       'aliases' => 
@@ -196,9 +196,9 @@
     ),
     'symfony/process' => 
     array (
-      'pretty_version' => 'v5.4.51',
-      'version' => '5.4.51.0',
-      'reference' => '467bfc56f18f5ef6d5ccb09324d7e988c1c0a98f',
+      'pretty_version' => 'v5.4.54',
+      'version' => '5.4.54.0',
+      'reference' => '485d7b3f15ae329058d2407c9772c57ed4f564de',
       'type' => 'library',
       'install_path' => __DIR__ . '/../symfony/process',
       'aliases' => 

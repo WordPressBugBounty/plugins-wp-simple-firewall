@@ -391,17 +391,17 @@
         },
         {
             "name": "fernleafsystems/worpdrive-client",
-            "version": "0.4.0",
-            "version_normalized": "0.4.0.0",
+            "version": "0.5.1",
+            "version_normalized": "0.5.1.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:FernleafSystems/worpdrive-client.git",
-                "reference": "2828ce71782a10ad4d921ec8a0504d3257c29510"
+                "reference": "f651bcb67adca9a0d1ec28894e5a42ff1e6a5e9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FernleafSystems/worpdrive-client/zipball/2828ce71782a10ad4d921ec8a0504d3257c29510",
-                "reference": "2828ce71782a10ad4d921ec8a0504d3257c29510",
+                "url": "https://api.github.com/repos/FernleafSystems/worpdrive-client/zipball/f651bcb67adca9a0d1ec28894e5a42ff1e6a5e9d",
+                "reference": "f651bcb67adca9a0d1ec28894e5a42ff1e6a5e9d",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -422,9 +422,10 @@
                 "ext-mysqli": "*",
                 "ext-pdo_mysql": "*",
                 "phpunit/phpunit": "^9.6",
+                "symfony/process": "^5.4",
                 "yoast/phpunit-polyfills": "^4.0"
             },
-            "time": "2026-06-18T09:54:42+00:00",
+            "time": "2026-10-26T12:28:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -453,6 +454,12 @@
                     "@scan:php-compat",
                     "@phpunit"
                 ],
+                "test:linux": [
+                    "@php bin/test-linux.php all"
+                ],
+                "test:linux:path-zip": [
+                    "@php bin/test-linux.php path-zip"
+                ],
                 "test:mysql": [
                     "phpunit --configuration phpunit.xml.dist tests/Integration/Database"
                 ],
@@ -473,7 +480,7 @@
             ],
             "description": "The WorpDrive Client Library",
             "support": {
-                "source": "https://github.com/FernleafSystems/worpdrive-client/tree/0.4.0",
+                "source": "https://github.com/FernleafSystems/worpdrive-client/tree/0.5.1",
                 "issues": "https://github.com/FernleafSystems/worpdrive-client/issues"
             },
             "install-path": "../fernleafsystems/worpdrive-client"

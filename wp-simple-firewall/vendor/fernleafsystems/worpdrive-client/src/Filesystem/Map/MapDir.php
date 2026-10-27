@@ -21,6 +21,8 @@ class MapDir {
 
 	private MapPathNormalizer $pathNormalizer;
 
+	private MapFileCandidateReader $candidateReader;
+
 	private string $dir;
 
 	private string $rootDir;
@@ -43,8 +45,9 @@ class MapDir {
 		$this->filter = $filter;
 		$this->filesystem = WorpdriveRuntime::host()->filesystem();
 		$this->pathNormalizer = new MapPathNormalizer();
-		$this->dir = wp_normalize_path( $dirToMap );
-		$this->rootDir = wp_normalize_path( $rootDir ?? $dirToMap );
+		$this->dir = $this->pathNormalizer->normalisePathSeparators( $dirToMap );
+		$this->rootDir = $this->pathNormalizer->normalisePathSeparators( $rootDir ?? $dirToMap );
+		$this->candidateReader = new MapFileCandidateReader( $this->filter, $this->pathNormalizer, $this->rootDir );
 		$this->hashAlgo = $hashAlgo;
 		$this->stopAtTS = $stopAtTS;
 	}
@@ -56,55 +59,58 @@ class MapDir {
 	public function run() :void {
 		$this->mapEntries();
 
+		// No time check after this: the parent checks once its cursor has moved past this directory.
 		$this->tracker->markDirCompleted( $this->normalisePath( $this->dir ) );
-
-		if ( \time() >= $this->stopAtTS ) {
-			throw new TimeLimitReachedException();
-		}
 	}
 
 	/**
+	 * Entries are handled in byte order of their names, and each directory on the active path saves the name of the
+	 * last entry it handled. A resumed request skips names up to that cursor, so files added or deleted between
+	 * requests can't move it, and a child directory still in progress sorts after its parent's cursor and is entered
+	 * again. Each directory on the active path holds its sorted names while it's mapped: about 12 MB per 100,000 entries.
+	 *
 	 * @throws Exc\MapDirCannotBeOpenedException
 	 * @throws TimeLimitReachedException
 	 */
 	private function mapEntries() :void {
 		$normalDir = $this->normalisePath( $this->dir );
-		$legacyFileCursor = $this->tracker->isEntryScanActiveFor( $normalDir ) ? null : $this->tracker->mostRecentFileForDir( $normalDir );
-		$trackOwnScan = !$this->tracker->hasActiveEntryScan() || $this->tracker->isEntryScanActiveFor( $normalDir );
-		if ( $trackOwnScan ) {
-			$this->tracker->startEntryScan( $normalDir );
-		}
-		$offset = $trackOwnScan ? $this->tracker->activeEntryOffsetFor( $normalDir ) : 0;
+		$cursor = $this->tracker->activeEntryCursorFor( $normalDir );
 
-		try {
-			$it = $this->seekFileIterator( $this->dirIterator(), $offset );
-		}
-		catch ( \Exception $e ) {
-			throw new Exc\MapDirCannotBeOpenedException( $e->getMessage() );
-		}
-
-		for ( ; $it->valid(); $it->next() ) {
-			/** @var \SplFileInfo $item */
-			$item = $it->current();
-			$this->mapEntry( $item, $legacyFileCursor );
-			$offset++;
-			if ( $trackOwnScan ) {
-				$this->tracker->advanceEntryScan( $normalDir, $offset );
+		foreach ( $this->entryNames() as $name ) {
+			if ( $cursor !== null && \strcmp( $name, $cursor ) <= 0 ) {
+				continue;
 			}
+			$this->mapEntry( new \SplFileInfo( \rtrim( $this->dir, '/' ).'/'.$name ) );
+			$this->tracker->advanceEntryScan( $normalDir, $name );
 			if ( \time() >= $this->stopAtTS ) {
 				throw new TimeLimitReachedException();
 			}
 		}
+	}
 
-		if ( $trackOwnScan ) {
-			$this->tracker->clearEntryScan( $normalDir );
+	/**
+	 * @return string[] entry names in byte order
+	 * @throws Exc\MapDirCannotBeOpenedException
+	 */
+	private function entryNames() :array {
+		$names = [];
+		try {
+			foreach ( new \FilesystemIterator( $this->dir, \FilesystemIterator::SKIP_DOTS ) as $item ) {
+				/** @var \SplFileInfo $item */
+				$names[] = $item->getFilename();
+			}
 		}
+		catch ( \Exception $e ) {
+			throw new Exc\MapDirCannotBeOpenedException( $e->getMessage() );
+		}
+		\sort( $names, \SORT_STRING );
+		return $names;
 	}
 
 	/**
 	 * @throws TimeLimitReachedException
 	 */
-	private function mapEntry( \SplFileInfo $item, ?string $legacyFileCursor ) :void {
+	private function mapEntry( \SplFileInfo $item ) :void {
 		try {
 			$isDir = $item->isDir();
 			$isLink = $item->isLink();
@@ -134,82 +140,28 @@ class MapDir {
 			return;
 		}
 
-		$this->mapFile( $item, $legacyFileCursor );
+		$this->mapFile( $item );
 	}
 
-	/**
-	 * @throws \Exception
-	 */
-	private function seekFileIterator( \FilesystemIterator $it, int &$offset ) :\FilesystemIterator {
-		if ( $offset > 0 ) {
-			try {
-				$it->seek( $offset );
-			}
-			catch ( \Exception $e ) {
-				$it = $this->dirIterator();
-				$it->rewind();
-				$offset = 0;
-			}
-		}
-		else {
-			$it->rewind();
-		}
-		return $it;
-	}
-
-	private function mapFile( \SplFileInfo $item, ?string $legacyFileCursor ) :void {
-		$attr = $this->fileAttributes( $item, $legacyFileCursor );
-		if ( $attr === null ) {
+	private function mapFile( \SplFileInfo $item ) :void {
+		$candidate = $this->candidateReader->read( $item );
+		if ( $candidate === null ) {
 			return;
 		}
 
-		if ( $this->filesystem->isReadable( $attr[ 'p' ] ) ) {
-			$hash = empty( $this->hashAlgo ) ? '' : \hash_file( $this->hashAlgo, $attr[ 'p' ] );
+		if ( $this->filesystem->isReadable( $candidate->sourcePath() ) ) {
+			$hash = empty( $this->hashAlgo ) ? '' : \hash_file( $this->hashAlgo, $candidate->sourcePath() );
 			if ( \is_string( $hash ) ) {
-				$this->map->addRaw( $attr[ 'n' ], '', $hash, $attr[ 'm' ], $attr[ 's' ] );
+				$this->map->addRaw(
+					$candidate->normalisedPath(),
+					'',
+					$hash,
+					$candidate->mtime(),
+					$candidate->size()
+				);
 			}
 		}
-		$this->tracker->markFileCompleted( $attr[ 'n' ] );
-	}
-
-	private function fileAttributes( \SplFileInfo $item, ?string $legacyFileCursor ) :?array {
-		try {
-			if ( !$item->isFile() || $item->isLink() ) {
-				return null;
-			}
-
-			$size = $item->getSize();
-			if ( empty( $size ) ) {
-				return null;
-			}
-
-			$path = $item->getPathname();
-			$normalisedPath = $this->normalisePath( $path );
-			$mTime = (int)$item->getMTime();
-			if ( ( $legacyFileCursor !== null && \strnatcmp( $legacyFileCursor, $normalisedPath ) >= 0 )
-				 || !$this->filter->isFileWithinTimeRange( $mTime )
-				 || !$this->filter->isFileSizeAllowed( $size )
-				 || $this->filter->isExcluded( $normalisedPath ) ) {
-				return null;
-			}
-
-			return [
-				'p' => $path,
-				'n' => $normalisedPath,
-				'm' => $mTime,
-				's' => $size,
-			];
-		}
-		catch ( \Exception $e ) {
-			return null;
-		}
-	}
-
-	/**
-	 * @throws \Exception
-	 */
-	private function dirIterator() :\FilesystemIterator {
-		return new \FilesystemIterator( $this->dir, \FilesystemIterator::SKIP_DOTS );
+		$this->tracker->markFileCompleted( $candidate->normalisedPath() );
 	}
 
 	private function normalisePath( string $path ) :string {
